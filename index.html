@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LLC 2.0 - Premium Accommodations</title>
+    <title>Luntian.net - Premium Accommodations</title>
+    <meta name="description" content="Experience luxury and comfort at Luntian.net - your premier destination for premium accommodations. Book your perfect stay today.">
+    <meta name="keywords" content="luntian, hotel, accommodation, luxury, premium, booking, rooms, packages, luntian.net">
+    
     <style>
         :root {
           --bg: #fafafa;
@@ -38,12 +41,23 @@
         .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; }
         .logo img { height: 40px; }
         .nav-links { display: none; gap: 18px; list-style: none; padding: 0; margin: 0; }
-        .nav-links a { padding: 8px 10px; border-radius: 10px; }
+        .nav-links a { padding: 8px 10px; border-radius: 10px; transition: background 0.2s; }
         .nav-links a:hover, .book-btn:hover { background: #f3f4f6; }
-        .book-btn { background: var(--text); color: #fff; padding: 10px 14px; border-radius: 999px; font-weight: 600; }
+        .book-btn { background: var(--text); color: #fff; padding: 10px 14px; border-radius: 999px; font-weight: 600; transition: all 0.2s; }
+        .book-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.15); }
 
         @media (min-width: 880px) {
           .nav-links { display: flex; }
+        }
+
+        /* -------- Mobile Menu -------- */
+        .mobile-menu-btn { display: block; background: none; border: none; font-size: 24px; cursor: pointer; }
+        .mobile-menu { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; border-bottom: 1px solid var(--border); padding: 20px; }
+        .mobile-menu.active { display: block; }
+        .mobile-menu a { display: block; padding: 10px 0; border-bottom: 1px solid var(--border); }
+
+        @media (min-width: 880px) {
+          .mobile-menu-btn { display: none; }
         }
 
         /* -------- Promo Banner -------- */
@@ -52,80 +66,321 @@
           padding: 10px 46px; background: #fff7ed; color: #7c2d12; border-bottom: 1px dashed #fed7aa;
           font-size: 0.95rem; text-align: center;
         }
-        .promo-banner .close-btn { position: absolute; right: 14px; cursor: pointer; font-size: 18px; opacity: .7; }
+        .promo-banner .close-btn { position: absolute; right: 14px; cursor: pointer; font-size: 18px; opacity: .7; transition: opacity 0.2s; }
         .promo-banner .close-btn:hover { opacity: 1; }
 
         /* -------- Hero -------- */
-        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 56vh; display: grid; place-items: center; text-align: center; position: relative; }
-        .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(250,250,250,0.0), rgba(250,250,250,0.6)); pointer-events: none; }
-        .hero .hero-content { position: relative; padding: 40px 16px; }
-        .hero h1 { font-size: clamp(28px, 4vw, 44px); margin: 0 0 10px; letter-spacing: -0.02em; color: white; }
-        .hero p { margin: 0 0 18px; color: white; }
-        .cta-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-        .btn-primary, .btn-secondary { display: inline-block; padding: 12px 16px; border-radius: 12px; font-weight: 700; }
-        .btn-primary { background: var(--text); color: #fff; }
-        .btn-secondary { border: 1px solid white; color: white; background: transparent; }
+        .hero { 
+          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+          min-height: 70vh; 
+          display: grid; 
+          place-items: center; 
+          text-align: center; 
+          position: relative;
+          overflow: hidden;
+        }
+        .hero::before {
+          content: "";
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+          animation: float 20s ease-in-out infinite;
+        }
+        .hero .hero-content { position: relative; padding: 40px 16px; z-index: 2; }
+        .hero h1 { 
+          font-size: clamp(32px, 5vw, 56px); 
+          margin: 0 0 20px; 
+          letter-spacing: -0.02em; 
+          color: white; 
+          font-weight: 700;
+          text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .hero p { margin: 0 0 30px; color: rgba(255,255,255,0.9); font-size: clamp(16px, 2vw, 20px); }
+        .cta-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary, .btn-secondary { 
+          display: inline-block; 
+          padding: 15px 25px; 
+          border-radius: 12px; 
+          font-weight: 700; 
+          transition: all 0.3s ease;
+          font-size: 16px;
+        }
+        .btn-primary { 
+          background: #fff; 
+          color: var(--text); 
+          box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .btn-primary:hover { 
+          transform: translateY(-2px); 
+          box-shadow: 0 8px 25px rgba(0,0,0,0.15); 
+        }
+        .btn-secondary { 
+          border: 2px solid white; 
+          color: white; 
+          background: transparent; 
+          backdrop-filter: blur(10px);
+        }
+        .btn-secondary:hover { 
+          background: rgba(255,255,255,0.1); 
+          transform: translateY(-2px); 
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(180deg); }
+        }
 
         /* -------- Grid helpers -------- */
-        .grid-2 { display: grid; gap: 18px; grid-template-columns: 1fr; }
+        .grid-2 { display: grid; gap: 24px; grid-template-columns: 1fr; }
         @media (min-width: 900px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } }
 
         /* -------- Rooms -------- */
-        .rooms .room-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
-        .rooms .room-body { padding: 18px; }
+        .rooms .room-card { 
+          background: var(--card); 
+          border: 1px solid var(--border); 
+          border-radius: var(--radius); 
+          overflow: hidden; 
+          box-shadow: var(--shadow); 
+          transition: all 0.3s ease;
+        }
+        .rooms .room-card:hover { 
+          transform: translateY(-5px); 
+          box-shadow: 0 12px 30px rgba(0,0,0,.1); 
+        }
+        .rooms .room-card img { 
+          width: 100%; 
+          height: 250px; 
+          object-fit: cover; 
+          transition: transform 0.3s ease; 
+        }
+        .rooms .room-card:hover img { transform: scale(1.05); }
+        .rooms .room-body { padding: 24px; }
         .rooms .room-tagline { margin: .25rem 0 .75rem; color: var(--muted); font-style: italic; }
-        .rooms .room-ctas { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
-        .btn { background: var(--text); color: #fff; padding: 10px 14px; border-radius: 10px; font-weight: 600; }
-        .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--text); }
-        .price { font-weight: 700; color: var(--accent); }
-        .strike { text-decoration: line-through; color: var(--muted); margin-left: 6px; }
+        .rooms .room-ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+        .btn { 
+          background: var(--text); 
+          color: #fff; 
+          padding: 12px 18px; 
+          border-radius: 10px; 
+          font-weight: 600; 
+          transition: all 0.2s ease;
+          border: none;
+          cursor: pointer;
+        }
+        .btn:hover { 
+          background: #333; 
+          transform: translateY(-1px); 
+        }
+        .btn.ghost { 
+          background: transparent; 
+          color: var(--text); 
+          border: 2px solid var(--text); 
+        }
+        .btn.ghost:hover { 
+          background: var(--text); 
+          color: #fff; 
+        }
+        .price { font-weight: 700; color: var(--accent); font-size: 1.2em; }
+        .strike { text-decoration: line-through; color: var(--muted); margin-left: 8px; font-size: 0.9em; }
 
         /* -------- Packages -------- */
-        .packages .grid-3 { display: grid; gap: 18px; grid-template-columns: 1fr; }
-        @media (min-width: 900px) { .packages .grid-3 { grid-template-columns: repeat(3, 1fr); } }
-        .pkg-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
-        .pkg-upsells details { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; margin: 10px 0; }
-        .pkg-upsells summary { cursor: pointer; }
+        .packages .grid-3 { display: grid; gap: 24px; grid-template-columns: 1fr; }
+        @media (min-width: 700px) { .packages .grid-3 { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1000px) { .packages .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+        .pkg-card { 
+          background: var(--card); 
+          border: 1px solid var(--border); 
+          border-radius: var(--radius); 
+          padding: 24px; 
+          box-shadow: var(--shadow); 
+          transition: all 0.3s ease;
+          position: relative;
+        }
+        .pkg-card:hover { 
+          transform: translateY(-5px); 
+          box-shadow: 0 12px 30px rgba(0,0,0,.1); 
+        }
+        .pkg-card h3 { color: var(--text); margin-bottom: 8px; }
+        .pkg-card .price { font-size: 1.5em; margin: 16px 0; }
+        .pkg-card ul { padding-left: 0; list-style: none; }
+        .pkg-card li { padding: 8px 0; padding-left: 24px; position: relative; }
+        .pkg-card li::before { 
+          content: "✓"; 
+          position: absolute; 
+          left: 0; 
+          color: var(--brand); 
+          font-weight: bold; 
+        }
+        .pkg-upsells details { 
+          background: #f8f9fa; 
+          border: 1px solid var(--border); 
+          border-radius: 8px; 
+          padding: 12px 16px; 
+          margin: 16px 0; 
+          transition: all 0.2s ease;
+        }
+        .pkg-upsells details:hover { background: #f1f3f4; }
+        .pkg-upsells summary { 
+          cursor: pointer; 
+          font-weight: 600; 
+          color: var(--text);
+        }
         .muted { color: var(--muted); }
 
         /* -------- Gallery -------- */
-        .gallery { display: grid; gap: 10px; grid-template-columns: repeat(2, 1fr); }
-        @media (min-width: 900px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
-        .gallery img { width: 100%; border-radius: 12px; border: 1px solid var(--border); aspect-ratio: 4/3; object-fit: cover; }
+        .gallery { display: grid; gap: 16px; grid-template-columns: repeat(2, 1fr); }
+        @media (min-width: 700px) { .gallery { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 1000px) { .gallery { grid-template-columns: repeat(4, 1fr); } }
+        .gallery img { 
+          width: 100%; 
+          border-radius: 12px; 
+          border: 1px solid var(--border); 
+          aspect-ratio: 4/3; 
+          object-fit: cover; 
+          transition: all 0.3s ease;
+          cursor: pointer;
+        }
+        .gallery img:hover { 
+          transform: scale(1.05); 
+          box-shadow: 0 8px 20px rgba(0,0,0,.15); 
+        }
 
         /* -------- Rules -------- */
-        .rules details { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; margin: 10px 0; }
-        .rules summary { cursor: pointer; }
+        .rules details { 
+          background: var(--card); 
+          border: 1px solid var(--border); 
+          border-radius: 12px; 
+          padding: 16px 20px; 
+          margin: 16px 0; 
+          transition: all 0.2s ease;
+        }
+        .rules details:hover { box-shadow: var(--shadow); }
+        .rules summary { 
+          cursor: pointer; 
+          font-weight: 600; 
+          font-size: 1.1em; 
+          padding: 8px 0;
+        }
+        .rules details[open] summary { color: var(--brand); }
 
         /* -------- Footer -------- */
-        .footer { border-top: 1px solid var(--border); padding: 28px 0; color: var(--muted); }
+        .footer { 
+          border-top: 1px solid var(--border); 
+          padding: 40px 0; 
+          color: var(--muted); 
+          background: #f8f9fa;
+        }
+        .footer-content { 
+          display: grid; 
+          gap: 24px; 
+          grid-template-columns: 1fr; 
+          text-align: center; 
+        }
+        @media (min-width: 700px) { 
+          .footer-content { 
+            grid-template-columns: repeat(3, 1fr); 
+            text-align: left; 
+          } 
+        }
+        .footer h4 { color: var(--text); margin-bottom: 12px; }
+        .footer a { color: var(--muted); transition: color 0.2s; }
+        .footer a:hover { color: var(--brand); }
 
         /* -------- Floating Book Menu -------- */
-        .floating-book { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
-        .floating-toggle { background: var(--brand); color: #fff; padding: 14px 20px; border-radius: 50px; border: none; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.2); }
-        .floating-toggle:hover { background: var(--brand-dark); }
-        .floating-menu { display: none; flex-direction: column; position: absolute; bottom: 60px; right: 0; background: #fff; border: 1px solid var(--border); border-radius: 10px; box-shadow: 0 10px 24px rgba(0,0,0,.18); overflow: hidden; min-width: 240px; }
-        .floating-menu a { padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+        .floating-book { position: fixed; bottom: 24px; right: 24px; z-index: 9999; }
+        .floating-toggle { 
+          background: var(--brand); 
+          color: #fff; 
+          padding: 16px 24px; 
+          border-radius: 50px; 
+          border: none; 
+          font-weight: 700; 
+          cursor: pointer; 
+          box-shadow: 0 6px 20px rgba(0,0,0,.2); 
+          transition: all 0.3s ease;
+          font-size: 16px;
+        }
+        .floating-toggle:hover { 
+          background: var(--brand-dark); 
+          transform: translateY(-2px); 
+          box-shadow: 0 8px 25px rgba(0,0,0,.25); 
+        }
+        .floating-menu { 
+          display: none; 
+          flex-direction: column; 
+          position: absolute; 
+          bottom: 70px; 
+          right: 0; 
+          background: #fff; 
+          border: 1px solid var(--border); 
+          border-radius: 12px; 
+          box-shadow: 0 12px 30px rgba(0,0,0,.15); 
+          overflow: hidden; 
+          min-width: 280px; 
+        }
+        .floating-menu a { 
+          padding: 14px 18px; 
+          border-bottom: 1px solid var(--border); 
+          white-space: nowrap; 
+          transition: background 0.2s;
+        }
         .floating-menu a:hover { background: #f3f4f6; }
+        .floating-menu a:last-child { border-bottom: none; }
         .floating-book.open .floating-menu { display: flex; }
 
         /* -------- Accessibility -------- */
         :focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; border-radius: 6px; }
 
         /* -------- Utilities -------- */
-        hr { border: none; border-top: 1px solid var(--border); margin: 6px 0; }
+        hr { border: none; border-top: 1px solid var(--border); margin: 8px 0; }
 
         /* -------- Responsive Typography -------- */
-        h2 { font-size: clamp(22px, 2.6vw, 32px); margin: 0 0 16px; }
-        h3 { font-size: clamp(18px, 2.1vw, 22px); margin: 0 0 10px; }
-        p, li { font-size: clamp(14px, 1.9vw, 16px); }
+        h2 { font-size: clamp(24px, 3vw, 36px); margin: 0 0 24px; font-weight: 700; }
+        h3 { font-size: clamp(20px, 2.5vw, 26px); margin: 0 0 12px; font-weight: 600; }
+        p, li { font-size: clamp(15px, 2vw, 17px); line-height: 1.7; }
+
+        /* -------- Loading Animation -------- */
+        .fade-in { animation: fadeIn 0.6s ease-in-out; }
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* -------- Scroll to Top -------- */
+        .scroll-to-top {
+          position: fixed;
+          bottom: 24px;
+          left: 24px;
+          background: var(--text);
+          color: white;
+          border: none;
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+          cursor: pointer;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          z-index: 1000;
+        }
+        .scroll-to-top.visible {
+          opacity: 1;
+          visibility: visible;
+        }
+        .scroll-to-top:hover {
+          background: #333;
+          transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
     <!-- Promo Banner -->
     <div class="promo-banner" id="promoBanner">
-        <span>🎉 Special Offer: Book now and save 20% on your stay!</span>
-        <span class="close-btn" onclick="document.getElementById('promoBanner').style.display='none'">×</span>
+        <span>🎉 Special Offer: Book now and save 20% on your stay! Use code: SAVE20</span>
+        <span class="close-btn" onclick="closeBanner()" aria-label="Close banner">×</span>
     </div>
 
     <!-- Header -->
@@ -133,27 +388,36 @@
         <div class="container">
             <nav class="nav">
                 <div class="logo">
-                    <img src="https://via.placeholder.com/120x40/0a0/fff?text=LLC+2.0" alt="LLC 2.0">
+                    <img src="https://via.placeholder.com/120x40/0a0/fff?text=Luntian.net" alt="Luntian.net Premium Accommodations">
                 </div>
                 <ul class="nav-links">
                     <li><a href="#rooms">Rooms</a></li>
                     <li><a href="#packages">Packages</a></li>
                     <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#rules">Rules</a></li>
+                    <li><a href="#rules">Policies</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
                 <a href="#book" class="book-btn">Book Now</a>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle menu">☰</button>
             </nav>
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="#rooms">Rooms</a>
+                <a href="#packages">Packages</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#rules">Policies</a>
+                <a href="#contact">Contact</a>
+            </div>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Premium Accommodations Await</h1>
-            <p>Experience luxury and comfort in our carefully curated spaces</p>
+        <div class="hero-content fade-in">
+            <h1>Welcome to Luntian.net</h1>
+            <p>Experience luxury and comfort in our carefully curated spaces. Your perfect getaway starts here.</p>
             <div class="cta-buttons">
-                <a href="#rooms" class="btn-primary">View Rooms</a>
-                <a href="#packages" class="btn-secondary">See Packages</a>
+                <a href="#rooms" class="btn-primary">Explore Rooms</a>
+                <a href="#packages" class="btn-secondary">View Packages</a>
             </div>
         </div>
     </section>
@@ -161,31 +425,32 @@
     <!-- Rooms Section -->
     <section class="section rooms" id="rooms">
         <div class="container">
-            <h2>Our Rooms</h2>
+            <h2>Our Premium Rooms</h2>
+            <p class="muted" style="text-align: center; margin-bottom: 40px;">Discover comfort and luxury in every detail</p>
             <div class="grid-2">
-                <div class="room-card">
-                    <img src="https://via.placeholder.com/500x300/667eea/fff?text=Deluxe+Suite" alt="Deluxe Suite">
+                <div class="room-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=500&h=300&fit=crop" alt="Deluxe Suite with city view" loading="lazy">
                     <div class="room-body">
                         <h3>Deluxe Suite</h3>
                         <p class="room-tagline">Luxury meets comfort in our premium suite</p>
-                        <p>Spacious room with king bed, city view, and premium amenities.</p>
+                        <p>Spacious room with king bed, panoramic city view, marble bathroom, and premium amenities including complimentary WiFi and 24/7 room service.</p>
                         <p class="price">$199/night <span class="strike">$249</span></p>
                         <div class="room-ctas">
-                            <a href="#" class="btn">Book Now</a>
-                            <a href="#" class="btn ghost">View Details</a>
+                            <button class="btn" onclick="bookRoom('deluxe')">Book Now</button>
+                            <button class="btn ghost" onclick="viewDetails('deluxe')">View Details</button>
                         </div>
                     </div>
                 </div>
-                <div class="room-card">
-                    <img src="https://via.placeholder.com/500x300/764ba2/fff?text=Standard+Room" alt="Standard Room">
+                <div class="room-card fade-in">
+                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=500&h=300&fit=crop" alt="Standard Room with modern amenities" loading="lazy">
                     <div class="room-body">
                         <h3>Standard Room</h3>
                         <p class="room-tagline">Comfortable and affordable accommodation</p>
-                        <p>Cozy room with queen bed, modern amenities, and great value.</p>
+                        <p>Cozy room with queen bed, modern amenities, flat-screen TV, and great value. Perfect for business travelers and budget-conscious guests.</p>
                         <p class="price">$99/night <span class="strike">$129</span></p>
                         <div class="room-ctas">
-                            <a href="#" class="btn">Book Now</a>
-                            <a href="#" class="btn ghost">View Details</a>
+                            <button class="btn" onclick="bookRoom('standard')">Book Now</button>
+                            <button class="btn ghost" onclick="viewDetails('standard')">View Details</button>
                         </div>
                     </div>
                 </div>
@@ -197,54 +462,73 @@
     <section class="section packages" id="packages">
         <div class="container">
             <h2>Special Packages</h2>
+            <p class="muted" style="text-align: center; margin-bottom: 40px;">Carefully crafted experiences for every occasion</p>
             <div class="grid-3">
-                <div class="pkg-card">
+                <div class="pkg-card fade-in">
                     <h3>Weekend Getaway</h3>
-                    <p class="muted">Perfect for short breaks</p>
+                    <p class="muted">Perfect for short breaks and romantic escapes</p>
                     <p class="price">$299</p>
                     <ul>
                         <li>2 nights accommodation</li>
-                        <li>Complimentary breakfast</li>
-                        <li>Late checkout</li>
+                        <li>Complimentary breakfast for two</li>
+                        <li>Late checkout until 2 PM</li>
+                        <li>Welcome champagne bottle</li>
+                        <li>Spa access included</li>
                     </ul>
                     <div class="pkg-upsells">
                         <details>
-                            <summary>Add-ons available</summary>
-                            <p>Spa treatment: +$50<br>Room upgrade: +$30<br>Airport transfer: +$25</p>
+                            <summary>Available Add-ons</summary>
+                            <p><strong>Spa Treatment:</strong> +$75 (couples massage)<br>
+                            <strong>Room Upgrade:</strong> +$50 (to deluxe suite)<br>
+                            <strong>Airport Transfer:</strong> +$35 (round trip)<br>
+                            <strong>Dinner Package:</strong> +$80 (3-course meal for two)</p>
                         </details>
                     </div>
+                    <button class="btn" onclick="bookPackage('weekend')" style="width: 100%; margin-top: 16px;">Book Package</button>
                 </div>
-                <div class="pkg-card">
+                <div class="pkg-card fade-in">
                     <h3>Business Special</h3>
-                    <p class="muted">Ideal for business travelers</p>
+                    <p class="muted">Ideal for business travelers and corporate stays</p>
                     <p class="price">$179/night</p>
                     <ul>
-                        <li>High-speed WiFi</li>
-                        <li>Work desk & chair</li>
-                        <li>Meeting room access</li>
+                        <li>High-speed WiFi (100 Mbps)</li>
+                        <li>Executive work desk & ergonomic chair</li>
+                        <li>Meeting room access (2 hours daily)</li>
+                        <li>Business center access</li>
+                        <li>Express check-in/out</li>
                     </ul>
                     <div class="pkg-upsells">
                         <details>
-                            <summary>Business extras</summary>
-                            <p>Printer access: +$10<br>Conference room: +$75<br>Catering: +$40</p>
+                            <summary>Business Extras</summary>
+                            <p><strong>Printer/Scanner Access:</strong> +$15/day<br>
+                            <strong>Private Conference Room:</strong> +$95/day<br>
+                            <strong>Catering Service:</strong> +$60/person<br>
+                            <strong>Airport Shuttle:</strong> +$25 (one way)</p>
                         </details>
                     </div>
+                    <button class="btn" onclick="bookPackage('business')" style="width: 100%; margin-top: 16px;">Book Package</button>
                 </div>
-                <div class="pkg-card">
+                <div class="pkg-card fade-in">
                     <h3>Family Package</h3>
-                    <p class="muted">Great for family vacations</p>
+                    <p class="muted">Great for family vacations and group stays</p>
                     <p class="price">$449</p>
                     <ul>
-                        <li>Family suite for 4</li>
-                        <li>Kids activities</li>
-                        <li>Pool access</li>
+                        <li>Family suite accommodating up to 4</li>
+                        <li>Kids activities and game room access</li>
+                        <li>Swimming pool and fitness center</li>
+                        <li>Complimentary breakfast for family</li>
+                        <li>Late checkout and early check-in</li>
                     </ul>
                     <div class="pkg-upsells">
                         <details>
-                            <summary>Family add-ons</summary>
-                            <p>Extra bed: +$25<br>Babysitting: +$60<br>Kids meals: +$35</p>
+                            <summary>Family Add-ons</summary>
+                            <p><strong>Extra Bed:</strong> +$35/night<br>
+                            <strong>Babysitting Service:</strong> +$80/evening<br>
+                            <strong>Kids Meal Plan:</strong> +$45/child<br>
+                            <strong>Family Excursion:</strong> +$120/family</p>
                         </details>
                     </div>
+                    <button class="btn" onclick="bookPackage('family')" style="width: 100%; margin-top: 16px;">Book Package</button>
                 </div>
             </div>
         </div>
@@ -254,13 +538,16 @@
     <section class="section" id="gallery">
         <div class="container">
             <h2>Gallery</h2>
+            <p class="muted" style="text-align: center; margin-bottom: 40px;">Take a visual tour of our premium facilities</p>
             <div class="gallery">
-                <img src="https://via.placeholder.com/400x300/667eea/fff?text=Lobby" alt="Hotel Lobby">
-                <img src="https://via.placeholder.com/400x300/764ba2/fff?text=Restaurant" alt="Restaurant">
-                <img src="https://via.placeholder.com/400x300/f093fb/fff?text=Pool" alt="Swimming Pool">
-                <img src="https://via.placeholder.com/400x300/4ade80/fff?text=Gym" alt="Fitness Center">
-                <img src="https://via.placeholder.com/400x300/fbbf24/fff?text=Spa" alt="Spa">
-                <img src="https://via.placeholder.com/400x300/f87171/fff?text=Rooftop" alt="Rooftop View">
+                <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=300&fit=crop" alt="Elegant hotel lobby with modern design" loading="lazy" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop" alt="Fine dining restaurant" loading="lazy" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop" alt="Luxury swimming pool area" loading="lazy" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=300&fit=crop" alt="State-of-the-art fitness center" loading="lazy" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=400&h=300&fit=crop" alt="Relaxing spa treatment room" loading="lazy" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop" alt="Rooftop terrace with city view" loading="lazy" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop" alt="Business meeting room" loading="lazy" onclick="openLightbox(this)">
+                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400&h=300&fit=crop" alt="Cozy lounge area" loading="lazy" onclick="openLightbox(this)">
             </div>
         </div>
     </section>
@@ -268,57 +555,214 @@
     <!-- Rules Section -->
     <section class="section rules" id="rules">
         <div class="container">
-            <h2>House Rules</h2>
-            <details>
-                <summary>Check-in/Check-out</summary>
-                <p>Check-in: 3:00 PM - 11:00 PM<br>Check-out: 11:00 AM<br>Late check-out available upon request (additional charges may apply)</p>
+            <h2>Policies & Information</h2>
+            <p class="muted" style="text-align: center; margin-bottom: 40px;">Everything you need to know for a smooth stay</p>
+            
+            <details class="fade-in">
+                <summary>Check-in & Check-out</summary>
+                <p><strong>Check-in:</strong> 3:00 PM - 11:00 PM<br>
+                <strong>Check-out:</strong> 11:00 AM<br>
+                <strong>Early Check-in:</strong> Available from 12:00 PM (subject to availability, $25 fee)<br>
+                <strong>Late Check-out:</strong> Until 2:00 PM ($35 fee), until 6:00 PM ($65 fee)<br>
+                <strong>Express Check-in/out:</strong> Available for business package guests</p>
             </details>
-            <details>
-                <summary>Cancellation Policy</summary>
-                <p>Free cancellation up to 24 hours before arrival. Cancellations within 24 hours are subject to one night charge.</p>
+            
+            <details class="fade-in">
+                <summary>Cancellation & Modification Policy</summary>
+                <p><strong>Standard Booking:</strong> Free cancellation up to 24 hours before arrival<br>
+                <strong>Special Packages:</strong> Free cancellation up to 48 hours before arrival<br>
+                <strong>Peak Season:</strong> Free cancellation up to 72 hours before arrival<br>
+                <strong>Late Cancellation:</strong> Subject to one night charge<br>
+                <strong>No-show:</strong> Full booking amount will be charged<br>
+                <strong>Modifications:</strong> Subject to availability and rate differences</p>
             </details>
-            <details>
+            
+            <details class="fade-in">
                 <summary>Pet Policy</summary>
-                <p>Pets are welcome with prior notice. Additional cleaning fee of $50 applies. Maximum 2 pets per room.</p>
+                <p><strong>Pet-Friendly Rooms:</strong> Available upon request<br>
+                <strong>Pet Fee:</strong> $75 per stay (covers cleaning and amenities)<br>
+                <strong>Maximum:</strong> 2 pets per room (under 50 lbs each)<br>
+                <strong>Required:</strong> Current vaccination records<br>
+                <strong>Restrictions:</strong> Pets must be supervised and leashed in public areas<br>
+                <strong>Pet Amenities:</strong> Bed, bowls, and treats provided</p>
             </details>
-            <details>
-                <summary>Smoking Policy</summary>
-                <p>All rooms are non-smoking. Designated smoking areas available on the terrace. Violation fee: $200.</p>
+            
+            <details class="fade-in">
+                <summary>Smoking & Noise Policy</summary>
+                <p><strong>Smoking:</strong> All rooms and indoor areas are non-smoking<br>
+                <strong>Designated Areas:</strong> Outdoor terrace and rooftop garden<br>
+                <strong>Violation Fee:</strong> $250 for smoking in non-smoking areas<br>
+                <strong>Quiet Hours:</strong> 10:00 PM - 7:00 AM<br>
+                <strong>Noise Policy:</strong> Guests are expected to maintain reasonable noise levels<br>
+                <strong>Parties:</strong> Private events must be pre-approved</p>
             </details>
+            
+            <details class="fade-in">
+                <summary>Amenities & Services</summary>
+                <p><strong>WiFi:</strong> Complimentary high-speed internet throughout property<br>
+                <strong>Parking:</strong> Valet parking $25/night, self-parking $15/night<br>
+                <strong>Airport Shuttle:</strong> Available 6:00 AM - 11:00 PM ($25 each way)<br>
+                <strong>Concierge:</strong> Available 24/7 for reservations and recommendations<br>
+                <strong>Room Service:</strong> Available 6:00 AM - 2:00 AM<br>
+                <strong>Laundry:</strong> Same-day service available (additional charges apply)</p>
+            </details>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <div class="grid-2">
+                <div>
+                    <h3>Get in Touch</h3>
+                    <p>Ready to book your stay or have questions? We're here to help make your experience perfect.</p>
+                    <p><strong>Phone:</strong> <a href="tel:+1234567890">+1 (234) 567-890</a><br>
+                    <strong>Email:</strong> <a href="mailto:reservations@luntian.net">reservations@luntian.net</a><br>
+                    <strong>Address:</strong> 123 Luntian Street, Premium District, Philippines</p>
+                    <p><strong>Reservations Hours:</strong><br>
+                    Monday - Friday: 8:00 AM - 10:00 PM<br>
+                    Saturday - Sunday: 9:00 AM - 9:00 PM</p>
+                </div>
+                <div>
+                    <h3>Quick Booking</h3>
+                    <p>For immediate reservations, use our floating booking menu or call our 24/7 hotline.</p>
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; border: 1px solid var(--border);">
+                        <h4 style="margin-top: 0;">Special Offers</h4>
+                        <p><strong>SAVE20:</strong> 20% off all bookings<br>
+                        <strong>WEEKEND:</strong> Free breakfast on weekend stays<br>
+                        <strong>BUSINESS:</strong> 15% off business packages</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 LLC 2.0. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <div class="footer-content">
+                <div>
+                    <h4>Luntian.net</h4>
+                    <p>Premium accommodations for the modern traveler. Experience luxury, comfort, and exceptional service at Luntian.net.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <p><a href="#rooms">Rooms</a><br>
+                    <a href="#packages">Packages</a><br>
+                    <a href="#gallery">Gallery</a><br>
+                    <a href="#rules">Policies</a></p>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <p><a href="tel:+1234567890">+1 (234) 567-890</a><br>
+                    <a href="mailto:info@luntian.net">info@luntian.net</a><br>
+                    123 Luntian Street<br>
+                    Premium District, Philippines</p>
+                </div>
+            </div>
+            <hr style="margin: 24px 0;">
+            <p style="text-align: center;">&copy; 2024 Luntian.net. All rights reserved. | <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
         </div>
     </footer>
 
     <!-- Floating Book Menu -->
     <div class="floating-book" id="floatingBook">
-        <button class="floating-toggle" onclick="toggleFloatingMenu()">Book</button>
+        <button class="floating-toggle" onclick="toggleFloatingMenu()" aria-label="Toggle booking menu">📞 Book</button>
         <div class="floating-menu">
-            <a href="#rooms">Deluxe Suite - $199</a>
-            <a href="#rooms">Standard Room - $99</a>
+            <a href="#" onclick="bookRoom('deluxe')">🏨 Deluxe Suite - $199/night</a>
+            <a href="#" onclick="bookRoom('standard')">🛏️ Standard Room - $99/night</a>
             <hr>
-            <a href="#packages">Weekend Package - $299</a>
-            <a href="#packages">Business Special - $179</a>
-            <a href="#packages">Family Package - $449</a>
+            <a href="#" onclick="bookPackage('weekend')">💕 Weekend Package - $299</a>
+            <a href="#" onclick="bookPackage('business')">💼 Business Special - $179/night</a>
+            <a href="#" onclick="bookPackage('family')">👨‍👩‍👧‍👦 Family Package - $449</a>
+            <hr>
+            <a href="tel:+1234567890">📞 Call: (234) 567-890</a>
         </div>
     </div>
 
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" onclick="scrollToTop()" aria-label="Scroll to top">↑</button>
+
     <script>
+        // Floating Menu Toggle
         function toggleFloatingMenu() {
             const floatingBook = document.getElementById('floatingBook');
             floatingBook.classList.toggle('open');
         }
 
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
+        // Close Banner
+        function closeBanner() {
+            document.getElementById('promoBanner').style.display = 'none';
+        }
+
+        // Booking Functions
+        function bookRoom(type) {
+            alert(`Booking ${type} room... This would redirect to booking system.`);
+            // In real implementation, this would redirect to booking system
+        }
+
+        function bookPackage(type) {
+            alert(`Booking ${type} package... This would redirect to booking system.`);
+            // In real implementation, this would redirect to booking system
+        }
+
+        function viewDetails(type) {
+            alert(`Viewing ${type} room details... This would show detailed information.`);
+            // In real implementation, this would show detailed room information
+        }
+
+        // Gallery Lightbox (simplified)
+        function openLightbox(img) {
+            const lightbox = document.createElement('div');
+            lightbox.style.cssText = `
+                position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+                background: rgba(0,0,0,0.9); display: flex; align-items: center;
+                justify-content: center; z-index: 10000; cursor: pointer;
+            `;
+            
+            const lightboxImg = document.createElement('img');
+            lightboxImg.src = img.src;
+            lightboxImg.style.cssText = 'max-width: 90vw; max-height: 90vh; border-radius: 8px;';
+            
+            lightbox.appendChild(lightboxImg);
+            document.body.appendChild(lightbox);
+            
+            lightbox.onclick = () => document.body.removeChild(lightbox);
+        }
+
+        // Scroll to Top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show/Hide Scroll to Top Button
+        window.addEventListener('scroll', () => {
+            const scrollButton = document.getElementById('scrollToTop');
+            if (window.pageYOffset > 300) {
+                scrollButton.classList.add('visible');
+            } else {
+                scrollButton.classList.remove('visible');
+            }
+        });
+
         // Close floating menu when clicking outside
         document.addEventListener('click', function(event) {
             const floatingBook = document.getElementById('floatingBook');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
             if (!floatingBook.contains(event.target)) {
                 floatingBook.classList.remove('open');
+            }
+            
+            if (!mobileMenu.contains(event.target) && !event.target.classList.contains('mobile-menu-btn')) {
+                mobileMenu.classList.remove('active');
             }
         });
 
@@ -332,8 +776,46 @@
                         behavior: 'smooth',
                         block: 'start'
                     });
+                    
+                    // Close mobile menu if open
+                    document.getElementById('mobileMenu').classList.remove('active');
+                    document.getElementById('floatingBook').classList.remove('open');
                 }
             });
+        });
+
+        // Add fade-in animation to elements when they come into view
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('floatingBook').classList.remove('open');
+                document.getElementById('mobileMenu').classList.remove('active');
+            }
         });
     </script>
 </body>
