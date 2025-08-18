@@ -1,1784 +1,314 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luntian Log Cabin - Tagaytay's Hidden Gem | 2 Private Rooms | Pet-Friendly</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Escape to Luntian Log Cabin in Tagaytay - your cozy retreat with 2 private rooms, native Filipino design, and premium packages. Pet-friendly sanctuary perfect for couples and families.">
-    <meta name="keywords" content="Tagaytay accommodation, log cabin, private rooms, pet-friendly, native design, couples retreat, family vacation, boutique hotel">
-    <meta property="og:title" content="Luntian Log Cabin - Tagaytay's Hidden Gem">
-    <meta property="og:description" content="Cozy cabin with 2 private rooms, native design, and premium packages in Tagaytay">
-    <meta property="og:image" content="coverpage.jpg">
-    <meta property="og:url" content="https://luntian.net">
-    
-    <style>
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header Styles */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1rem 0;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #2d5a27;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: #2d5a27;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #2d5a27;
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .book-btn {
-            background: linear-gradient(135deg, #2d5a27, #4a7c59);
-            color: white;
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(45, 90, 39, 0.3);
-        }
-
-        .book-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(45, 90, 39, 0.4);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('coverpage.jpg') center/cover;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            color: white;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #2d5a27, #4a7c59);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(45, 90, 39, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(45, 90, 39, 0.4);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            border: 2px solid white;
-            transition: all 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: #2d5a27;
-        }
-
-        /* Promo Banner */
-        .promo-banner {
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            font-weight: 600;
-            animation: pulse 2s infinite;
-        }
-
-        /* Section Styles */
-        .section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 1rem;
-            color: #2d5a27;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* About Section */
-        .about {
-            background: white;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: #2d5a27;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .feature {
-            text-align: center;
-            padding: 1.5rem;
-            background: #f8f9fa;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .feature:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        /* Rooms Section */
-        .rooms {
-            background: #f8f9fa;
-        }
-
-        .rooms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 2rem;
-        }
-
-        .room-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .room-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .room-image {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-        }
-
-        .room-content {
-            padding: 2rem;
-        }
-
-        .room-title {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: #2d5a27;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .room-tagline {
-            font-style: italic;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .sunrise-tagline {
-            color: #ff6b35;
-        }
-
-        .leaf-tagline {
-            color: #4a7c59;
-        }
-
-        .room-description {
-            color: #666;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .room-amenities {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .amenity-tag {
-            background: #e8f5e8;
-            color: #2d5a27;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-        }
-
-        .room-price {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #2d5a27;
-            margin-bottom: 1rem;
-        }
-
-        /* Premium Packages Section */
-        .premium-packages {
-            background: linear-gradient(135deg, #2d5a27, #4a7c59);
-            color: white;
-        }
-
-        .packages-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .package-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .package-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .package-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .package-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .package-title {
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .package-price {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #ffd700;
-        }
-
-        .package-duration {
-            opacity: 0.8;
-            margin-bottom: 1rem;
-        }
-
-        .package-features {
-            list-style: none;
-            margin-bottom: 2rem;
-        }
-
-        .package-features li {
-            padding: 0.5rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .package-features li::before {
-            content: '✓';
-            color: #ffd700;
-            font-weight: bold;
-        }
-
-        /* Special Setup Packages */
-        .special-setups {
-            background: white;
-        }
-
-        .setup-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .setup-card {
-            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .setup-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .setup-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .setup-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #2d5a27;
-        }
-
-        .setup-price {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ff6b35;
-            margin-bottom: 1rem;
-        }
-
-        .setup-features {
-            list-style: none;
-            text-align: left;
-            color: #2d3748;
-        }
-
-        .setup-features li {
-            padding: 0.3rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .setup-features li::before {
-            content: '•';
-            color: #2d5a27;
-            font-weight: bold;
-        }
-
-        /* Special Occasion Extras */
-        .special-occasions {
-            background: #f8f9fa;
-        }
-
-        .occasions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .occasion-card {
-            background: white;
-            border-radius: 15px;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .occasion-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .occasion-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .occasion-title {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: #2d5a27;
-        }
-
-        .occasion-price {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ff6b35;
-            margin-bottom: 1rem;
-        }
-
-        .occasion-description {
-            color: #666;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        /* Pricing Section */
-        .pricing {
-            background: white;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .pricing-card {
-            background: linear-gradient(135deg, #2d5a27, #4a7c59);
-            color: white;
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pricing-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
-            transform: rotate(45deg);
-            transition: all 0.3s ease;
-        }
-
-        .pricing-card:hover::before {
-            transform: rotate(45deg) scale(1.2);
-        }
-
-        .pricing-type {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .pricing-amount {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            color: #ffd700;
-        }
-
-        .pricing-period {
-            opacity: 0.8;
-            margin-bottom: 2rem;
-        }
-
-        .pricing-features {
-            list-style: none;
-            text-align: left;
-        }
-
-        .pricing-features li {
-            padding: 0.5rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .pricing-features li::before {
-            content: '✓';
-            color: #ffd700;
-            font-weight: bold;
-        }
-
-        /* Guest Welcome Guide */
-        .welcome-guide {
-            background: #f8f9fa;
-        }
-
-        .guide-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .guide-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .guide-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .guide-icon {
-            font-size: 2rem;
-            color: #2d5a27;
-        }
-
-        .guide-title {
-            font-size: 1.3rem;
-            color: #2d5a27;
-            margin: 0;
-        }
-
-        .guide-content {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .guide-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .guide-list li {
-            padding: 0.5rem 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-        }
-
-        .guide-list li::before {
-            content: '•';
-            color: #2d5a27;
-            font-weight: bold;
-            margin-top: 0.2rem;
-        }
-
-        /* FAQ Section */
-        .faq {
-            background: white;
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .faq-search {
-            margin-bottom: 2rem;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: #2d5a27;
-        }
-
-        .faq-categories {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .category-btn {
-            background: #f8f9fa;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .category-btn.active,
-        .category-btn:hover {
-            background: #2d5a27;
-            color: white;
-        }
-
-        .faq-item {
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .faq-question {
-            background: none;
-            border: none;
-            width: 100%;
-            padding: 1.5rem;
-            text-align: left;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .faq-question:hover {
-            background: rgba(45, 90, 39, 0.1);
-        }
-
-        .faq-answer {
-            padding: 0 1.5rem 1.5rem;
-            color: #666;
-            line-height: 1.6;
-            display: none;
-        }
-
-        .faq-answer.active {
-            display: block;
-        }
-
-        .faq-toggle {
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .faq-toggle.active {
-            transform: rotate(180deg);
-        }
-
-        /* House Rules Section */
-        .house-rules {
-            background: #f8f9fa;
-        }
-
-        .rules-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .rule-card {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .rule-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .rule-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .rule-icon {
-            font-size: 2rem;
-        }
-
-        .rule-title {
-            font-size: 1.3rem;
-            color: #2d5a27;
-            margin: 0;
-        }
-
-        .rule-content {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .rule-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .rule-list li {
-            padding: 0.5rem 0;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-        }
-
-        .rule-list li::before {
-            content: '•';
-            color: #2d5a27;
-            font-weight: bold;
-            margin-top: 0.2rem;
-        }
-
-        .emergency-card {
-            background: linear-gradient(135deg, #dc3545, #c82333);
-            color: white;
-        }
-
-        .emergency-card .rule-title {
-            color: white;
-        }
-
-        .emergency-card .rule-list li::before {
-            color: #ffd700;
-        }
-
-        /* Amenities Section */
-        .amenities {
-            background: white;
-        }
-
-        .amenities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .amenity-item {
-            text-align: center;
-            padding: 2rem;
-            background: #f8f9fa;
-            border-radius: 15px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .amenity-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .amenity-icon {
-            font-size: 3rem;
-            color: #2d5a27;
-            margin-bottom: 1rem;
-        }
-
-        .amenity-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #2d5a27;
-        }
-
-        .amenity-description {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* Gallery Section */
-        .gallery {
-            background: #f8f9fa;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-        }
-
-        .gallery-item {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            cursor: pointer;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.05);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
-
-        /* Reviews Section */
-        .reviews {
-            background: white;
-        }
-
-        .reviews-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .review-card {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        .review-stars {
-            color: #ffd700;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .review-text {
-            font-style: italic;
-            color: #666;
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .review-author {
-            font-weight: 600;
-            color: #2d5a27;
-        }
-
-        .review-platform {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .quote-icon {
-            position: absolute;
-            top: 1rem;
-            left: 1.5rem;
-            font-size: 2rem;
-            color: #2d5a27;
-            opacity: 0.3;
-        }
-
-        /* Booking Platforms */
-        .booking-platforms {
-            background: linear-gradient(135deg, #2d5a27, #4a7c59);
-            color: white;
-        }
-
-        .platforms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-        }
-
-        .platform-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 2rem;
-            text-align: center;
-            transition: transform 0.3s ease;
-            text-decoration: none;
-            color: white;
-        }
-
-        .platform-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .platform-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #ffd700;
-        }
-
-        .platform-name {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .platform-description {
-            opacity: 0.8;
-            font-size: 0.9rem;
-        }
-
-        /* Contact Section */
-        .contact {
-            background: white;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        .contact-info h3 {
-            color: #2d5a27;
-            margin-bottom: 1rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .contact-icon {
-            font-size: 1.5rem;
-            color: #2d5a27;
-        }
-
-        .contact-form {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 15px;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #2d5a27;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #2d5a27;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, #2d5a27, #4a7c59);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(45, 90, 39, 0.3);
-        }
-
-        /* Footer */
-        .footer {
-            background: #2d5a27;
-            color: white;
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: #ffd700;
-        }
-
-        .footer-section p,
-        .footer-section li {
-            margin-bottom: 0.5rem;
-            opacity: 0.9;
-            line-height: 1.6;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-section a:hover {
-            color: #ffd700;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem;
-            border-radius: 50%;
-            transition: background 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: rgba(255, 215, 0, 0.2);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            opacity: 0.7;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 5% auto;
-            padding: 2rem;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-        }
-
-        .close {
-            position: absolute;
-            right: 1rem;
-            top: 1rem;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #666;
-        }
-
-        .close:hover {
-            color: #2d5a27;
-        }
-
-        /* Scroll to top button */
-        .scroll-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #2d5a27;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: none;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .scroll-top:hover {
-            background: #4a7c59;
-            transform: translateY(-3px);
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-content p {
-                font-size: 1.1rem;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <nav class="nav container">
-            <a href="#" class="logo">
-                🏡 Luntian Log Cabin
-            </a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#rooms">Rooms</a></li>
-                <li><a href="#packages">Packages</a></li>
-                <li><a href="#amenities">Amenities</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <a href="#booking" class="book-btn">Book Now</a>
-        </nav>
-    </header>
-
-    <!-- Promo Banner -->
-    <div class="promo-banner">
-        🔥 HUGE SAVINGS! Weeknight Special: Was ₱5,000 NOW ₱1,999 | Weekend with Breakfast: Was ₱8,000 NOW ₱2,499 🔥
-    </div>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Luntian Log Cabin</h1>
-                <p>Tagaytay's Hidden Gem • Native & Cozy Vibe • Premium Packages Available</p>
-                <div class="cta-buttons">
-                    <a href="#packages" class="btn-primary">View Packages</a>
-                    <a href="#rooms" class="btn-secondary">Explore Rooms</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section about">
-        <div class="container">
-            <h2 class="section-title">About Luntian</h2>
-            <p class="section-subtitle">A cozy cabin featuring 2 private rooms - your serene escape from city life</p>
-            <div class="about-content">
-                <div class="about-text">
-                    <h3>Your Native & Cozy Retreat</h3>
-                    <p>Escape the hustle and bustle of city life at Luntian Log Cabin, nestled in the cool mountains of Tagaytay. Our charming retreat offers a perfect blend of rustic charm and modern comfort, designed with authentic Filipino materials and craftsmanship.</p>
-                    <p>With 2 beautifully designed private rooms, each with its own unique character and story, we provide an intimate setting for couples seeking romance, families creating memories, or friends looking for a peaceful getaway.</p>
-                    <p>Experience the warmth of Filipino hospitality in a setting that celebrates our rich cultural heritage while providing all the amenities you need for a comfortable and memorable stay.</p>
-                </div>
-                <div class="features">
-                    <div class="feature">
-                        <div class="feature-icon">🏡</div>
-                        <h4>Native Design</h4>
-                        <p>Authentic Filipino architecture with handwoven rattan details</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">🐕</div>
-                        <h4>Pet-Friendly</h4>
-                        <p>Bring your furry family members along for the adventure</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">🌿</div>
-                        <h4>Nature Escape</h4>
-                        <p>Surrounded by lush greenery and fresh mountain air</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">⭐</div>
-                        <h4>Premium Service</h4>
-                        <p>Thoughtful amenities and personalized guest experiences</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Rooms Section -->
-    <section id="rooms" class="section rooms">
-        <div class="container">
-            <h2 class="section-title">Our 2 Beautiful Rooms</h2>
-            <p class="section-subtitle">Each room tells its own story with unique design and ambiance</p>
-            <div class="rooms-grid">
-                <div class="room-card">
-                    <img src="sunrise-room.jpg" alt="Sunrise Room with geometric patterns and warm terracotta tones" class="room-image">
-                    <div class="room-content">
-                        <h3 class="room-title">🟠 Sunrise Room</h3>
-                        <p class="room-tagline sunrise-tagline">"When life gives you tangerines, let Sunrise paint your morning."</p>
-                        <p class="room-description">Wake up to warmth and inspiration in our Sunrise Room. Featuring stunning geometric patterns in terracotta and orange tones, contemporary artwork, and a sophisticated dark wood slat accent wall. The modern design creates the perfect atmosphere for couples seeking an energizing and stylish retreat.</p>
-                        <div class="room-amenities">
-                            <span class="amenity-tag">King Bed</span>
-                            <span class="amenity-tag">AC</span>
-                            <span class="amenity-tag">Private Bath</span>
-                            <span class="amenity-tag">Work Desk</span>
-                            <span class="amenity-tag">Premium Linens</span>
-                        </div>
-                        <div class="room-price">Perfect for couples</div>
-                        <a href="#booking" class="btn-primary">Book Sunrise Room</a>
-                    </div>
-                </div>
-
-                <div class="room-card">
-                    <img src="leaf-room.jpg" alt="Leaf Room with green cabinetry and natural elements" class="room-image">
-                    <div class="room-content">
-                        <h3 class="room-title">🟢 Leaf Room</h3>
-                        <p class="room-tagline leaf-tagline">"Leaf — where calm grows quietly."</p>
-                        <p class="room-description">Find tranquility in our Leaf Room, where nature meets modern Filipino design. Beautiful green cabinetry, live plants, handwoven rattan pendant lights, and exposed wooden beams create a serene sanctuary. Perfect for those seeking peace, mindfulness, and connection with nature.</p>
-                        <div class="room-amenities">
-                            <span class="amenity-tag">Queen Bed</span>
-                            <span class="amenity-tag">AC</span>
-                            <span class="amenity-tag">Private Bath</span>
-                            <span class="amenity-tag">Garden View</span>
-                            <span class="amenity-tag">Natural Materials</span>
-                        </div>
-                        <div class="room-price">Perfect for couples or small families</div>
-                        <a href="#booking" class="btn-primary">Book Leaf Room</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Premium Packages Section -->
-    <section id="packages" class="section premium-packages">
-        <div class="container">
-            <h2 class="section-title">Premium Experience Packages</h2>
-            <p class="section-subtitle">Curated experiences that transform your stay into unforgettable memories</p>
-            <div class="packages-grid">
-                <div class="package-card">
-                    <div class="package-header">
-                        <div class="package-icon">💕</div>
-                        <h3 class="package-title">Romance Package</h3>
-                        <div class="package-price">₱12,000</div>
-                        <div class="package-duration">2 Days, 1 Night</div>
-                    </div>
-                    <ul class="package-features">
-                        <li>Private room with romantic setup</li>
-                        <li>Candlelit dinner for two</li>
-                        <li>Complimentary bottle of wine</li>
-                        <li>Rose petals and ambient lighting</li>
-                        <li>Couples massage session</li>
-                        <li>Late checkout privilege</li>
-                        <li>Personalized welcome note</li>
-                    </ul>
-                    <a href="#booking" class="btn-secondary">Book Romance Package</a>
-                </div>
-
-                <div class="package-card">
-                    <div class="package-header">
-                        <div class="package-icon">👨‍👩‍👧‍👦</div>
-                        <h3 class="package-title">Family Package</h3>
-                        <div class="package-price">₱8,500</div>
-                        <div class="package-duration">2 Days, 1 Night</div>
-                    </div>
-                    <ul class="package-features">
-                        <li>Family-friendly room setup</li>
-                        <li>Welcome treats for kids</li>
-                        <li>Outdoor activity kit</li>
-                        <li>Complimentary breakfast</li>
-                        <li>Board games and books</li>
-                        <li>Pet accommodation (if needed)</li>
-                        <li>Family photo session</li>
-                    </ul>
-                    <a href="#booking" class="btn-secondary">Book Family Package</a>
-                </div>
-
-                <div class="package-card">
-                    <div class="package-header">
-                        <div class="package-icon">🧘‍♀️</div>
-                        <h3 class="package-title">Wellness Package</h3>
-                        <div class="package-price">₱15,000</div>
-                        <div class="package-duration">3 Days, 2 Nights</div>
-                    </div>
-                    <ul class="package-features">
-                        <li>Extended stay for deep relaxation</li>
-                        <li>Daily meditation sessions</li>
-                        <li>Healthy organic meals</li>
-                        <li>Spa treatments included</li>
-                        <li>Yoga mat and accessories</li>
-                        <li>Nature walking guide</li>
-                        <li>Wellness consultation</li>
-                    </ul>
-                    <a href="#booking" class="btn-secondary">Book Wellness Package</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Special Setup Packages -->
-    <section class="section special-setups">
-        <div class="container">
-            <h2 class="section-title">Special Setup Packages</h2>
-            <p class="section-subtitle">Elevated experiences for your most important moments</p>
-            <div class="setup-grid">
-                <div class="setup-card">
-                    <div class="setup-icon">🎊</div>
-                    <h3 class="setup-title">Grand Celebration Setup</h3>
-                    <div class="setup-price">₱25,000</div>
-                    <ul class="setup-features">
-                        <li>Premium event styling and decoration</li>
-                        <li>Professional photography coverage</li>
-                        <li>Catered dining experience</li>
-                        <li>Sound system and ambient lighting</li>
-                        <li>Dedicated event coordinator</li>
-                        <li>Custom celebration theme</li>
-                        <li>Accommodates up to 12 guests</li>
-                        <li>Extended venue access</li>
-                    </ul>
-                    <a href="#booking" class="btn-primary">Book Grand Celebration</a>
-                </div>
-
-                <div class="setup-card">
-                    <div class="setup-icon">👥</div>
-                    <h3 class="setup-title">Romantic Group Retreat</h3>
-                    <div class="setup-price">₱18,000</div>
-                    <ul class="setup-features">
-                        <li>Perfect for couples' group getaways</li>
-                        <li>Both rooms beautifully coordinated</li>
-                        <li>Group activities and games</li>
-                        <li>Shared dining experience</li>
-                        <li>Bonfire setup with s'mores</li>
-                        <li>Group photo session</li>
-                        <li>Accommodates 4-6 people</li>
-                        <li>Flexible check-in/out times</li>
-                    </ul>
-                    <a href="#booking" class="btn-primary">Book Group Retreat</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Special Occasion Extras -->
-    <section class="section special-occasions">
-        <div class="container">
-            <h2 class="section-title">Special Occasion Extras</h2>
-            <p class="section-subtitle">Add magical touches to celebrate life's precious moments</p>
-            <div class="occasions-grid">
-                <div class="occasion-card">
-                    <div class="occasion-icon">🎂</div>
-                    <h3 class="occasion-title">Birthday Celebration Setup</h3>
-                    <div class="occasion-price">₱2,500</div>
-                    <p class="occasion-description">Balloon decorations, personalized cake, birthday banner, and special surprise setup to make their day unforgettable.</p>
-                </div>
-
-                <div class="occasion-card">
-                    <div class="occasion-icon">💍</div>
-                    <h3 class="occasion-title">Proposal Package</h3>
-                    <div class="occasion-price">₱5,000</div>
-                    <p class="occasion-description">Romantic lighting, flower petals, champagne service, and discrete coordination to create the perfect proposal moment.</p>
-                </div>
-
-                <div class="occasion-card">
-                    <div class="occasion-icon">💐</div>
-                    <h3 class="occasion-title">Anniversary Celebration</h3>
-                    <div class="occasion-price">₱3,500</div>
-                    <p class="occasion-description">Elegant table setting, anniversary cake, wine pairing, and romantic ambiance to honor your love story.</p>
-                </div>
-
-                <div class="occasion-card">
-                    <div class="occasion-icon">🎓</div>
-                    <h3 class="occasion-title">Graduation Celebration</h3>
-                    <div class="occasion-price">₱2,000</div>
-                    <p class="occasion-description">Congratulatory decorations, photo props, celebration cake, and special amenities to honor academic achievements.</p>
-                </div>
-
-                <div class="occasion-card">
-                    <div class="occasion-icon">🍼</div>
-                    <h3 class="occasion-title">Baby Shower Setup</h3>
-                    <div class="occasion-price">₱3,000</div>
-                    <p class="occasion-description">Themed decorations, baby-friendly setup, special refreshments, and photo opportunities for expecting families.</p>
-                </div>
-
-                <div class="occasion-card">
-                    <div class="occasion-icon">🎪</div>
-                    <h3 class="occasion-title">Custom Celebration</h3>
-                    <div class="occasion-price">₱4,000</div>
-                    <p class="occasion-description">Tailored setup for any special occasion with personalized decorations, themed elements, and custom arrangements.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing Section -->
-    <section class="section pricing">
-        <div class="container">
-            <h2 class="section-title">🔥 PROMO RATES - LIMITED TIME!</h2>
-            <p class="section-subtitle">Massive savings on our cozy retreat experience</p>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-type">Weekdays</div>
-                    <div class="pricing-amount">₱1,999</div>
-                    <div class="pricing-period">per night <span style="text-decoration: line-through; opacity: 0.7;">was ₱5,000</span></div>
-                    <ul class="pricing-features">
-                        <li>Monday to Thursday</li>
-                        <li>Perfect for peaceful retreats</li>
-                        <li>All amenities included</li>
-                        <li>Flexible check-in times</li>
-                        <li>Pet-friendly policy</li>
-                    </ul>
-                </div>
-
-                <div class="pricing-card">
-                    <div class="pricing-type">Weekends</div>
-                    <div class="pricing-amount">₱2,499</div>
-                    <div class="pricing-period">per night <span style="text-decoration: line-through; opacity: 0.7;">was ₱8,000</span></div>
-                    <ul class="pricing-features">
-                        <li>Friday to Sunday</li>
-                        <li>Popular getaway times</li>
-                        <li>Enhanced weekend experience</li>
-                        <li>Priority booking available</li>
-                        <li>All premium amenities</li>
-                    </ul>
-                </div>
-
-                <div class="pricing-card">
-                    <div class="pricing-type">Peak Season</div>
-                    <div class="pricing-amount">₱6,800</div>
-                    <div class="pricing-period">per night</div>
-                    <ul class="pricing-features">
-                        <li>Holidays & Special Events</li>
-                        <li>Christmas, New Year, Valentine's</li>
-                        <li>Premium holiday experience</li>
-                        <li>Extended housekeeping service</li>
-                        <li>Complimentary welcome treats</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Guest Welcome Guide -->
-    <section class="section welcome-guide">
-        <div class="container">
-            <h2 class="section-title">Guest Welcome Guide</h2>
-            <p class="section-subtitle">Everything you need to know for a perfect stay</p>
-            <div class="guide-grid">
-                <div class="guide-card">
-                    <div class="guide-header">
-                        <div class="guide-icon">📶</div>
-                        <h3 class="guide-title">WiFi & Connectivity</h3>
-                    </div>
-                    <div class="guide-content">
-                        <ul class="guide-list">
-                            <li>Network: LuntianGuest</li>
-                            <li>Password: Welcome2024</li>
-                            <li>Strong signal throughout cabin</li>
-                            <li>Perfect for remote work</li>
-                            <li>Backup mobile hotspot available</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="guide-card">
-                    <div class="guide-header">
-                        <div class="guide-icon">🎯</div>
-                        <h3 class="guide-title">Local Activities</h3>
-                    </div>
-                    <div class="guide-content">
-                        <ul class="guide-list">
-                            <li>Sky Ranch (15 mins) - Amusement park</li>
-                            <li>Picnic Grove (10 mins) - Nature walks</li>
-                            <li>Bag of Beans (12 mins) - Café & restaurant</li>
-                            <li>Taal Lake viewing (8 mins) - Scenic views</li>
-                            <li>Mahogany Market (20 mins) - Local shopping</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="guide-card">
-                    <div class="guide-header">
-                        <div class="guide-icon">🍽️</div>
-                        <h3 class="guide-title">Available Add-Ons</h3>
-                    </div>
-                    <div class="guide-content">
-                        <ul class="guide-list">
-                            <li>Breakfast service - ₱350/person</li>
-                            <li>Grocery shopping service - ₱200</li>
-                            <li>Airport pickup - ₱1,500</li>
-                            <li>Pet care supplies - ₱300</li>
-                            <li>Extra cleaning service - ₱500</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="guide-card">
-                    <div class="guide-header">
-                        <div class="guide-icon">🔑</div>
-                        <h3 class="guide-title">Access Information</h3>
-                    </div>
-                    <div class="guide-content">
-                        <ul class="guide-list">
-                            <li>Self check-in available</li>
-                            <li>Digital lock code provided</li>
-                            <li>24/7 host support</li>
-                            <li>Detailed arrival instructions</li>
-                            <li>Easy parking on premises</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section id="faq" class="section faq">
-        <div class="container">
-            <h2 class="section-title">Frequently Asked Questions</h2>
-            <p class="section-subtitle">Find answers to common questions about your stay</p>
-            
-            <div class="faq-container">
-                <div class="faq-search">
-                    <input type="text" class="search-input" placeholder="Search FAQs..." id="faqSearch">
-                </div>
-                
-                <div class="faq-categories">
-                    <button class="category-btn active" data-category="all">All</button>
-                    <button class="category-btn" data-category="booking">Booking</button>
-                    <button class="category-btn" data-category="amenities">Amenities</button>
-                    <button class="category-btn" data-category="policies">Policies</button>
-                    <button class="category-btn" data-category="location">Location</button>
-                </div>
-
-                <div class="faq-list">
-                    <div class="faq-item" data-category="booking">
-                        <button class="faq-question">
-                            What's included in the room rate?
-                            <span class="faq-toggle">▼</span>
-                        </button>
-                        <div class="faq-answer">
-                            All rooms include AC, private bathroom, WiFi, basic toiletries, fresh linens, and access to common areas. Parking, kitchen access, and pet accommodation are also included at no extra charge.
-                        </div>
-                    </div>
-
-                    <div class="faq-item" data-category="policies">
-                        <button class="faq-question">
-                            What's your cancellation policy?
-                            <span class="faq-toggle">▼</span>
-                        </button>
-                        <div class="faq-answer">
-                            Free cancellation up to 48 hours before arrival. Cancellations within 48 hours are subject to a 50% charge. No-shows are charged the full amount.
-                        </div>
-                    </div>
-
-                    <div class="faq-item" data-category="amenities">
-                        <button class="faq-question">
-                            Do you provide kitchen access?
-                            <span class="faq-toggle">▼</span>
-                        </button>
-                        <div class="faq-answer">
-                            Yes! Guests have full access to our equipped kitchen including refrigerator, stove, microwave, cookware, and dining area. Perfect for preparing your own meals.
-                        </div>
-                    </div>
-
-                    <div class="faq-item" data-category="policies">
-                        <button class="faq-question">
-                            Are pets really welcome?
-                            <span class="faq-toggle">▼</span>
-                        </button>
-                        <div class="faq-answer">
-                            Absolutely! We're truly pet-friendly. Well-behaved pets stay free of charge. We just ask that you clean up after them and don't leave them unattended for long periods.
-                        </div>
-                    </div>
-
-                    <div class="faq-item" data-category="location">
-                        <button class="faq-question">
-                            How far are you from Manila?
-                            <span class="faq-toggle">▼</span>
-                        </button>
-                        <div class="faq-answer">
-                            We're approximately 1.5-2 hours from Manila by car (depending on traffic). The scenic drive through SLEX and Aguinaldo Highway is part of the experience!
-                        </div>
-                    </div>
-
-                    <div class="faq-item" data-category="booking">
-                        <button class="faq-question">
-                            Can I book for same-day arrival?
-                            <span class="faq-toggle">▼</span>
-                        </button>
-                        <div class="faq-answer">
-                            Same-day bookings are possible subject to availability. Please call us directly at 0935-763-7498 for immediate assistance with urgent bookings.
-                        </div>
-                    </div>
-
-                    <div class="faq-item" data-category="amenities">
-                        <button class="faq-question">
-                            Is there parking available?
-                            <span class="faq-toggle">▼</span>
-                        </button>
-                        <div class="faq-answer">
-                            Yes, we provide free on-site parking for all guests. The parking area is secure and can accommodate multiple vehicles comfortably.
-                        </div>
-                    </div>
-
-                    <div class="faq-item" data-category="policies">
-                        <button class="faq-question">
-                            What time is check-in and check-out?
-                            <span class="faq-toggle">▼</span>
-                        </button>
-                        <div class="faq-answer">
-                            Standard check-in is 2:00 PM and check-out is 11:00 AM. Early check-in and late check-out may be available upon request for an additional fee.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- House Rules Section -->
-    <section class="section house-rules">
-        <div class="container">
-            <h2 class="section-title">House Rules & Information</h2>
-            <p class="section-subtitle">Guidelines to ensure everyone has a wonderful stay</p>
-            
-            <div class="rules-grid">
-                <div class="rule-card">
-                    <div class="rule-header">
+🏡 Luntian Log Cabin
+		About
+		Rooms
+		Packages
+		Amenities
+		Gallery
+		Contact
+Book Now
+🎉 SPECIAL PROMO: Book 2 nights, get 1 FREE! Limited time offer - Book now!
+Luntian Log Cabin
+Tagaytay's Hidden Gem • Native & Cozy Vibe • Premium Packages Available
+View Packages
+Explore Rooms
+About Luntian
+A cozy cabin featuring 2 private rooms - your serene escape from city life
+Your Native & Cozy Retreat
+Escape the hustle and bustle of city life at Luntian Log Cabin, nestled in the cool mountains of Tagaytay. Our charming retreat offers a perfect blend of rustic charm and modern comfort, designed with authentic Filipino materials and craftsmanship.
+With 2 beautifully designed private rooms, each with its own unique character and story, we provide an intimate setting for couples seeking romance, families creating memories, or friends looking for a peaceful getaway.
+Experience the warmth of Filipino hospitality in a setting that celebrates our rich cultural heritage while providing all the amenities you need for a comfortable and memorable stay.
+🏡
+Native Design
+Authentic Filipino architecture with handwoven rattan details
+🐕
+Pet-Friendly
+Bring your furry family members along for the adventure
+🌿
+Nature Escape
+Surrounded by lush greenery and fresh mountain air
+⭐
+Premium Service
+Thoughtful amenities and personalized guest experiences
+Our 2 Beautiful Rooms
+Each room tells its own story with unique design and ambiance
+￼
+🟠 Sunrise Room
+"When life gives you tangerines, let Sunrise paint your morning."
+Wake up to warmth and inspiration in our Sunrise Room. Featuring stunning geometric patterns in terracotta and orange tones, contemporary artwork, and a sophisticated dark wood slat accent wall. The modern design creates the perfect atmosphere for couples seeking an energizing and stylish retreat.
+King Bed
+AC
+Private Bath
+Work Desk
+Premium Linens
+Perfect for couples
+Book Sunrise Room
+￼
+🟢 Leaf Room
+"Leaf — where calm grows quietly."
+Find tranquility in our Leaf Room, where nature meets modern Filipino design. Beautiful green cabinetry, live plants, handwoven rattan pendant lights, and exposed wooden beams create a serene sanctuary. Perfect for those seeking peace, mindfulness, and connection with nature.
+Queen Bed
+AC
+Private Bath
+Garden View
+Natural Materials
+Perfect for couples or small families
+Book Leaf Room
+Premium Experience Packages
+Curated experiences that transform your stay into unforgettable memories
+💕
+Romance Package
+₱12,000
+2 Days, 1 Night
+		Private room with romantic setup Candlelit dinner for two Complimentary bottle of wine Rose petals and ambient lighting Couples massage session Late checkout privilege Personalized welcome note
+Book Romance Package
+👨‍👩‍👧‍👦
+Family Package
+₱8,500
+2 Days, 1 Night
+		Family-friendly room setup Welcome treats for kids Outdoor activity kit Complimentary breakfast Board games and books Pet accommodation (if needed) Family photo session
+Book Family Package
+🧘‍♀️
+Wellness Package
+₱15,000
+3 Days, 2 Nights
+		Extended stay for deep relaxation Daily meditation sessions Healthy organic meals Spa treatments included Yoga mat and accessories Nature walking guide Wellness consultation
+Book Wellness Package
+Special Setup Packages
+Elevated experiences for your most important moments
+🎊
+Grand Celebration Setup
+₱25,000
+		Premium event styling and decoration Professional photography coverage Catered dining experience Sound system and ambient lighting Dedicated event coordinator Custom celebration theme Accommodates up to 12 guests Extended venue access
+Book Grand Celebration
+👥
+Romantic Group Retreat
+₱18,000
+		Perfect for couples' group getaways Both rooms beautifully coordinated Group activities and games Shared dining experience Bonfire setup with s'mores Group photo session Accommodates 4-6 people Flexible check-in/out times
+Book Group Retreat
+Special Occasion Extras
+Add magical touches to celebrate life's precious moments
+🎂
+Birthday Celebration Setup
+₱2,500
+Balloon decorations, personalized cake, birthday banner, and special surprise setup to make their day unforgettable.
+💍
+Proposal Package
+₱5,000
+Romantic lighting, flower petals, champagne service, and discrete coordination to create the perfect proposal moment.
+💐
+Anniversary Celebration
+₱3,500
+Elegant table setting, anniversary cake, wine pairing, and romantic ambiance to honor your love story.
+🎓
+Graduation Celebration
+₱2,000
+Congratulatory decorations, photo props, celebration cake, and special amenities to honor academic achievements.
+🍼
+Baby Shower Setup
+₱3,000
+Themed decorations, baby-friendly setup, special refreshments, and photo opportunities for expecting families.
+🎪
+Custom Celebration
+₱4,000
+Tailored setup for any special occasion with personalized decorations, themed elements, and custom arrangements.
+Room Rates
+Transparent pricing for your perfect getaway
+Weekdays
+₱3,800
+per night
+		Monday to Thursday Perfect for peaceful retreats All amenities included Flexible check-in times Pet-friendly policy
+Weekends
+₱5,200
+per night
+		Friday to Sunday Popular getaway times Enhanced weekend experience Priority booking available All premium amenities
+Peak Season
+₱6,800
+per night
+		Holidays & Special Events Christmas, New Year, Valentine's Premium holiday experience Extended housekeeping service Complimentary welcome treats
+Guest Welcome Guide
+Everything you need to know for a perfect stay
+📶
+WiFi & Connectivity
+		Network: LuntianGuest Password: Welcome2024 Strong signal throughout cabin Perfect for remote work Backup mobile hotspot available
+🎯
+Local Activities
+		Sky Ranch (15 mins) - Amusement park Picnic Grove (10 mins) - Nature walks Bag of Beans (12 mins) - Café & restaurant Taal Lake viewing (8 mins) - Scenic views Mahogany Market (20 mins) - Local shopping
+🍽️
+Available Add-Ons
+		Breakfast service - ₱350/person Grocery shopping service - ₱200 Airport pickup - ₱1,500 Pet care supplies - ₱300 Extra cleaning service - ₱500
+🔑
+Access Information
+		Self check-in available Digital lock code provided 24/7 host support Detailed arrival instructions Easy parking on premises
+Frequently Asked Questions
+Find answers to common questions about your stay
+
+All
+Booking
+Amenities
+Policies
+Location
+What's included in the room rate?
+▼
+What's your cancellation policy?
+▼
+Do you provide kitchen access?
+▼
+Are pets really welcome?
+▼
+How far are you from Manila?
+▼
+Can I book for same-day arrival?
+▼
+Is there parking available?
+▼
+What time is check-in and check-out?
+▼
+House Rules & Information
+Guidelines to ensure everyone has a wonderful stay
+⏰
+Check-In/Out Times
+		Check-in: 2:00 PM Check-out: 11:00 AM Early check-in subject to availability Late check-out available for ₱150/hour Self check-in option available 24/7 host support via WhatsApp
+🐾
+Pet Policy
+		Pets are warmly welcomed at no extra charge Must be well-behaved and house-trained Clean up after your pets immediately Don't leave pets unattended for extended periods Pet supplies available for purchase Inform us of your pet during booking
+🔇
+Quiet Hours
+		Quiet hours: 10:00 PM - 7:00 AM Respect neighboring properties Keep music and conversations at reasonable levels Close doors and windows during late hours Be mindful of other guests Report noise disturbances to management
+🚭
+Smoking & Safety
+		Strictly no smoking inside the cabin Designated smoking area in the garden Dispose of cigarette butts properly Fire extinguisher located near chimney First aid kit in cabinet with books Report any safety concerns immediately
+💰
+Late Checkout Policy
+		Standard checkout: 11:00 AM Late checkout fee: ₱150 per hour Subject to availability for incoming guests Creates additional operational costs Extended staff hours required Must be arranged in advance
+🚨
+Emergency Information
+		Medical Emergency: (046) 483 0134 | Address: Aguinaldo Hwy, Tagaytay, 4120 Cavite Fire Department: 09429898495 / 09552306663 | Address: 3WWQ+QXQ, Crisantimo M, Crisanto M. De Los Reyes Ave, Tagaytay, Cavite Police: 0998 598 5603 | Address: 4W3F+C6M, Tagaytay, Cavite LLC Admins: 0935-763-7498 | 0961-883-8060 Fire extinguisher location: Near chimney Emergency light location: Near chimney First aid kit location: Cabinet with books Electrical shut-off location: Kitchen area
+🏠
+Property Care
+		Treat the cabin as your own home Report any damages immediately Keep common areas clean and tidy Close windows when using AC Turn off lights and appliances when not in use Additional cleaning fee for excessive mess
+Amenities & Features
+Everything you need for a comfortable and memorable stay
+❄️
+Air Conditioning
+Cool comfort in every room with energy-efficient AC units
+📶
+High-Speed WiFi
+Reliable internet connection perfect for remote work and streaming
+🍽️
+Full Kitchen
+Equipped with stove, refrigerator, microwave, and all cooking essentials
+🅿️
+Free Parking
+Secure on-site parking for multiple vehicles
+🚿
+Hot Water
+Instant hot water in all bathrooms with premium fixtures
+🧺
+Laundry Facilities
+Washing machine and drying area for extended stays
+🌳
+Garden Area
+Beautiful outdoor space perfect for relaxation and pet activities
+🎯
+Entertainment
+Books, board games, and recreational activities for all ages
+🔐
+Digital Locks
+Secure keyless entry with personalized access codes
+🧴
+Premium Toiletries
+Quality bath essentials and fresh towels provided
+🏔️
+Mountain Views
+Stunning panoramic views of Tagaytay's natural landscape
+📞
+24/7 Support
+Round-the-clock assistance via phone and messaging
+Photo Gallery
+Discover the beauty and charm of Luntian Log Cabin
+￼
+￼
+￼
+￼
+￼
+￼
+Guest Reviews
+What our guests say about their Luntian experience
+"
+★★★★★
+Perfect getaway from the city! The native design and cozy atmosphere made our weekend so relaxing. The hosts were incredibly accommodating and the rooms are beautifully designed.
+Maria Santos
+Airbnb Guest
+"
+★★★★★
+Luntian exceeded our expectations! The pet-friendly policy made it possible to bring our dog, and the property is just stunning. Great value for money and amazing Filipino hospitality.
+James & Anna Cruz
+Booking.com
+"
+★★★★★
+The Sunrise Room was absolutely gorgeous! The attention to detail in the design and the romantic setup for our anniversary was perfect. We'll definitely be back!
+Carlos & Mia Rivera
+Agoda
+Book Your Stay
+Choose your preferred booking platform
+🏠
+Airbnb
+Book directly through Airbnb for verified reviews and secure payments
+🏨
+Booking.com
+Compare prices and enjoy flexible cancellation policies
+🎯
+Agoda
+Special deals and promotions for Asian travelers
+📞
+Direct Booking
+Contact us directly for special packages and custom arrangements
+Contact Us
+Get in touch for bookings, inquiries, or special requests
+Get In Touch
+📱
+WhatsApp
+0935-763-7498
+0961-883-8060
+📧
+Email
+hello@luntian.net
+📍
+Location
+Asisan, Tagaytay
+Cavite, Philippines
+🗺️
+Navigation
+Open in Waze
+Send us a Message
+Full Name
+Email Address
+Phone Number
+Preferred Dates
+Message
+Send Message
+Luntian Log Cabin
+Your native and cozy retreat in the heart of Tagaytay. Experience authentic Filipino hospitality with modern comfort and style.
+📘
+📷
+💬
+Quick Links
+		About Us
+		Our Rooms
+		Packages
+		Amenities
+		Gallery
+		FAQ
+Packages
+		Romance Package
+		Family Package
+		Wellness Package
+		Special Setups
+		Occasion Extras
+Contact Info
+		📱 0935-763-7498
+		📱 0961-883-8060
+		📧 hello@luntian.net
+		📍 Asisan, Tagaytay
+		🗺️ Get Directions
+© 2024 Luntian Log Cabin. All rights reserved. | Website: luntian.net | Made with ❤️ in the Philippines
