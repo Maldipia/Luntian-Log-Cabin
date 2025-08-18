@@ -1,593 +1,185 @@
-<?php
-/**
- * config/database.php - Database Configuration
- */
-class Database {
-    private $host = 'localhost';
-    private $db_name = 'llc_leads';
-    private $username = 'your_username';
-    private $password = 'your_password';
-    public $conn;
-
-    public function getConnection() {
-        $this->conn = null;
-        try {
-            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, 
-                                 $this->username, $this->password);
-            $this->conn->exec("set names utf8");
-        } catch(PDOException $exception) {
-            echo "Connection error: " . $exception->getMessage();
-        }
-        return $this->conn;
-    }
-}
-
-/**
- * classes/Lead.php - Lead Management Class
- */
-class Lead {
-    private $conn;
-    private $table_name = "leads";
-
-    public $id;
-    public $email;
-    public $source;
-    public $ab_variant;
-    public $created_at;
-
-    public function __construct($db) {
-        $this->conn = $db;
-    }
-
-    public function create() {
-        $query = "INSERT INTO " . $this->table_name . " 
-                  SET email=:email, source=:source, ab_variant=:ab_variant, created_at=NOW()";
-
-        $stmt = $this->conn->prepare($query);
-
-        // Sanitize
-        $this->email = htmlspecialchars(strip_tags($this->email));
-        $this->source = htmlspecialchars(strip_tags($this->source));
-        $this->ab_variant = htmlspecialchars(strip_tags($this->ab_variant));
-
-        // Bind values
-        $stmt->bindParam(":email", $this->email);
-        $stmt->bindParam(":source", $this->source);
-        $stmt->bindParam(":ab_variant", $this->ab_variant);
-
-        if($stmt->execute()) {
-            return true;
-        }
-        return false;
-    }
-
-    public function emailExists() {
-        $query = "SELECT id FROM " . $this->table_name . " WHERE email = :email LIMIT 1";
-        $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(":email", $this->email);
-        $stmt->execute();
-        
-        return $stmt->rowCount() > 0;
-    }
-
-    public function getAll() {
-        $query = "SELECT * FROM " . $this->table_name . " ORDER BY created_at DESC";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $stmt;
-    }
-}
-
-/**
- * classes/Booking.php - Booking Management Class
- */
-class Booking {
-    private $conn;
-    private $table_name = "bookings";
-
-    public $id;
-    public $customer_name;
-    public $customer_email;
-    public $customer_phone;
-    public $room_id;
-    public $package_id;
-    public $check_in;
-    public $check_out;
-    public $guests;
-    public $total_price;
-    public $status;
-    public $ab_variant;
-    public $created_at;
-
-    public function __construct($db) {
-        $this->conn = $db;
-    }
-
-    public function create() {
-        $query = "INSERT INTO " . $this->table_name . " 
-                  SET customer_name=:customer_name, customer_email=:customer_email, 
-                      customer_phone=:customer_phone, room_id=:room_id, package_id=:package_id,
-                      check_in=:check_in, check_out=:check_out, guests=:guests, 
-                      total_price=:total_price, status=:status, ab_variant=:ab_variant, 
-                      created_at=NOW()";
-
-        $stmt = $this->conn->prepare($query);
-
-        // Sanitize
-        $this->customer_name = htmlspecialchars(strip_tags($this->customer_name));
-        $this->customer_email = htmlspecialchars(strip_tags($this->customer_email));
-        $this->customer_phone = htmlspecialchars(strip_tags($this->customer_phone));
-
-        // Bind values
-        $stmt->bindParam(":customer_name", $this->customer_name);
-        $stmt->bindParam(":customer_email", $this->customer_email);
-        $stmt->bindParam(":customer_phone", $this->customer_phone);
-        $stmt->bindParam(":room_id", $this->room_id);
-        $stmt->bindParam(":package_id", $this->package_id);
-        $stmt->bindParam(":check_in", $this->check_in);
-        $stmt->bindParam(":check_out", $this->check_out);
-        $stmt->bindParam(":guests", $this->guests);
-        $stmt->bindParam(":total_price", $this->total_price);
-        $stmt->bindParam(":status", $this->status);
-        $stmt->bindParam(":ab_variant", $this->ab_variant);
-
-        if($stmt->execute()) {
-            return $this->conn->lastInsertId();
-        }
-        return false;
-    }
-
-    public function getAll() {
-        $query = "SELECT * FROM " . $this->table_name . " ORDER BY created_at DESC";
-        $stmt = $this->conn->prepare($query);
-        $stmt->execute();
-        return $stmt;
-    }
-}
-
-/**
- * classes/EmailService.php - Email Automation
- */
-class EmailService {
-    private $from_email;
-    private $from_name;
-
-    public function __construct() {
-        $this->from_email = 'noreply@yourdomain.com';
-        $this->from_name = 'LLC 2.0';
-    }
-
-    public function sendWelcomeEmail($email, $discount_code = 'SAVE20') {
-        $subject = 'Welcome! Your Exclusive 25% Discount Inside';
-        $message = $this->getWelcomeEmailTemplate($discount_code);
-        
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= 'From: ' . $this->from_name . ' <' . $this->from_email . '>' . "\r\n";
-
-        return mail($email, $subject, $message, $headers);
-    }
-
-    public function sendBookingConfirmation($booking_data) {
-        $subject = 'Booking Confirmation - ' . $booking_data['customer_name'];
-        $message = $this->getBookingConfirmationTemplate($booking_data);
-        
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-        $headers .= 'From: ' . $this->from_name . ' <' . $this->from_email . '>' . "\r\n";
-
-        return mail($booking_data['customer_email'], $subject, $message, $headers);
-    }
-
-    private function getWelcomeEmailTemplate($discount_code) {
-        return "
-        <html>
-        <head>
-            <style>
-                body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-                .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-                .header { background: #22c55e; color: white; padding: 20px; text-align: center; }
-                .content { padding: 20px; background: #f9f9f9; }
-                .discount-code { background: #ef4444; color: white; padding: 15px; text-align: center; font-size: 24px; font-weight: bold; margin: 20px 0; }
-                .cta-button { background: #22c55e; color: white; padding: 12px 24px; text-decoration: none; border-radius: 5px; display: inline-block; margin: 20px 0; }
-            </style>
-        </head>
-        <body>
-            <div class='container'>
-                <div class='header'>
-                    <h1>Welcome to LLC 2.0!</h1>
-                </div>
-                <div class='content'>
-                    <h2>Thank you for joining our VIP list!</h2>
-                    <p>We're excited to have you as part of our exclusive community. As promised, here's your special discount:</p>
-                    
-                    <div class='discount-code'>
-                        Use Code: {$discount_code} for 25% OFF
-                    </div>
-                    
-                    <p>This exclusive offer is valid for your first booking and expires in 7 days.</p>
-                    
-                    <a href='#book' class='cta-button'>Book Now & Save 25%</a>
-                    
-                    <p>Best regards,<br>The LLC 2.0 Team</p>
-                </div>
-            </div>
-        </body>
-        </html>";
-    }
-
-    private function getBookingConfirmationTemplate($booking_data) {
-        return "
-        <html>
-        <head>
-            <style>
-                body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-                .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-                .header { background: #22c55e; color: white; padding: 20px; text-align: center; }
-                .content { padding: 20px; background: #f9f9f9; }
-                .booking-details { background: white; padding: 15px; margin: 20px 0; border-left: 4px solid #22c55e; }
-            </style>
-        </head>
-        <body>
-            <div class='container'>
-                <div class='header'>
-                    <h1>Booking Confirmed!</h1>
-                </div>
-                <div class='content'>
-                    <h2>Dear {$booking_data['customer_name']},</h2>
-                    <p>Your booking has been confirmed! Here are the details:</p>
-                    
-                    <div class='booking-details'>
-                        <strong>Booking ID:</strong> {$booking_data['id']}<br>
-                        <strong>Check-in:</strong> {$booking_data['check_in']}<br>
-                        <strong>Check-out:</strong> {$booking_data['check_out']}<br>
-                        <strong>Guests:</strong> {$booking_data['guests']}<br>
-                        <strong>Total:</strong> \${$booking_data['total_price']}
-                    </div>
-                    
-                    <p>We look forward to hosting you!</p>
-                    
-                    <p>Best regards,<br>The LLC 2.0 Team</p>
-                </div>
-            </div>
-        </body>
-        </html>";
-    }
-}
-
-/**
- * api/leads.php - Lead Capture API Endpoint
- */
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Content-Type');
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    include_once '../config/database.php';
-    include_once '../classes/Lead.php';
-    include_once '../classes/EmailService.php';
-
-    $database = new Database();
-    $db = $database->getConnection();
-    $lead = new Lead($db);
-    $emailService = new EmailService();
-
-    // Get POST data
-    $data = json_decode(file_get_contents("php://input"));
-    
-    if (!empty($data->email)) {
-        $lead->email = $data->email;
-        $lead->source = $data->source ?? 'unknown';
-        $lead->ab_variant = $data->ab_variant ?? 'default';
-
-        // Check if email already exists
-        if ($lead->emailExists()) {
-            http_response_code(400);
-            echo json_encode(array("message" => "Email already subscribed."));
-        } else {
-            // Create the lead
-            if ($lead->create()) {
-                // Send welcome email
-                $emailService->sendWelcomeEmail($lead->email);
-                
-                http_response_code(201);
-                echo json_encode(array("message" => "Lead captured successfully."));
-            } else {
-                http_response_code(503);
-                echo json_encode(array("message" => "Unable to capture lead."));
-            }
-        }
-    } else {
-        http_response_code(400);
-        echo json_encode(array("message" => "Email is required."));
-    }
-}
-
-/**
- * api/bookings.php - Booking API Endpoint
- */
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: POST');
-header('Access-Control-Allow-Headers: Content-Type');
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    include_once '../config/database.php';
-    include_once '../classes/Booking.php';
-    include_once '../classes/EmailService.php';
-
-    $database = new Database();
-    $db = $database->getConnection();
-    $booking = new Booking($db);
-    $emailService = new EmailService();
-
-    // Get POST data
-    $data = json_decode(file_get_contents("php://input"));
-    
-    if (!empty($data->customer_email) && !empty($data->customer_name)) {
-        $booking->customer_name = $data->customer_name;
-        $booking->customer_email = $data->customer_email;
-        $booking->customer_phone = $data->customer_phone ?? '';
-        $booking->room_id = $data->room_id ?? null;
-        $booking->package_id = $data->package_id ?? null;
-        $booking->check_in = $data->check_in;
-        $booking->check_out = $data->check_out;
-        $booking->guests = $data->guests ?? 1;
-        $booking->total_price = $data->total_price;
-        $booking->status = 'pending';
-        $booking->ab_variant = $data->ab_variant ?? 'default';
-
-        // Create the booking
-        $booking_id = $booking->create();
-        if ($booking_id) {
-            // Send confirmation email
-            $booking_data = (array) $data;
-            $booking_data['id'] = $booking_id;
-            $emailService->sendBookingConfirmation($booking_data);
-            
-            http_response_code(201);
-            echo json_encode(array("message" => "Booking created successfully.", "booking_id" => $booking_id));
-        } else {
-            http_response_code(503);
-            echo json_encode(array("message" => "Unable to create booking."));
-        }
-    } else {
-        http_response_code(400);
-        echo json_encode(array("message" => "Required fields missing."));
-    }
-}
-
-/**
- * admin/dashboard.php - Admin Dashboard
- */
-session_start();
-
-// Simple admin authentication (replace with proper auth system)
-if (!isset($_SESSION['admin_logged_in'])) {
-    header('Location: login.php');
-    exit();
-}
-
-include_once '../config/database.php';
-include_once '../classes/Lead.php';
-include_once '../classes/Booking.php';
-
-$database = new Database();
-$db = $database->getConnection();
-$lead = new Lead($db);
-$booking = new Booking($db);
-
-$leads = $lead->getAll();
-$bookings = $booking->getAll();
-?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>LLC 2.0 - Admin Dashboard</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .stats { display: flex; gap: 20px; margin-bottom: 30px; }
-        .stat-card { background: #f0f9ff; padding: 20px; border-radius: 8px; flex: 1; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
-        th { background-color: #f2f2f2; }
-        .export-btn { background: #22c55e; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LLC 2.0 – Luxury Lodging & Cabins</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #fafafa;
+      --text: #111111;
+      --muted: #6b7280;
+      --brand: #0a0;
+      --brand-dark: #060;
+      --accent: #b12704;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --shadow: 0 6px 18px rgba(0,0,0,.06);
+      --radius: 16px;
+    }
+
+    /* ===== RESET / BASE ===== */
+    *,*::before,*::after { box-sizing: border-box; }
+    html,body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: "Inter","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1100px, calc(100% - 2rem)); margin: 0 auto; }
+    .section { padding: 64px 0; }
+
+    /* ===== HEADER ===== */
+    .header {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(250,250,250,.9);
+      backdrop-filter: saturate(180%) blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px; padding: 12px 0;
+    }
+    .logo img { height: 40px; }
+    .nav-links { display: none; gap: 18px; list-style: none; margin: 0; padding: 0; }
+    .nav-links a { padding: 8px 10px; border-radius: 10px; }
+    .nav-links a:hover { background: #f3f4f6; }
+    .book-btn {
+      background: var(--text); color: #fff;
+      padding: 10px 14px; border-radius: 999px; font-weight: 600;
+    }
+    .book-btn:hover { background: #f3f4f6; color: var(--text); }
+    @media (min-width: 880px) { .nav-links { display: flex; } }
+
+    /* ===== PROMO BANNER ===== */
+    .promo-banner {
+      position: relative; display: flex; align-items: center; justify-content: center;
+      gap: 8px; padding: 10px 46px; background: #fff7ed; color: #7c2d12;
+      border-bottom: 1px dashed #fed7aa; font-size: .95rem; text-align: center;
+    }
+    .promo-banner .close-btn {
+      position: absolute; right: 14px; cursor: pointer; font-size: 18px; opacity: .7;
+    }
+    .promo-banner .close-btn:hover { opacity: 1; }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: url('cover2.0.png') center/cover no-repeat;
+      min-height: 56vh; display: grid; place-items: center; text-align: center;
+      position: relative;
+    }
+    .hero::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(to bottom,rgba(250,250,250,0),rgba(250,250,250,.6));
+      pointer-events: none;
+    }
+    .hero-content { position: relative; padding: 40px 16px; }
+    .hero h1 { font-size: clamp(34px,5vw,52px); margin: 0 0 14px; letter-spacing: -.02em; }
+    .hero p { margin: 0 0 18px; }
+    .cta-buttons { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+
+    /* ===== BUTTONS ===== */
+    .btn-primary,.btn-secondary,.btn,.book-btn,.floating-toggle {
+      display: inline-block; font-weight: 600;
+    }
+    .btn-primary,.btn {
+      background: var(--text); color: #fff;
+      padding: 12px 16px; border-radius: 12px;
+    }
+    .btn-secondary {
+      border: 1px solid var(--text); color: var(--text); background: transparent;
+      padding: 12px 16px; border-radius: 12px;
+    }
+    .btn.ghost {
+      background: transparent; color: var(--text); border: 1px solid var(--text);
+    }
+
+    /* ===== GRID HELPERS ===== */
+    .grid-2 { display: grid; gap: 18px; grid-template-columns: 1fr; }
+    .grid-3 { display: grid; gap: 18px; grid-template-columns: 1fr; }
+    @media (min-width: 900px) {
+      .grid-2 { grid-template-columns: repeat(2,1fr); }
+      .grid-3 { grid-template-columns: repeat(3,1fr); }
+    }
+
+    /* ===== ROOMS ===== */
+    .room-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .room-body { padding: 18px; }
+    .room-tagline { margin: .25rem 0 .75rem; color: var(--muted); font-style: italic; }
+    .room-ctas { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+    .price { font-weight: 700; }
+    .strike { text-decoration: line-through; color: var(--muted); margin-left: 6px; }
+
+    /* ===== PACKAGES ===== */
+    .pkg-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow);
+    }
+    .pkg-upsells details, .rules details {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 12px 14px; margin: 10px 0;
+    }
+    .pkg-upsells summary, .rules summary { cursor: pointer; }
+    .muted { color: var(--muted); }
+
+    /* ===== GALLERY ===== */
+    .gallery {
+      display: grid; gap: 10px; grid-template-columns: repeat(2,1fr);
+    }
+    .gallery img {
+      width: 100%; border-radius: 12px; border: 1px solid var(--border);
+      aspect-ratio: 4/3; object-fit: cover;
+    }
+    @media (min-width: 900px) { .gallery { grid-template-columns: repeat(3,1fr); } }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      border-top: 1px solid var(--border); padding: 28px 0; color: var(--muted);
+    }
+
+    /* ===== FLOATING BOOK MENU ===== */
+    .floating-book { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
+    .floating-toggle {
+      background: var(--brand); color: #fff;
+      padding: 14px 20px; border-radius: 50px; border: none;
+      font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,.2);
+    }
+    .floating-toggle:hover { background: var(--brand-dark); }
+    .floating-menu {
+      display: none; flex-direction: column; position: absolute;
+      bottom: 60px; right: 0; background: #fff; border: 1px solid var(--border);
+      border-radius: 10px; box-shadow: 0 10px 24px rgba(0,0,0,.18);
+      overflow: hidden; min-width: 240px;
+    }
+    .floating-menu a {
+      padding: 10px 14px; border-bottom: 1px solid var(--border); white-space: nowrap;
+    }
+    .floating-menu a:hover { background: #f3f4f6; }
+    .floating-book.open .floating-menu { display: flex; }
+
+    /* ===== ACCESSIBILITY / UTILITIES ===== */
+    :focus-visible { outline: 3px solid #2563eb; outline-offset: 2px; border-radius: 6px; }
+    hr { border: none; border-top: 1px solid var(--border); margin: 6px 0; }
+
+    /* ===== HEADING SIZES ===== */
+    h2 { font-size: clamp(26px,3.4vw,36px); margin: 0 0 18px; }
+    h3 { font-size: clamp(22px,2.6vw,28px); margin: 0 0 12px; }
+  </style>
 </head>
 <body>
-    <h1>LLC 2.0 - Admin Dashboard</h1>
-    
-    <div class="stats">
-        <div class="stat-card">
-            <h3>Total Leads</h3>
-            <h2><?= $leads->rowCount() ?></h2>
-        </div>
-        <div class="stat-card">
-            <h3>Total Bookings</h3>
-            <h2><?= $bookings->rowCount() ?></h2>
-        </div>
-        <div class="stat-card">
-            <h3>Conversion Rate</h3>
-            <h2><?= $leads->rowCount() > 0 ? round(($bookings->rowCount() / $leads->rowCount()) * 100, 2) : 0 ?>%</h2>
-        </div>
-    </div>
-
-    <h2>Recent Leads</h2>
-    <button class="export-btn" onclick="exportLeads()">Export CSV</button>
-    <table>
-        <thead>
-            <tr>
-                <th>Email</th>
-                <th>Source</th>
-                <th>A/B Variant</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($row = $leads->fetch(PDO::FETCH_ASSOC)): ?>
-            <tr>
-                <td><?= htmlspecialchars($row['email']) ?></td>
-                <td><?= htmlspecialchars($row['source']) ?></td>
-                <td><?= htmlspecialchars($row['ab_variant']) ?></td>
-                <td><?= $row['created_at'] ?></td>
-            </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
-
-    <h2>Recent Bookings</h2>
-    <button class="export-btn" onclick="exportBookings()">Export CSV</button>
-    <table>
-        <thead>
-            <tr>
-                <th>Customer</th>
-                <th>Email</th>
-                <th>Check-in</th>
-                <th>Check-out</th>
-                <th>Total</th>
-                <th>Status</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php 
-            $bookings = $booking->getAll(); // Re-fetch for iteration
-            while ($row = $bookings->fetch(PDO::FETCH_ASSOC)): 
-            ?>
-            <tr>
-                <td><?= htmlspecialchars($row['customer_name']) ?></td>
-                <td><?= htmlspecialchars($row['customer_email']) ?></td>
-                <td><?= $row['check_in'] ?></td>
-                <td><?= $row['check_out'] ?></td>
-                <td>$<?= $row['total_price'] ?></td>
-                <td><?= ucfirst($row['status']) ?></td>
-                <td><?= $row['created_at'] ?></td>
-            </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
-
-    <script>
-        function exportLeads() {
-            window.location.href = 'export.php?type=leads';
-        }
-        
-        function exportBookings() {
-            window.location.href = 'export.php?type=bookings';
-        }
-    </script>
+  <!-- Paste the rest of your existing markup here -->
+  <!-- (promo-banner, hero, rooms, packages, gallery, rules, footer, etc.) -->
 </body>
 </html>
-
-/**
- * install/database.sql - Database Schema
- */
-/*
-CREATE DATABASE llc_leads;
-USE llc_leads;
-
-CREATE TABLE leads (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    source VARCHAR(100) NOT NULL,
-    ab_variant VARCHAR(50) DEFAULT 'default',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE rooms (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description TEXT,
-    price DECIMAL(10,2) NOT NULL,
-    original_price DECIMAL(10,2),
-    image VARCHAR(255),
-    features JSON,
-    popular BOOLEAN DEFAULT FALSE,
-    active BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE packages (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description TEXT,
-    price DECIMAL(10,2) NOT NULL,
-    original_price DECIMAL(10,2),
-    duration VARCHAR(50),
-    includes JSON,
-    popular BOOLEAN DEFAULT FALSE,
-    active BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE bookings (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    customer_name VARCHAR(255) NOT NULL,
-    customer_email VARCHAR(255) NOT NULL,
-    customer_phone VARCHAR(50),
-    room_id INT,
-    package_id INT,
-    check_in DATE,
-    check_out DATE,
-    guests INT DEFAULT 1,
-    total_price DECIMAL(10,2) NOT NULL,
-    status ENUM('pending', 'confirmed', 'cancelled') DEFAULT 'pending',
-    ab_variant VARCHAR(50) DEFAULT 'default',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (room_id) REFERENCES rooms(id),
-    FOREIGN KEY (package_id) REFERENCES packages(id)
-);
-
-CREATE TABLE ab_tests (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    test_name VARCHAR(100) NOT NULL,
-    variant VARCHAR(50) NOT NULL,
-    user_session VARCHAR(255) NOT NULL,
-    conversions INT DEFAULT 0,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Insert sample data
-INSERT INTO rooms (name, description, price, original_price, image, features, popular) VALUES
-('Deluxe Business Suite', 'Spacious room with modern amenities and city views.', 199.00, 249.00, 'room1.jpg', '["Free WiFi", "City View", "Work Desk", "Mini Bar"]', TRUE),
-('Premium King Room', 'King-sized bed with premium linens and spa bathroom.', 159.00, 199.00, 'room2.jpg', '["King Bed", "Spa Bathroom", "Premium Linens", "Smart TV"]', FALSE),
-('Executive Corner Suite', 'Corner suite with panoramic views and premium amenities.', 299.00, 349.00, 'room3.jpg', '["Corner Views", "Executive Lounge", "Premium Bathroom", "Balcony"]', FALSE);
-
-INSERT INTO packages (name, description, price, original_price, duration, includes, popular) VALUES
-('Weekend Getaway', 'Perfect for a quick escape', 299.00, 399.00, '2 nights', '["2 nights accommodation", "Breakfast included", "Late checkout", "Welcome drink", "Free parking"]', TRUE),
-('Business Package', 'Everything you need for business', 449.00, 549.00, '3 nights', '["3 nights accommodation", "Meeting room access", "Business center", "Express laundry", "Airport transfer"]', FALSE),
-('Luxury Experience', 'Ultimate luxury package', 699.00, 899.00, '4 nights', '["4 nights in premium suite", "Spa treatments", "Fine dining", "Concierge service", "VIP amenities"]', FALSE);
-*/
-
-/**
- * .htaccess - URL Rewriting and Security
- */
-/*
-RewriteEngine On
-
-# API Routes
-RewriteRule ^api/leads/?$ api/leads.php [L]
-RewriteRule ^api/bookings/?$ api/bookings.php [L]
-
-# Admin Routes
-RewriteRule ^admin/?$ admin/dashboard.php [L]
-RewriteRule ^admin/login/?$ admin/login.php [L]
-
-# Security Headers
-Header always set X-Content-Type-Options nosniff
-Header always set X-Frame-Options DENY
-Header always set X-XSS-Protection "1; mode=block"
-
-# Block access to sensitive files
-<Files "config/database.php">
-    Order Allow,Deny
-    Deny from all
-</Files>
-
-<Files "*.sql">
-    Order Allow,Deny
-    Deny from all
-</Files>
-*/
