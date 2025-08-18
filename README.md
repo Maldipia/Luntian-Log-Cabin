@@ -124,8 +124,8 @@ Luntian Log Cabin is a nature-inspired staycation located in Tagaytay, perfect f
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(rgba(101, 67, 33, 0.3), rgba(139, 69, 19, 0.5)), 
-                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23228B22" width="1200" height="800"/><polygon fill="%23654321" points="0,800 400,600 800,700 1200,500 1200,800"/><circle fill="%2332CD32" cx="200" cy="200" r="100" opacity="0.7"/><circle fill="%2332CD32" cx="800" cy="150" r="80" opacity="0.7"/><circle fill="%2332CD32" cx="1000" cy="300" r="120" opacity="0.7"/><rect fill="%238B4513" x="100" y="600" width="80" height="200"/><rect fill="%238B4513" x="900" y="550" width="100" height="250"/></svg>');
+            background: background: linear-gradient(rgba(101, 67, 33, 0.4), rgba(139, 69, 19, 0.4)), 
+            url('coverpage.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
