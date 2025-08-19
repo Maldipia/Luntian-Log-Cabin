@@ -351,20 +351,23 @@
         }
 
         .room-image {
-            height: auto;
-            background: none;
-            display: block;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.1em;
-            overflow: visible;
-        }
+    height: 300px;
+    background: #f8f8f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1em;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
 
-        .room-image img {
-            width: 100%;
-            height: auto;
-            object-fit: none;
+.room-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: none;
+}
         }
 
         .room-content {
