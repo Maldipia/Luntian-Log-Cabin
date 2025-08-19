@@ -377,6 +377,29 @@
 
 .section-subtitle {
     font-size: 1.1em;
+    /* Rooms Section - REPLACE ALL EXISTING ROOM CSS WITH THIS */
+.rooms {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.rooms .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Section Header Updates */
+.section-title {
+    font-size: 2.5em;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.section-subtitle {
+    font-size: 1.1em;
     color: #7f8c8d;
     text-align: center;
     margin-bottom: 60px;
@@ -448,6 +471,132 @@
 }
 
 /* Room Content */
+.room-content {
+    padding: 30px;
+}
+
+.room-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.room-icon {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.sunrise-icon {
+    background: #ff6b6b;
+}
+
+.leaf-icon {
+    background: #4ecdc4;
+}
+
+.room-title {
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+}
+
+/* Room Quote */
+.room-quote {
+    font-style: italic;
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.sunrise-quote {
+    color: #e74c3c;
+    background: linear-gradient(135deg, #ffeaa7, #fab1a0);
+}
+
+.leaf-quote {
+    color: #27ae60;
+    background: linear-gradient(135deg, #a8e6cf, #dcedc1);
+}
+
+/* Room Description */
+.room-description {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #5a6c7d;
+    margin-bottom: 25px;
+}
+
+/* Room Features */
+.room-features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 0.95em;
+    color: #34495e;
+}
+
+.feature-check {
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #00b894, #00cec9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Pricing Section */
+.pricing-section {
+    margin-top: 25px;
+    padding: 20px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 15px;
+    text-align: center;
+}
+
+.price-tag {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.price-note {
+    font-size: 0.9em;
+    color: #7f8c8d;
+    margin-top: 5px;
+}
+
+/* Mobile Responsive for Rooms */
+@media (max-width: 768px) {
+    .rooms-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .room-content {
+        padding: 25px;
+    }
+
+    .room-features {
+        grid-template-columns: 1fr;
+    }
+}
 .room-content {
     padding: 30px;
 }
