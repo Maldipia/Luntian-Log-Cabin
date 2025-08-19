@@ -347,522 +347,37 @@
         }
 
         .room-card:hover {
-/* Rooms Section - CLEAN VERSION */
-.rooms {
-    padding: 80px 0;
-    background: #f8f9fa;
-}
+            transform: translateY(-10px);
+        }
 
-.rooms .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.section-title {
-    font-size: 2.5em;
-    color: #2c3e50;
-    text-align: center;
-    margin-bottom: 10px;
-    font-weight: 700;
-}
-
-.section-subtitle {
-    font-size: 1.1em;
-    color: #7f8c8d;
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.rooms-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    gap: 40px;
-    margin-top: 60px;
-}
-
-.room-card {
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-    overflow: hidden;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.room-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-}
-
-.room-image {
-    position: relative;
+        .room-image {
     height: 300px;
+    background: #f8f8f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.1em;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     overflow: hidden;
-    background: none;
-    display: block;
 }
 
 .room-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-    border-radius: 0;
+    object-fit: contain;
 }
+        }
 
-.room-card:hover .room-image img {
-    transform: scale(1.05);
-}
-
-.room-badge {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    padding: 8px 16px;
-    border-radius: 25px;
-    font-weight: 600;
-    font-size: 0.9em;
-    color: white;
-    z-index: 2;
-}
-
-.sunrise-badge {
-    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
-}
-
-.leaf-badge {
-    background: linear-gradient(135deg, #4ecdc4, #44a08d);
-}
-
-.room-content {
-    padding: 30px;
-}
-
-.room-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.room-icon {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
-
-.sunrise-icon {
-    background: #ff6b6b;
-}
-
-.leaf-icon {
-    background: #4ecdc4;
-}
-
-.room-title {
-    font-size: 1.8em;
-    font-weight: 700;
-    color: #2c3e50;
-    margin: 0;
-}
-
-.room-quote {
-    font-style: italic;
-    font-size: 1.1em;
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    position: relative;
-}
-
-.sunrise-quote {
-    color: #e74c3c;
-    background: linear-gradient(135deg, #ffeaa7, #fab1a0);
-}
-
-.leaf-quote {
-    color: #27ae60;
-    background: linear-gradient(135deg, #a8e6cf, #dcedc1);
-}
-
-.room-description {
-    font-size: 1em;
-    line-height: 1.6;
-    color: #5a6c7d;
-    margin-bottom: 25px;
-}
-
-.room-features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
-    margin-bottom: 25px;
-}
-
-.feature-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 0;
-    font-size: 0.95em;
-    color: #34495e;
-}
-
-.feature-check {
-    width: 20px;
-    height: 20px;
-    background: linear-gradient(135deg, #00b894, #00cec9);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.pricing-section {
-    margin-top: 25px;
-    padding: 20px;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    border-radius: 15px;
-    text-align: center;
-}
-
-.price-tag {
-    font-size: 1.4em;
-    font-weight: 700;
-    color: #2c3e50;
-}
-
-.price-note {
-    font-size: 0.9em;
-    color: #7f8c8d;
-    margin-top: 5px;
-}
-
-@media (max-width: 768px) {
-    .rooms-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    .room-content {
-        padding: 25px;
-    }
-    .room-features {
-        grid-template-columns: 1fr;
-    }
-}
-    overflow: hidden;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.room-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-}
-
-/* Room Image */
-.room-image {
-    position: relative;
-    height: 300px;
-    overflow: hidden;
-    background: none;
-    display: block;
-}
-
-.room-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-    border-radius: 0;
-}
-
-.room-card:hover .room-image img {
-    transform: scale(1.05);
-}
-
-/* Room Badge */
-.room-badge {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    padding: 8px 16px;
-    border-radius: 25px;
-    font-weight: 600;
-    font-size: 0.9em;
-    color: white;
-    z-index: 2;
-}
-
-.sunrise-badge {
-    background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
-}
-
-.leaf-badge {
-    background: linear-gradient(135deg, #4ecdc4, #44a08d);
-}
-
-/* Room Content */
-.room-content {
-    padding: 30px;
-}
-
-.room-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
-
-.room-icon {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
-
-.sunrise-icon {
-    background: #ff6b6b;
-}
-
-.leaf-icon {
-    background: #4ecdc4;
-}
-
-.room-title {
-    font-size: 1.8em;
-    font-weight: 700;
-    color: #2c3e50;
-    margin: 0;
-}
-
-/* Room Quote */
-.room-quote {
-    font-style: italic;
-    font-size: 1.1em;
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    position: relative;
-}
-
-.sunrise-quote {
-    color: #e74c3c;
-    background: linear-gradient(135deg, #ffeaa7, #fab1a0);
-}
-
-.leaf-quote {
-    color: #27ae60;
-    background: linear-gradient(135deg, #a8e6cf, #dcedc1);
-}
-
-/* Room Description */
-.room-description {
-    font-size: 1em;
-    line-height: 1.6;
-    color: #5a6c7d;
-    margin-bottom: 25px;
-}
-
-/* Room Features */
-.room-features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
-    margin-bottom: 25px;
-}
-
-.feature-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 0;
-    font-size: 0.95em;
-    color: #34495e;
-}
-
-.feature-check {
-    width: 20px;
-    height: 20px;
-    background: linear-gradient(135deg, #00b894, #00cec9);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-/* Pricing Section */
-.pricing-section {
-    margin-top: 25px;
-    padding: 20px;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    border-radius: 15px;
-    text-align: center;
-}
-
-.price-tag {
-    font-size: 1.4em;
-    font-weight: 700;
-    color: #2c3e50;
-}
-
-.price-note {
-    font-size: 0.9em;
-    color: #7f8c8d;
-    margin-top: 5px;
-}
-
-/* Mobile Responsive for Rooms */
-@media (max-width: 768px) {
-    .rooms-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .room-content {
-        padding: 25px;
-    }
-
-    .room-features {
-        grid-template-columns: 1fr;
-    }
-}
-.room-content {
-    padding: 30px;
-}
-
-.room-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
-}
+        .room-content {
+            padding: 30px;
+        }
 
-.room-icon {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-}
-
-.sunrise-icon {
-    background: #ff6b6b;
-}
-
-.leaf-icon {
-    background: #4ecdc4;
-}
-
-.room-title {
-    font-size: 1.8em;
-    font-weight: 700;
-    color: #2c3e50;
-    margin: 0;
-}
-
-/* Room Quote */
-.room-quote {
-    font-style: italic;
-    font-size: 1.1em;
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    position: relative;
-}
-
-.sunrise-quote {
-    color: #e74c3c;
-    background: linear-gradient(135deg, #ffeaa7, #fab1a0);
-}
-
-.leaf-quote {
-    color: #27ae60;
-    background: linear-gradient(135deg, #a8e6cf, #dcedc1);
-}
-
-/* Room Description */
-.room-description {
-    font-size: 1em;
-    line-height: 1.6;
-    color: #5a6c7d;
-    margin-bottom: 25px;
-}
-
-/* Room Features */
-.room-features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
-    margin-bottom: 25px;
-}
-
-.feature-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 8px 0;
-    font-size: 0.95em;
-    color: #34495e;
-}
-
-.feature-check {
-    width: 20px;
-    height: 20px;
-    background: linear-gradient(135deg, #00b894, #00cec9);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-/* Pricing Section */
-.pricing-section {
-    margin-top: 25px;
-    padding: 20px;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    border-radius: 15px;
-    text-align: center;
-}
-
-.price-tag {
-    font-size: 1.4em;
-    font-weight: 700;
-    color: #2c3e50;
-}
-
-.price-note {
-    font-size: 0.9em;
-    color: #7f8c8d;
-    margin-top: 5px;
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-    .rooms-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .room-content {
-        padding: 25px;
-    }
-
-    .room-features {
-        grid-template-columns: 1fr;
-    }
-
-    .section-title {
-        font-size: 2em;
-    }
-}
+        .room-title {
+            font-size: 1.5em;
+            color: #654321;
+            margin-bottom: 15px;
             font-weight: bold;
         }
 
@@ -1991,110 +1506,66 @@
     </section>
 
     <!-- Rooms Section -->
-   <section id="rooms" class="rooms">
-    <div class="container">
-        <h2 class="section-title fade-in">Choose Your Perfect Retreat</h2>
-        <p class="section-subtitle fade-in">Two unique spaces designed for your ultimate comfort and relaxation</p>
-        
-        <div class="rooms-grid">
-            <!-- Sunrise Room -->
-            <div class="room-card fade-in">
-                <div class="room-image">
-                    <img src="SunriseR.JPG" alt="Sunrise Room - Modern retreat with terracotta tones">
-                    <div class="room-badge sunrise-badge">Sunrise Room</div>
-                </div>
-                <div class="room-content">
-                    <div class="room-header">
-                        <div class="room-icon sunrise-icon"></div>
-                        <h3 class="room-title">Sunrise Room</h3>
+    <section id="rooms" class="rooms">
+        <div class="container">
+            <h2 class="section-title fade-in">Our 2 Beautiful Rooms</h2>
+            <p class="section-subtitle fade-in">Sunrise & Leaf Rooms - both available on Airbnb, Booking.com, and Agoda</p>
+            
+            <div class="rooms-grid">
+                <div class="room-card fade-in">
+                    <div class="room-image">
+                        <img src="SunriseR.JPG" alt="Sunrise Room - Modern Filipino Design">
                     </div>
-                    
-                    <div class="room-quote sunrise-quote">
-                        "When life gives you tangerines, let Sunrise paint your morning."
-                    </div>
-                    
-                    <p class="room-description">
-                        Sophisticated modern retreat featuring warm terracotta tones, geometric patterns, and dark wood slat walls. The handwoven pendant lighting and contemporary artwork create the perfect sunrise-inspired atmosphere for couples.
-                    </p>
-                    
-                    <div class="room-features">
-                        <div class="feature-item">
-                            <span class="feature-check">✓</span>
-                            <span>Ideal for 2 guests</span>
+                    <div class="room-content">
+                        <h3 class="room-title">🟠 Sunrise Room</h3>
+                        <p class="room-description" style="font-style: italic; color: #ff6b35; margin-bottom: 15px;">"When life gives you tangerines, let Sunrise paint your morning."</p>
+                        <p class="room-description">Sophisticated modern retreat featuring warm terracotta tones, geometric patterns, and dark wood slat walls. The handwoven pendant lighting and contemporary artwork create the perfect sunrise-inspired atmosphere for couples.</p>
+                        <ul class="room-features">
+                            <li>Ideal for 2 guests</li>
+                            <li>Air conditioning & WiFi</li>
+                            <li>Geometric pattern bedding</li>
+                            <li>Dark wood slat accent wall</li>
+                            <li>Contemporary artwork</li>
+                            <li>Featured on Airbnb</li>
+                        </ul>
+                        <div style="margin-bottom: 15px;">
+                            <a href="https://www.airbnb.com/rooms/1454241386398482759?source_impression_id=p3_1755532332_P3Js8K83mfd1akQY" class="btn btn-primary" target="_blank" rel="noopener">🏡 Book Sunrise Room on Airbnb</a>
                         </div>
-                        <div class="feature-item">
-                            <span class="feature-check">✓</span>
-                            <span>Air conditioning & WiFi</span>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="#" class="platform-btn" target="_blank" rel="noopener">📘 Booking.com</a>
+                            <a href="#" class="platform-btn" target="_blank" rel="noopener">🛎️ Agoda</a>
                         </div>
-                        <div class="feature-item">
-                            <span class="feature-check">✓</span>
-                            <span>Geometric pattern bedding</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-check">✓</span>
-                            <span>Dark wood slat accent wall</span>
-                        </div>
-                    </div>
-                    
-                    <div class="pricing-section">
-                        <div class="price-tag">₱3,800 - ₱6,800 / night</div>
-                        <div class="price-note">Weekday to Peak Season rates</div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Leaf Room -->
-            <div class="room-card fade-in">
-                <div class="room-image">
-                    <img src="ivroom.jpg" alt="Leaf Room - Nature-inspired sanctuary with green cabinetry">
-                    <div class="room-badge leaf-badge">Leaf Room</div>
-                </div>
-                <div class="room-content">
-                    <div class="room-header">
-                        <div class="room-icon leaf-icon"></div>
-                        <h3 class="room-title">Leaf Room</h3>
+                
+                <div class="room-card fade-in">
+                    <div class="room-image">
+                        <img src="LeafR.JPG" alt="Leaf Room - Native Filipino Design">
                     </div>
-                    
-                    <div class="room-quote leaf-quote">
-                        "Leaf — where calm grows quietly."
-                    </div>
-                    
-                    <p class="room-description">
-                        Tranquil nature-inspired sanctuary with beautiful green cabinetry, live plants, and organic woven textures. Features exposed wooden beams, rattan pendant lights, and the signature Luntian aesthetic for ultimate serenity.
-                    </p>
-                    
-                    <div class="room-features">
-                        <div class="feature-item">
-                            <span class="feature-check">✓</span>
-                            <span>Perfect for 2-3 guests</span>
+                    <div class="room-content">
+                        <h3 class="room-title">🟢 Leaf Room</h3>
+                        <p class="room-description" style="font-style: italic; color: #228B22; margin-bottom: 15px;">"Leaf — where calm grows quietly."</p>
+                        <p class="room-description">Tranquil nature-inspired sanctuary with beautiful green cabinetry, live plants, and organic woven textures. Features exposed wooden beams, rattan pendant lights, and the signature Luntian aesthetic for ultimate serenity.</p>
+                        <ul class="room-features">
+                            <li>Perfect for 2-3 guests</li>
+                            <li>Air conditioning & WiFi</li>
+                            <li>Green cabinetry & natural elements</li>
+                            <li>Live plants throughout</li>
+                            <li>Exposed wooden beams</li>
+                            <li>Featured on Airbnb</li>
+                        </ul>
+                        <div style="margin-bottom: 15px;">
+                            <a href="https://www.airbnb.com/rooms/1276705378418419415?source_impression_id=p3_1755532332_P3Eiv_2zKEdsGEvN" class="btn btn-primary" target="_blank" rel="noopener">🏡 Book Leaf Room on Airbnb</a>
                         </div>
-                        <div class="feature-item">
-                            <span class="feature-check">✓</span>
-                            <span>Air conditioning & WiFi</span>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="#" class="platform-btn" target="_blank" rel="noopener">📘 Booking.com</a>
+                            <a href="#" class="platform-btn" target="_blank" rel="noopener">🛎️ Agoda</a>
                         </div>
-                        <div class="feature-item">
-                            <span class="feature-check">✓</span>
-                            <span>Green cabinetry & natural elements</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-check">✓</span>
-                            <span>Live plants throughout</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-check">✓</span>
-                            <span>Exposed wooden beams</span>
-                        </div>
-                    </div>
-                    
-                    <div class="pricing-section">
-                        <div class="price-tag">₱3,800 - ₱6,800 / night</div>
-                        <div class="price-note">Weekday to Peak Season rates</div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Premium Packages Section -->
     <section id="packages" class="premium-packages">
