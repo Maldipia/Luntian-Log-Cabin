@@ -2137,218 +2137,202 @@
     </section>
 
     <!-- FAQ Section -->
-    <section id="faq" class="faq">
-        <div class="container">
-            <h2 class="section-title fade-in">Frequently Asked Questions</h2>
-            <p class="section-subtitle fade-in">Quick answers to help you plan your perfect stay</p>
-            
-            <div class="faq-search fade-in">
-                <input type="text" id="faqSearch" placeholder="Search frequently asked questions..." onkeyup="searchFAQ()">
-                <span class="search-icon">🔍</span>
+    <!-- FAQ Section -->
+<section id="faq" class="faq">
+    <div class="container">
+        <h2 class="section-title fade-in">Frequently Asked Questions</h2>
+        <p class="section-subtitle fade-in">Quick answers to help you plan your perfect stay</p>
+        
+        <div class="faq-search fade-in">
+            <input type="text" id="faqSearch" placeholder="Search frequently asked questions..." onkeyup="searchFAQ()">
+            <span class="search-icon">🔍</span>
+        </div>
+
+        <div class="faq-categories fade-in">
+            <button class="category-btn active" onclick="filterFAQ('all')">All</button>
+            <button class="category-btn" onclick="filterFAQ('accommodation')">Accommodation</button>
+            <button class="category-btn" onclick="filterFAQ('amenities')">Amenities</button>
+            <button class="category-btn" onclick="filterFAQ('policies')">Policies</button>
+            <button class="category-btn" onclick="filterFAQ('location')">Location</button>
+            <button class="category-btn" onclick="filterFAQ('services')">Services</button>
+        </div>
+
+        <div class="faq-grid" id="faqGrid">
+            <!-- Accommodation FAQs -->
+            <div class="faq-item fade-in" data-category="accommodation">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>🏠 Is the room private?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes. Each booking includes a private room and private bathroom. The living room is shared, designed for quiet moments or bonding with other guests.
+                </div>
             </div>
 
-            <div class="faq-categories fade-in">
-                <button class="category-btn active" onclick="filterFAQ('all')">All</button>
-                <button class="category-btn" onclick="filterFAQ('accommodation')">Accommodation</button>
-                <button class="category-btn" onclick="filterFAQ('amenities')">Amenities</button>
-                <button class="category-btn" onclick="filterFAQ('policies')">Policies</button>
-                <button class="category-btn" onclick="filterFAQ('location')">Location</button>
+            <div class="faq-item fade-in" data-category="accommodation">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>👥 How many guests can stay in a room?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Each room is ideal for 2–3 guests. Extra guests may be allowed with advance notice and an additional fee.
+                </div>
             </div>
 
-            <div class="faq-grid" id="faqGrid">
-                <!-- Accommodation FAQs -->
-                <div class="faq-item fade-in" data-category="accommodation">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <span>🏠 Is the room private?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes. Each booking includes a private room and private bathroom. The living room is shared, designed for quiet moments or bonding with other guests.
-                    </div>
+            <div class="faq-item fade-in" data-category="accommodation">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>🏠 Where is the room located?</span>
+                    <span class="faq-toggle">+</span>
                 </div>
-
-                <div class="faq-item fade-in" data-category="accommodation">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <span>👥 How many guests can stay in a room?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        Each room is ideal for 2–3 guests. Extra guests may be allowed with advance notice and additional fees. Contact us for group arrangements.
-                    </div>
+                <div class="faq-answer">
+                    Your private room is on the 2nd floor of the Luntian Log Cabin.
                 </div>
+            </div>
 
-                <div class="faq-item fade-in" data-category="amenities">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <span>🌐 Is WiFi available?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes! High-speed WiFi is available throughout the cabin. Network: LuntianLogCabin, Password: NatureLovesYou
-                    </div>
+            <div class="faq-item fade-in" data-category="accommodation">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>👶 Is the place child-friendly?</span>
+                    <span class="faq-toggle">+</span>
                 </div>
-
-                <div class="faq-item fade-in" data-category="amenities">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <span>🐕 Are pets allowed?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        Yes, we are pet-friendly! A cleaning fee applies for pets. Please inform us in advance about your furry companions.
-                    </div>
+                <div class="faq-answer">
+                    Yes. Families and children enjoy our safe surroundings and outdoor charm.
                 </div>
+            </div>
 
-                <div class="faq-item fade-in" data-category="policies">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <span>⏰ What are the check-in/check-out times?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        Check-in: 2:00 PM | Check-out: 11:00 AM. Late checkout may be available for ₱150 per hour, subject to availability.
-                    </div>
+            <!-- Amenities FAQs -->
+            <div class="faq-item fade-in" data-category="amenities">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>📶 What is the WiFi password?</span>
+                    <span class="faq-toggle">+</span>
                 </div>
-
-                <div class="faq-item fade-in" data-category="location">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <span>📍 Where is Luntian located?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        We're located in Asisan, Tagaytay. The exact address will be shared upon booking confirmation. We're easily accessible by car from Manila.
-                    </div>
+                <div class="faq-answer">
+                    Network: LuntianLogCabin<br>
+                    Password: NatureLovesYou<br>
+                    Complimentary high-speed WiFi is provided for light browsing and communication.
                 </div>
+            </div>
 
-                <div class="faq-item fade-in" data-category="amenities">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <span>🍳 Is breakfast included?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        Complimentary breakfast is included for weekend stays and premium packages. Weekday stays may add breakfast for an additional fee.
-                    </div>
+            <div class="faq-item fade-in" data-category="amenities">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>🚗 Is there parking?</span>
+                    <span class="faq-toggle">+</span>
                 </div>
+                <div class="faq-answer">
+                    Yes, hassle-free parking is available right in front of the cabin for your convenience.
+                </div>
+            </div>
 
-                <div class="faq-item fade-in" data-category="policies">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        <span>💰 What is the cancellation policy?</span>
-                        <span class="faq-toggle">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        Standard cancellations follow Airbnb/Booking platform policies. Premium packages require 3-7 days advance notice for cancellations.
-                    </div>
+            <div class="faq-item fade-in" data-category="amenities">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>🍳 Can we cook or bring food?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes. You are welcome to bring food. We offer shared refrigerator access and basic kitchen use for reheating.
+                </div>
+            </div>
+
+            <div class="faq-item fade-in" data-category="amenities">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>🍳 Is breakfast included?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Breakfast inclusion depends on the promo or booking platform. There are times we provide complimentary breakfast featuring brown eggs from MHC Farm. Please check your specific booking details or contact us to confirm.
+                </div>
+            </div>
+
+            <div class="faq-item fade-in" data-category="amenities">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>❄️ Is there air conditioning?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes, all private rooms are equipped with AC units.
+                </div>
+            </div>
+
+            <div class="faq-item fade-in" data-category="amenities">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>🌧️ What if it rains?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    No worries! We offer plenty of indoor activities: board games, karaoke, and movie projector nights.
+                </div>
+            </div>
+
+            <!-- Policies FAQs -->
+            <div class="faq-item fade-in" data-category="policies">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>⏰ Do you offer early check-in or late check-out?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes, both are available upon request, subject to availability.
+                </div>
+            </div>
+
+            <div class="faq-item fade-in" data-category="policies">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>🐕 Are pets allowed?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Yes, with the following conditions:<br>
+                    🐿 Limit of 2–3 small to medium-sized pets per booking<br>
+                    🪜 Cleaning fee applies<br>
+                    🔹 Advance notice required<br>
+                    ✅ Guests are fully responsible for pet behavior and cleanliness
+                </div>
+            </div>
+
+            <!-- Location FAQs -->
+            <div class="faq-item fade-in" data-category="location">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>📍 Where exactly is Luntian located?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Luntian Log Cabin is located at llcw, Asisan, Tagaytay. We are only 5–10 minutes away from Sky Ranch, Mahogany Market, and other landmarks.<br><br>
+                    <strong>Exact Waze Location:</strong><br>
+                    <a href="https://www.waze.com/live-map/directions?to=ll.14.098485%2C120.903533" target="_blank" style="color: #654321; text-decoration: underline;">Click here for precise navigation</a>
+                </div>
+            </div>
+
+            <div class="faq-item fade-in" data-category="location">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>🛡️ Is the area gated and safe?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    The village "Woodsborough Log House" is gated with 24/7 security. Luntian cabin itself is purely surrounded by nature within this secure village community.
+                </div>
+            </div>
+
+            <!-- Services FAQs -->
+            <div class="faq-item fade-in" data-category="services">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>🎯 How do we book optional add-ons (photoshoot, dinner, etc.)?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Message us in advance to reserve any add-on services.
+                </div>
+            </div>
+
+            <div class="faq-item fade-in" data-category="services">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    <span>🎂 Do you accommodate birthdays or anniversaries?</span>
+                    <span class="faq-toggle">+</span>
+                </div>
+                <div class="faq-answer">
+                    Absolutely! We offer surprise setups and romantic dinner packages. Please book ahead.
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- House Rules Section -->
-    <section id="rules" class="house-rules">
-        <div class="container">
-            <h2 class="section-title fade-in">🏡 House Rules</h2>
-            <p class="section-subtitle fade-in">Welcome to Luntian Log Cabin - we are located at Asisan Tagaytay</p>
-            
-            <div class="rules-grid">
-                <div class="rule-card fade-in">
-                    <div class="rule-header">
-                        <span class="rule-icon">⏰</span>
-                        <h3 class="rule-title">Check-In/Out Times</h3>
-                    </div>
-                    <div class="rule-content">
-                        <ul class="rule-list">
-                            <li>Check-in: 2:00 PM</li>
-                            <li>Check-out: 11:00 AM</li>
-                            <li>Late checkout fee: ₱150 per hour</li>
-                            <li>Subject to availability for incoming guests</li>
-                            <li>Extended staff hours required</li>
-                            <li>Must be arranged in advance</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="rule-card fade-in">
-                    <div class="rule-header">
-                        <span class="rule-icon">🏠</span>
-                        <h3 class="rule-title">House Guidelines</h3>
-                    </div>
-                    <div class="rule-content">
-                        <ul class="rule-list">
-                            <li>Respect other guests and neighbors</li>
-                            <li>Keep noise levels considerate (quiet hours: 10 PM - 7 AM)</li>
-                            <li>No smoking inside the cabin (outdoor areas available)</li>
-                            <li>No parties or events without prior arrangement</li>
-                            <li>Maximum occupancy must be respected</li>
-                            <li>Keep common areas clean and tidy</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="rule-card fade-in">
-                    <div class="rule-header">
-                        <span class="rule-icon">🐕</span>
-                        <h3 class="rule-title">Pet Policy</h3>
-                    </div>
-                    <div class="rule-content">
-                        <ul class="rule-list">
-                            <li>Pets are welcome with advance notice</li>
-                            <li>Additional cleaning fee applies</li>
-                            <li>Pets must be supervised at all times</li>
-                            <li>Clean up after your pets immediately</li>
-                            <li>Pets should not disturb other guests</li>
-                            <li>Report any pet damage immediately</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="rule-card emergency-card fade-in">
-    <div class="rule-header">
-        <span class="rule-icon">📞</span>
-        <h3 class="rule-title">Contact Information</h3>
     </div>
-    <div class="rule-content">
-        <ul class="rule-list">
-            <li>LLC Admins: 0935-763-7498 | 0961-883-8060</li>
-            <li>Available for assistance and emergencies</li>
-        </ul>
-    </div>
-</div>
-
-                <div class="rule-card fade-in">
-                    <div class="rule-header">
-                        <span class="rule-icon">🔥</span>
-                        <h3 class="rule-title">Safety Guidelines</h3>
-                    </div>
-                    <div class="rule-content">
-                        <ul class="rule-list">
-                            <li>Fire extinguisher location: Near chimney</li>
-                            <li>Emergency light location: Near chimney</li>
-                            <li>First aid kit location: Cabinet with books</li>
-                            <li>Electrical shut-off location: Kitchen area</li>
-                            <li>Report any safety concerns immediately</li>
-                            <li>Follow all posted safety instructions</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="rule-card emergency-card fade-in">
-                    <div class="rule-header">
-                        <span class="rule-icon">🚨</span>
-                        <h3 class="rule-title">Emergency Information</h3>
-                    </div>
-                    <div class="rule-content">
-                        <ul class="rule-list">
-                            <li>Medical Emergency: (046) 483 0134 | Address: Aguinaldo Hwy, Tagaytay, 4120 Cavite</li>
-                            <li>Fire Department: 09429898495 / 09552306663 | Address: 3WWQ+QXQ, Crisantimo M, Crisanto M. De Los Reyes Ave, Tagaytay, Cavite</li>
-                            <li>Police: 0998 598 5603 | Address: 4W3F+C6M, Tagaytay, Cavite</li>
-                            <li>LLC Admins: 0935-763-7498 | 0961-883-8060</li>
-                            <li>Fire extinguisher location: Near chimney</li>
-                            <li>Emergency light location: Near chimney</li>
-                            <li>First aid kit location: Cabinet with books</li>
-                            <li>Electrical shut-off location: Kitchen area</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+</section>
 
     <!-- Amenities Section -->
     <section id="amenities" class="amenities">
