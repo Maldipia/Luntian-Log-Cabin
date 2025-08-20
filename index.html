@@ -337,53 +337,7 @@
             margin-top: 60px;
         }
 
-        <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room Layout Preview</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #F5F5DC 0%, #F0F8E7 100%);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: #654321;
-            font-weight: 300;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2em;
-            color: #666;
-            margin-bottom: 60px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .rooms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
-        }
-
-        /* Improved Room Section Layout */
+ /* Improved Room Section Layout */
         .room-card {
             background: rgba(255, 255, 255, 0.9);
             border-radius: 20px;
@@ -498,11 +452,6 @@
             font-size: 1.1em;
         }
 
-        /* Button container spacing */
-        .room-content > div[style*="margin-bottom"] {
-            margin-bottom: 20px;
-        }
-
         /* Primary button improvements */
         .btn-primary {
             background: linear-gradient(135deg, #1B5E20, #2E7D32);
@@ -546,111 +495,6 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(101, 67, 33, 0.4);
         }
-
-        /* Button container */
-        .room-content > div[style*="display: flex"] {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-top: 15px;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .rooms-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .room-content {
-                padding: 25px;
-            }
-            
-            .room-title {
-                font-size: 1.4em;
-            }
-            
-            .room-description[style*="italic"] {
-                padding: 15px 20px;
-                font-size: 1em;
-            }
-            
-            .btn-primary {
-                width: 100%;
-                text-align: center;
-                margin-bottom: 15px;
-            }
-            
-            .room-content > div[style*="display: flex"] {
-                justify-content: center;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2 class="section-title">Our 2 Beautiful Rooms</h2>
-        <p class="section-subtitle">Sunrise & Leaf Rooms - both available on Airbnb, Booking.com, and Agoda</p>
-        
-        <div class="rooms-grid">
-            <div class="room-card">
-                <div class="room-image">
-                    <div style="background: linear-gradient(45deg, #ff6b35, #f7931e); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2em;">
-                        Sunrise Room Image
-                    </div>
-                </div>
-                <div class="room-content">
-                    <h3 class="room-title">🟠 Sunrise Room</h3>
-                    <p class="room-description" style="font-style: italic; color: #ff6b35; margin-bottom: 15px;">"When life gives you tangerines, let Sunrise paint your morning."</p>
-                    <p class="room-description">Sophisticated modern retreat featuring warm terracotta tones, geometric patterns, and dark wood slat walls. The handwoven pendant lighting and contemporary artwork create the perfect sunrise-inspired atmosphere for couples.</p>
-                    <ul class="room-features">
-                        <li>Ideal for 2 guests</li>
-                        <li>Air conditioning & WiFi</li>
-                        <li>Geometric pattern bedding</li>
-                        <li>Dark wood slat accent wall</li>
-                        <li>Contemporary artwork</li>
-                        <li>Featured on Airbnb</li>
-                    </ul>
-                    <div style="margin-bottom: 15px;">
-                        <a href="#" class="btn-primary">🏡 Book Sunrise Room on Airbnb</a>
-                    </div>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="#" class="platform-btn">📘 Booking.com</a>
-                        <a href="#" class="platform-btn">🛎️ Agoda</a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="room-card">
-                <div class="room-image">
-                    <div style="background: linear-gradient(45deg, #228B22, #32CD32); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2em;">
-                        Leaf Room Image
-                    </div>
-                </div>
-                <div class="room-content">
-                    <h3 class="room-title">🟢 Leaf Room</h3>
-                    <p class="room-description" style="font-style: italic; color: #228B22; margin-bottom: 15px;">"Leaf — where calm grows quietly."</p>
-                    <p class="room-description">Tranquil nature-inspired sanctuary with beautiful green cabinetry, live plants, and organic woven textures. Features exposed wooden beams, rattan pendant lights, and the signature Luntian aesthetic for ultimate serenity.</p>
-                    <ul class="room-features">
-                        <li>Perfect for 2-3 guests</li>
-                        <li>Air conditioning & WiFi</li>
-                        <li>Green cabinetry & natural elements</li>
-                        <li>Live plants throughout</li>
-                        <li>Exposed wooden beams</li>
-                        <li>Featured on Airbnb</li>
-                    </ul>
-                    <div style="margin-bottom: 15px;">
-                        <a href="#" class="btn-primary">🏡 Book Leaf Room on Airbnb</a>
-                    </div>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <a href="#" class="platform-btn">📘 Booking.com</a>
-                        <a href="#" class="platform-btn">🛎️ Agoda</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
 
         /* Premium Packages Section */
         .premium-packages {
