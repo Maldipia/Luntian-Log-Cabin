@@ -1605,6 +1605,298 @@
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+ }
+
+    /* Prenup Packages - Clean & Professional */
+.prenup-packages {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: #333;
+}
+
+.prenup-packages .section-title {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.prenup-packages .section-subtitle {
+    color: #6c757d;
+    font-size: 1.1em;
+    max-width: 500px;
+}
+
+.prenup-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin: 60px 0;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.prenup-card {
+    background: white;
+    border-radius: 16px;
+    padding: 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #e9ecef;
+}
+
+.prenup-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+}
+
+.package-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #6c757d;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.package-badge.popular {
+    background: linear-gradient(135deg, #28a745, #20c997);
+}
+
+.prenup-header {
+    padding: 40px 30px 20px;
+    text-align: center;
+    border-bottom: 1px solid #f8f9fa;
+}
+
+.prenup-name {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.prenup-price {
+    font-size: 2.4em;
+    font-weight: 700;
+    color: #28a745;
+    margin-bottom: 8px;
+}
+
+.prenup-duration {
+    color: #6c757d;
+    font-size: 0.95em;
+    margin: 0;
+}
+
+.prenup-features {
+    padding: 30px;
+}
+
+.feature-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.feature-list li {
+    padding: 12px 0;
+    color: #495057;
+    border-bottom: 1px solid #f8f9fa;
+    position: relative;
+    padding-left: 25px;
+    font-size: 0.95em;
+}
+
+.feature-list li:last-child {
+    border-bottom: none;
+}
+
+.feature-list li:before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #28a745;
+    font-weight: 600;
+}
+
+.package-note {
+    padding: 20px 30px;
+    background: #f8f9fa;
+    margin-top: auto;
+}
+
+.package-note p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #6c757d;
+    font-style: italic;
+    text-align: center;
+}
+
+.addons-section {
+    margin: 80px 0;
+    text-align: center;
+}
+
+.addons-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.addon-card {
+    background: white;
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.addon-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.addon-icon {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #28a745;
+}
+
+.addon-card h4 {
+    color: #2c3e50;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.addon-price {
+    color: #28a745;
+    font-weight: 600;
+    font-size: 1.1em;
+    margin-bottom: 8px;
+}
+
+.addon-desc {
+    color: #6c757d;
+    font-size: 0.9em;
+    margin: 0;
+}
+
+.booking-guidelines {
+    margin-top: 60px;
+}
+
+.guidelines-card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.guidelines-card h4 {
+    color: #2c3e50;
+    font-size: 1.5em;
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.guidelines-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.guideline-item {
+    text-align: left;
+    color: #495057;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.guideline-item strong {
+    color: #2c3e50;
+}
+
+.booking-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-book, .btn-location {
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.95em;
+}
+
+.btn-book {
+    background: #28a745;
+    color: white;
+}
+
+.btn-book:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+.btn-location {
+    background: transparent;
+    color: #28a745;
+    border: 2px solid #28a745;
+}
+
+.btn-location:hover {
+    background: #28a745;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .prenup-packages {
+        padding: 60px 0;
+    }
+    
+    .prenup-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin: 40px 0;
+    }
+    
+    .addons-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .guidelines-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .booking-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .guidelines-card {
+        padding: 30px 20px;
+    }
 }
     </style>
 </head>
@@ -1625,7 +1917,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#rooms">Rooms</a></li>
-                <li><a href="#packages">Packages</a></li>
+               <li><a href="#prenup">Prenup Packages</a></li>
                 <li><a href="#amenities">Amenities</a></li>
                 <li><a href="#faq">FAQ</a></li>
                 <li><a href="#rules">Rules</a></li>
@@ -1945,7 +2237,71 @@
                         <p style="margin-top: 10px; font-size: 0.9em;">Advance booking required</p>
                     </div>
                 </div>
+           </section>
+
+<!-- Prenup Shoot Packages Section -->
+<section id="prenup" class="prenup-packages">
+    <div class="container">
+        <h2 class="section-title fade-in">Prenup Photography Packages</h2>
+        <p class="section-subtitle fade-in">Professional photography sessions in our stunning natural setting</p>
+        
+        <!-- Package Cards -->
+        <div class="prenup-grid">
+            <!-- Basic Package -->
+            <div class="prenup-card basic fade-in">
+                <div class="package-badge">BASIC</div>
+                <div class="prenup-header">
+                    <h3 class="prenup-name">Venue Use Only</h3>
+                    <div class="prenup-price">₱8,500</div>
+                    <p class="prenup-duration">2-3 Hours Access</p>
+                </div>
+                
+                <div class="prenup-features">
+                    <ul class="feature-list">
+                        <li>Cabin interior access</li>
+                        <li>Garden and outdoor areas</li>
+                        <li>Basic restroom facilities</li>
+                        <li>Natural lighting setup</li>
+                    </ul>
+                </div>
+                
+                <div class="package-note">
+                    <p>Location rental only - bring your own equipment and props</p>
+                </div>
             </div>
+
+            <!-- Premium Package -->
+            <div class="prenup-card premium fade-in">
+                <div class="package-badge popular">MOST POPULAR</div>
+                <div class="prenup-header">
+                    <h3 class="prenup-name">Half-Day Experience</h3>
+                    <div class="prenup-price">₱12,500</div>
+                    <p class="prenup-duration">5 Hours Exclusive Access</p>
+                </div>
+                
+                <div class="prenup-features">
+                    <ul class="feature-list">
+                        <li>Complete venue access</li>
+                        <li>Basic props and styling corner</li>
+                        <li>Changing room access</li>
+                        <li>Setup assistance available</li>
+                        <li>Extended shooting time</li>
+                    </ul>
+                </div>
+                
+                <div class="package-note">
+                    <p>Perfect balance of time and amenities for most couples</p>
+                </div>
+            </div>
+
+            <!-- Luxury Package -->
+            <div class="prenup-card luxury fade-in">
+                <div class="package-badge">LUXURY</div>
+                <div class="prenup-header">
+                    <h3 class="prenup-name">Full-Day Exclusive</h3>
+                    <div class="prenup-price">₱18,000</div>
+                    <p class="prenup-duration">8 Hours Private Use</p>
+                </div>
 
             <!-- Special Occasion Extras -->
             <div style="margin-top: 60px;">
