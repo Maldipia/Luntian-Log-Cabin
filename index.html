@@ -2260,6 +2260,1330 @@
                     </div>
                 </div>
            </section>
+                <!-- Food Menu Section - Add this after the Prenup Packages section and before the Pricing section -->
+
+<!-- Food Menu Section -->
+<section id="food-menu" class="food-menu">
+    <div class="container">
+        <h2 class="section-title fade-in">🍽️ Food Menu</h2>
+        <p class="section-subtitle fade-in">Fresh, locally-sourced meals prepared with love</p>
+        
+        <!-- Important Notice -->
+        <div class="menu-notice fade-in">
+            <span class="notice-icon">⏰</span>
+            <p><strong>Pre-order Required:</strong> All food orders must be placed <strong>4-5 hours in advance</strong> to ensure fresh preparation and availability.</p>
+        </div>
+
+        <!-- Menu Categories -->
+        <div class="menu-categories fade-in">
+            <button class="menu-category-btn active" onclick="filterMenu('all')">All Items</button>
+            <button class="menu-category-btn" onclick="filterMenu('breakfast')">Breakfast</button>
+            <button class="menu-category-btn" onclick="filterMenu('filipino')">Filipino Favorites</button>
+            <button class="menu-category-btn" onclick="filterMenu('mains')">Main Courses</button>
+            <button class="menu-category-btn" onclick="filterMenu('snacks')">Snacks & Sides</button>
+            <button class="menu-category-btn" onclick="filterMenu('beverages')">Beverages</button>
+        </div>
+
+        <div class="menu-grid">
+            <!-- Featured Breakfast Menu -->
+            <div class="menu-section breakfast-featured fade-in" data-category="breakfast">
+                <div class="section-header">
+                    <h3 class="menu-section-title">🌅 Breakfast Selection</h3>
+                    <span class="serving-time">Served 6:00 AM - 11:00 AM</span>
+                </div>
+                
+                <div class="breakfast-grid">
+                    <!-- Value Breakfast Meals -->
+                    <div class="breakfast-category">
+                        <h4 class="category-title">💰 Value Breakfast Meals - ₱169 Only!</h4>
+                        <p style="color: #666; margin-bottom: 15px; font-style: italic;">All meals include rice, egg, and choice of coffee, Milo, or tea</p>
+                        <div class="menu-items">
+                            <div class="menu-item value-meal">
+                                <div class="menu-item-header">
+                                    <h4>Corned Beef Silog</h4>
+                                    <span class="menu-price">₱169</span>
+                                </div>
+                                <p class="menu-description">Premium corned beef sautéed with onions, garlic rice, sunny-side up egg, plus your choice of coffee, Milo, or tea</p>
+                            </div>
+                            
+                            <div class="menu-item value-meal">
+                                <div class="menu-item-header">
+                                    <h4>Ma-Ling Silog</h4>
+                                    <span class="menu-price">₱169</span>
+                                </div>
+                                <p class="menu-description">Ma-Ling luncheon meat fried to golden perfection, garlic rice, sunny-side up egg, plus your choice of coffee, Milo, or tea</p>
+                            </div>
+                            
+                            <div class="menu-item value-meal">
+                                <div class="menu-item-header">
+                                    <h4>Hotsilog</h4>
+                                    <span class="menu-price">₱169</span>
+                                </div>
+                                <p class="menu-description">Juicy hotdog slices, garlic rice, sunny-side up egg, plus your choice of coffee, Milo, or tea</p>
+                            </div>
+                            
+                            <div class="menu-item value-meal">
+                                <div class="menu-item-header">
+                                    <h4>Tocilog</h4>
+                                    <span class="menu-price">₱169</span>
+                                </div>
+                                <p class="menu-description">Sweet-style tocino (pork), garlic rice, sunny-side up egg, plus your choice of coffee, Milo, or tea</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Traditional Filipino Breakfast -->
+                    <div class="breakfast-category">
+                        <h4 class="category-title">Traditional Filipino</h4>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h4>Luntian Special Silog</h4>
+                                    <span class="menu-price">₱320</span>
+                                </div>
+                                <p class="menu-description">Choice of Tapsilog, Longsilog, Tocilog, or Bangsilog with garlic rice, 2 eggs, atchara, and fresh tomatoes</p>
+                            </div>
+                            
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h4>Bulalo Breakfast Bowl</h4>
+                                    <span class="menu-price">₱280</span>
+                                </div>
+                                <p class="menu-description">Mini bulalo soup perfect for cool Tagaytay mornings, served with garlic rice</p>
+                            </div>
+                            
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h4>Daing na Bangus Plate</h4>
+                                    <span class="menu-price">₱280</span>
+                                </div>
+                                <p class="menu-description">Marinated milkfish, garlic rice, scrambled eggs, tomato salad</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Continental Breakfast -->
+                    <div class="breakfast-category">
+                        <h4 class="category-title">Continental & Healthy Options</h4>
+                        <div class="menu-items">
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h4>Luntian Big Breakfast</h4>
+                                    <span class="menu-price">₱380</span>
+                                </div>
+                                <p class="menu-description">2 eggs any style, bacon, sausage, hash browns, toast, grilled tomatoes, and seasonal fruits</p>
+                            </div>
+                            
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h4>Fluffy Pancake Tower</h4>
+                                    <span class="menu-price">₱250</span>
+                                </div>
+                                <p class="menu-description">Stack of 3 buttermilk pancakes with maple syrup, butter, and fresh berries</p>
+                            </div>
+                            
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h4>French Toast Deluxe</h4>
+                                    <span class="menu-price">₱240</span>
+                                </div>
+                                <p class="menu-description">Thick-cut brioche with cinnamon, powdered sugar, and fruit compote</p>
+                            </div>
+                            
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h4>Wellness Bowl</h4>
+                                    <span class="menu-price">₱320</span>
+                                </div>
+                                <p class="menu-description">Greek yogurt, granola, chia seeds, honey, mixed berries, and sliced banana</p>
+                            </div>
+                            
+                            <div class="menu-item">
+                                <div class="menu-item-header">
+                                    <h4>Avocado Toast & Eggs</h4>
+                                    <span class="menu-price">₱280</span>
+                                </div>
+                                <p class="menu-description">Multigrain bread, smashed avocado, poached eggs, cherry tomatoes, feta</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Breakfast Options -->
+                    <div class="breakfast-category">
+                        <h4 class="category-title">Quick Breakfast (30 min prep)</h4>
+                        <div class="menu-items">
+                            <div class="menu-item quick-prep">
+                                <div class="menu-item-header">
+                                    <h4>Omelette Your Way</h4>
+                                    <span class="menu-price">₱180</span>
+                                </div>
+                                <p class="menu-description">3-egg omelette with choice of 3 fillings: cheese, ham, mushroom, onion, tomato, bell pepper</p>
+                                <span class="prep-time">⚡ 30 mins</span>
+                            </div>
+                            
+                            <div class="menu-item quick-prep">
+                                <div class="menu-item-header">
+                                    <h4>Toast & Eggs</h4>
+                                    <span class="menu-price">₱120</span>
+                                </div>
+                                <p class="menu-description">2 eggs any style with buttered toast</p>
+                                <span class="prep-time">⚡ 30 mins</span>
+                            </div>
+                            
+                            <div class="menu-item quick-prep">
+                                <div class="menu-item-header">
+                                    <h4>Breakfast Sandwich</h4>
+                                    <span class="menu-price">₱150</span>
+                                </div>
+                                <p class="menu-description">Egg, cheese, and bacon or ham on toasted bread</p>
+                                <span class="prep-time">⚡ 30 mins</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filipino Favorites -->
+            <div class="menu-section fade-in" data-category="filipino">
+                <h3 class="menu-section-title">🇵🇭 Filipino Favorites</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Bulalo</h4>
+                            <span class="menu-price">₱480</span>
+                        </div>
+                        <p class="menu-description">Tagaytay's famous beef bone marrow soup with vegetables</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Crispy Pata</h4>
+                            <span class="menu-price">₱650</span>
+                        </div>
+                        <p class="menu-description">Deep-fried pork knuckle with soy-vinegar dipping sauce</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Sinigang na Baboy</h4>
+                            <span class="menu-price">₱380</span>
+                        </div>
+                        <p class="menu-description">Pork in tamarind soup with vegetables</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Courses -->
+            <div class="menu-section fade-in" data-category="mains">
+                <h3 class="menu-section-title">🍖 Main Courses</h3>
+                <div class="menu-items">
+                    <div class="menu-item special">
+                        <div class="menu-item-header">
+                            <h4>MHC Pork Sangyup BBQ</h4>
+                            <span class="menu-price">₱59/stick</span>
+                        </div>
+                        <p class="menu-description">Korean-style marinated pork BBQ on a stick. Minimum order of 3 sticks recommended. Perfect with rice or as pulutan!</p>
+                        <span class="prep-notice">⏰ 3-4 hrs prep required</span>
+                    </div>
+                    
+                    <div class="menu-item special">
+                        <div class="menu-item-header">
+                            <h4>Luntian Special Flan Meal</h4>
+                            <span class="menu-price">₱320</span>
+                        </div>
+                        <p class="menu-description">Unique savory-sweet creation: Creamy egg flan molded with yellow rice, topped with caramel sauce, served with fresh steamed broccoli. A fusion dish that surprises and delights!</p>
+                    </div>
+                    
+                    <div class="menu-item special">
+                        <div class="menu-item-header">
+                            <h4>Inihaw na Liempo Special</h4>
+                            <span class="menu-price">₱450</span>
+                        </div>
+                        <p class="menu-description">Perfectly grilled pork belly marinated in our special sauce, charred to perfection. Served on banana leaves with bacon rolls. Good for 2-3 persons.</p>
+                    </div>
+                    
+                    <div class="menu-item special">
+                        <div class="menu-item-header">
+                            <h4>Whole Chicken Inasal</h4>
+                            <span class="menu-price">₱390</span>
+                        </div>
+                        <p class="menu-description">Whole chicken butterflied and grilled with our signature inasal marinade - golden crispy skin with juicy tender meat. Served with sawsawan (dipping sauce).</p>
+                        <span class="prep-notice">⏰ 3-4 hrs prep required</span>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Grilled Pork Chops</h4>
+                            <span class="menu-price">₱380</span>
+                        </div>
+                        <p class="menu-description">Marinated pork chops with mashed potatoes and vegetables</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Herb Roasted Chicken</h4>
+                            <span class="menu-price">₱350</span>
+                        </div>
+                        <p class="menu-description">Half chicken with rosemary and garlic butter</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Grilled Tuna Belly</h4>
+                            <span class="menu-price">₱420</span>
+                        </div>
+                        <p class="menu-description">Fresh tuna belly with calamansi butter sauce and steamed rice</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Snacks & Sides -->
+            <div class="menu-section fade-in" data-category="snacks">
+                <h3 class="menu-section-title">🍟 Snacks & Meryenda</h3>
+                <div class="menu-items">
+                    <div class="menu-item special">
+                        <div class="menu-item-header">
+                            <h4>Turon (Banana Spring Rolls)</h4>
+                            <span class="menu-price">₱100</span>
+                        </div>
+                        <p class="menu-description">3 pieces of golden crispy turon - ripe saba bananas wrapped in spring roll wrapper, deep-fried to perfection with caramelized sugar coating. Perfect afternoon meryenda with coffee! (3-4 hrs prep, upon availability)</p>
+                        <span class="prep-notice">⏰ 3-4 hrs prep • Subject to availability</span>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>French Fries</h4>
+                            <span class="menu-price">₱150</span>
+                        </div>
+                        <p class="menu-description">Golden crispy fries with garlic mayo</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Nachos Supreme</h4>
+                            <span class="menu-price">₱280</span>
+                        </div>
+                        <p class="menu-description">Loaded with cheese, jalapeños, and salsa</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Lumpiang Shanghai</h4>
+                            <span class="menu-price">₱180</span>
+                        </div>
+                        <p class="menu-description">Crispy pork spring rolls with sweet and sour sauce</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Rice & Sides -->
+            <div class="menu-section fade-in" data-category="snacks">
+                <h3 class="menu-section-title">🍚 Rice & Sides</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Plain Rice</h4>
+                            <span class="menu-price">₱30</span>
+                        </div>
+                        <p class="menu-description">Steamed white rice per serving</p>
+                        <span class="prep-notice">⏰ 3-4 hrs prep required</span>
+                    </div>
+                    
+                    <div class="menu-item special">
+                        <div class="menu-item-header">
+                            <h4>MHC Fried Rice</h4>
+                            <span class="menu-price">₱149</span>
+                        </div>
+                        <p class="menu-description">Special fried rice with mixed vegetables and egg - good for 2 persons</p>
+                        <span class="prep-notice">⏰ 3-4 hrs prep required</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beverages -->
+            <div class="menu-section fade-in" data-category="beverages">
+                <h3 class="menu-section-title">☕ Beverages</h3>
+                <div class="admin-notice">
+                    <span>📢</span>
+                    <p><strong>Note:</strong> Beverage orders available only when admins are present to assist</p>
+                </div>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Bottled Water</h4>
+                            <span class="menu-price">₱30</span>
+                        </div>
+                        <p class="menu-description">Purified drinking water</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Softdrinks</h4>
+                            <span class="menu-price">₱59</span>
+                        </div>
+                        <p class="menu-description">Choice of Coke, Sprite, or Royal</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Fresh Milk</h4>
+                            <span class="menu-price">₱69</span>
+                        </div>
+                        <p class="menu-description">Chilled fresh milk</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Yakult</h4>
+                            <span class="menu-price">₱49</span>
+                        </div>
+                        <p class="menu-description">Probiotic cultured milk drink</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Pilsen</h4>
+                            <span class="menu-price">₱79</span>
+                        </div>
+                        <p class="menu-description">Local beer - ice cold</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Heineken</h4>
+                            <span class="menu-price">₱120</span>
+                        </div>
+                        <p class="menu-description">Premium imported beer</p>
+                    </div>
+                    
+                    <div class="menu-item special">
+                        <div class="menu-item-header">
+                            <h4>Soju</h4>
+                            <span class="menu-price">₱169</span>
+                        </div>
+                        <p class="menu-description">Korean alcoholic beverage - Choice of Green Apple, Peach, Strawberry, or Original flavor</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Barako Coffee</h4>
+                            <span class="menu-price">₱120</span>
+                        </div>
+                        <p class="menu-description">Strong Batangas coffee, hot or iced</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <div class="menu-item-header">
+                            <h4>Fresh Fruit Shakes</h4>
+                            <span class="menu-price">₱150</span>
+                        </div>
+                        <p class="menu-description">Mango, Pineapple, or Watermelon</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Online Order Form -->
+        <div class="order-form-section fade-in">
+            <h3 class="section-title" style="font-size: 2em; margin: 60px 0 30px;">📝 Order Food Online</h3>
+            
+            <div class="order-form-container">
+                <form id="foodOrderForm" class="food-order-form">
+                    <!-- Guest Information -->
+                    <div class="form-section">
+                        <h4>Guest Information</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="guestName">Full Name *</label>
+                                <input type="text" id="guestName" name="guestName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="roomNumber">Room</label>
+                                <select id="roomNumber" name="roomNumber">
+                                    <option value="">Select Room</option>
+                                    <option value="sunrise">Sunrise Room</option>
+                                    <option value="leaf">Leaf Room</option>
+                                    <option value="external">Not a Guest</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="contactNumber">Contact Number *</label>
+                                <input type="tel" id="contactNumber" name="contactNumber" required placeholder="09XX XXX XXXX">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email" name="email">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Details -->
+                    <div class="form-section">
+                        <h4>Order Details</h4>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="orderDate">Delivery Date *</label>
+                                <input type="date" id="orderDate" name="orderDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="orderTime">Preferred Time *</label>
+                                <select id="orderTime" name="orderTime" required>
+                                    <option value="">Select Time</option>
+                                    <option value="6:00">6:00 AM</option>
+                                    <option value="6:30">6:30 AM</option>
+                                    <option value="7:00">7:00 AM</option>
+                                    <option value="7:30">7:30 AM</option>
+                                    <option value="8:00">8:00 AM</option>
+                                    <option value="8:30">8:30 AM</option>
+                                    <option value="9:00">9:00 AM</option>
+                                    <option value="9:30">9:30 AM</option>
+                                    <option value="10:00">10:00 AM</option>
+                                    <option value="10:30">10:30 AM</option>
+                                    <option value="11:00">11:00 AM</option>
+                                    <option value="12:00">12:00 PM</option>
+                                    <option value="12:30">12:30 PM</option>
+                                    <option value="1:00">1:00 PM</option>
+                                    <option value="1:30">1:30 PM</option>
+                                    <option value="2:00">2:00 PM</option>
+                                    <option value="2:30">2:30 PM</option>
+                                    <option value="3:00">3:00 PM</option>
+                                    <option value="3:30">3:30 PM</option>
+                                    <option value="4:00">4:00 PM</option>
+                                    <option value="4:30">4:30 PM</option>
+                                    <option value="5:00">5:00 PM</option>
+                                    <option value="5:30">5:30 PM</option>
+                                    <option value="6:00pm">6:00 PM</option>
+                                    <option value="6:30pm">6:30 PM</option>
+                                    <option value="7:00pm">7:00 PM</option>
+                                    <option value="7:30pm">7:30 PM</option>
+                                    <option value="8:00pm">8:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Menu Item Selection -->
+                        <div class="menu-selection">
+                            <label>Select Items *</label>
+                            <div class="menu-items-grid">
+                                <!-- Breakfast Items -->
+                                <div class="menu-category-section">
+                                    <h5>Breakfast</h5>
+                                    <h6 style="color: #ff6b35; margin: 10px 0;">🔥 Value Breakfast Meals - ₱169 Only (includes rice, egg & drink)</h6>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item1" name="menuItems" value="Corned Beef Silog - ₱169">
+                                        <label for="item1">
+                                            <span class="item-name">Corned Beef Silog w/ Drink</span>
+                                            <span class="item-price">₱169</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item2" name="menuItems" value="Ma-Ling Silog - ₱169">
+                                        <label for="item2">
+                                            <span class="item-name">Ma-Ling Silog w/ Drink</span>
+                                            <span class="item-price">₱169</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item3" name="menuItems" value="Hotsilog - ₱169">
+                                        <label for="item3">
+                                            <span class="item-name">Hotsilog w/ Drink</span>
+                                            <span class="item-price">₱169</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item4" name="menuItems" value="Tocilog - ₱169">
+                                        <label for="item4">
+                                            <span class="item-name">Tocilog w/ Drink</span>
+                                            <span class="item-price">₱169</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <h6 style="color: #654321; margin: 15px 0 10px;">Premium Breakfast</h6>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item5" name="menuItems" value="Luntian Special Silog - ₱320">
+                                        <label for="item5">
+                                            <span class="item-name">Luntian Special Silog</span>
+                                            <span class="item-price">₱320</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item6" name="menuItems" value="Luntian Big Breakfast - ₱380">
+                                        <label for="item6">
+                                            <span class="item-name">Luntian Big Breakfast</span>
+                                            <span class="item-price">₱380</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Main Courses -->
+                                <div class="menu-category-section">
+                                    <h5>Main Courses</h5>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item5" name="menuItems" value="MHC Pork Sangyup BBQ - ₱59/stick">
+                                        <label for="item5">
+                                            <span class="item-name">MHC Pork Sangyup BBQ 🌟</span>
+                                            <span class="item-price">₱59/stick</span>
+                                            <input type="number" class="quantity-input" min="3" max="20" value="3">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item6" name="menuItems" value="Luntian Special Flan Meal - ₱320">
+                                        <label for="item6">
+                                            <span class="item-name">Luntian Special Flan Meal 🌟</span>
+                                            <span class="item-price">₱320</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item7" name="menuItems" value="Inihaw na Liempo - ₱450">
+                                        <label for="item7">
+                                            <span class="item-name">Inihaw na Liempo Special 🌟</span>
+                                            <span class="item-price">₱450</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item8" name="menuItems" value="Whole Chicken Inasal - ₱390">
+                                        <label for="item8">
+                                            <span class="item-name">Whole Chicken Inasal 🌟</span>
+                                            <span class="item-price">₱390</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item9" name="menuItems" value="Bulalo - ₱480">
+                                        <label for="item9">
+                                            <span class="item-name">Bulalo</span>
+                                            <span class="item-price">₱480</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item10" name="menuItems" value="Crispy Pata - ₱650">
+                                        <label for="item10">
+                                            <span class="item-name">Crispy Pata</span>
+                                            <span class="item-price">₱650</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <!-- Beverages -->
+                                <div class="menu-category-section">
+                                    <h5>Beverages (Available when admins can assist)</h5>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item20" name="menuItems" value="Water - ₱30">
+                                        <label for="item20">
+                                            <span class="item-name">Bottled Water</span>
+                                            <span class="item-price">₱30</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item21" name="menuItems" value="Softdrinks - ₱59">
+                                        <label for="item21">
+                                            <span class="item-name">Coke/Sprite/Royal</span>
+                                            <span class="item-price">₱59</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item22" name="menuItems" value="Fresh Milk - ₱69">
+                                        <label for="item22">
+                                            <span class="item-name">Fresh Milk</span>
+                                            <span class="item-price">₱69</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item23" name="menuItems" value="Yakult - ₱49">
+                                        <label for="item23">
+                                            <span class="item-name">Yakult</span>
+                                            <span class="item-price">₱49</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item24" name="menuItems" value="Pilsen - ₱79">
+                                        <label for="item24">
+                                            <span class="item-name">Pilsen Beer</span>
+                                            <span class="item-price">₱79</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item25" name="menuItems" value="Heineken - ₱120">
+                                        <label for="item25">
+                                            <span class="item-name">Heineken</span>
+                                            <span class="item-price">₱120</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item26" name="menuItems" value="Soju - ₱169">
+                                        <label for="item26">
+                                            <span class="item-name">Soju (Green Apple/Peach/Strawberry/Original)</span>
+                                            <span class="item-price">₱169</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="menu-category-section">
+                                    <h5>Snacks & Meryenda</h5>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item10" name="menuItems" value="Turon (3 pcs) - ₱100">
+                                        <label for="item10">
+                                            <span class="item-name">Turon (3 pcs) 🌟</span>
+                                            <span class="item-price">₱100</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <!-- Rice & Sides -->
+                                <div class="menu-category-section">
+                                    <h5>Rice & Sides</h5>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item11" name="menuItems" value="Plain Rice - ₱30">
+                                        <label for="item11">
+                                            <span class="item-name">Plain Rice</span>
+                                            <span class="item-price">₱30</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                    <div class="menu-checkbox-item">
+                                        <input type="checkbox" id="item12" name="menuItems" value="MHC Fried Rice - ₱149">
+                                        <label for="item12">
+                                            <span class="item-name">MHC Fried Rice (Good for 2)</span>
+                                            <span class="item-price">₱149</span>
+                                            <input type="number" class="quantity-input" min="1" max="10" value="1">
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="specialRequests">Special Requests / Dietary Requirements</label>
+                            <textarea id="specialRequests" name="specialRequests" rows="3" placeholder="E.g., No pork, vegetarian, food allergies, extra spicy..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="order-summary">
+                        <h4>Order Summary</h4>
+                        <div class="summary-content">
+                            <p>Selected items will appear here...</p>
+                        </div>
+                        <div class="total-amount">
+                            <strong>Total Amount: </strong>
+                            <span id="totalAmount">₱0</span>
+                        </div>
+                    </div>
+
+                    <!-- Important Reminders -->
+                    <div class="form-reminders">
+                        <h5>⚠️ Important Reminders:</h5>
+                        <ul>
+                            <li>Orders must be placed <strong>4-5 hours in advance</strong></li>
+                            <li>Quick breakfast items available with 30-minute preparation</li>
+                            <li>Payment can be made upon delivery or charged to your room</li>
+                            <li>For orders over ₱2,000, 50% advance payment is required</li>
+                            <li>Cancellations must be made at least 2 hours before delivery time</li>
+                        </ul>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">📧 Submit Order</button>
+                        <button type="button" class="btn btn-secondary" onclick="resetForm()">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Enhanced CSS for the menu -->
+<style>
+/* Food Menu Section */
+.food-menu {
+    padding: 100px 0;
+    background: linear-gradient(135deg, #F5F5DC 0%, #F0F8E7 100%);
+}
+
+/* Menu Notice */
+.menu-notice {
+    background: linear-gradient(135deg, #fff9e6, #ffe4b5);
+    border: 2px solid #ff9800;
+    border-radius: 15px;
+    padding: 20px 30px;
+    margin: 30px auto;
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    animation: pulse 2s infinite;
+}
+
+.notice-icon {
+    font-size: 2em;
+}
+
+.menu-notice p {
+    margin: 0;
+    color: #654321;
+    font-size: 1.1em;
+}
+
+/* Menu Categories */
+.menu-categories {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+
+.menu-category-btn {
+    padding: 10px 20px;
+    background: white;
+    border: 2px solid #654321;
+    border-radius: 25px;
+    color: #654321;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: bold;
+}
+
+.menu-category-btn.active,
+.menu-category-btn:hover {
+    background: #654321;
+    color: white;
+}
+
+/* Breakfast Section */
+.breakfast-featured {
+    background: linear-gradient(135deg, #ffffff, #fff9f0);
+    border: 3px solid #ff9800;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.serving-time {
+    background: #ff9800;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.breakfast-grid {
+    display: grid;
+    gap: 40px;
+}
+
+.breakfast-category {
+    margin-bottom: 30px;
+}
+
+.category-title {
+    color: #ff9800;
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #ffe4b5;
+}
+
+/* Menu Items */
+.menu-section {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.menu-item.special {
+    background: linear-gradient(135deg, #fff9f5, #ffe8e0);
+    border-left: 4px solid #ff6b35;
+}
+
+.menu-item.value-meal {
+    background: linear-gradient(135deg, #f0fff0, #e8f5e8);
+    border-left: 4px solid #4caf50;
+}
+
+.prep-notice {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 12px;
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 15px;
+    color: #856404;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.admin-notice {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    border: 2px solid #2196f3;
+    border-radius: 15px;
+    padding: 15px 20px;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.admin-notice span {
+    font-size: 1.5em;
+}
+
+.admin-notice p {
+    margin: 0;
+    color: #1565c0;
+    font-size: 1em;
+}
+
+.menu-section-title {
+    color: #654321;
+    font-size: 1.8em;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #F5DEB3;
+}
+
+.menu-items {
+    display: grid;
+    gap: 20px;
+}
+
+.menu-item {
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.menu-item.quick-prep {
+    border: 2px solid #4caf50;
+    background: #f1f8e9;
+}
+
+.prep-time {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #4caf50;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.menu-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.menu-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.menu-item-header h4 {
+    color: #654321;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+}
+
+.menu-price {
+    color: #228B22;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.menu-description {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Order Form Section */
+.order-form-section {
+    margin-top: 80px;
+}
+
+.order-form-container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+.food-order-form {
+    display: grid;
+    gap: 30px;
+}
+
+.form-section {
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 30px;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+}
+
+.form-section h4 {
+    color: #654321;
+    font-size: 1.4em;
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #654321;
+}
+
+/* Menu Selection */
+.menu-selection {
+    margin: 20px 0;
+}
+
+.menu-selection > label {
+    display: block;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.menu-items-grid {
+    display: grid;
+    gap: 30px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.menu-category-section h5 {
+    color: #654321;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.menu-checkbox-item {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.menu-checkbox-item:hover {
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.menu-checkbox-item label {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+}
+
+.menu-checkbox-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.item-name {
+    flex: 1;
+    color: #333;
+    font-weight: 500;
+}
+
+.item-price {
+    color: #228B22;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.quantity-input {
+    width: 60px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Order Summary */
+.order-summary {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 30px;
+}
+
+.order-summary h4 {
+    color: #654321;
+    margin-bottom: 15px;
+}
+
+.summary-content {
+    min-height: 80px;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.total-amount {
+    font-size: 1.3em;
+    text-align: right;
+}
+
+#totalAmount {
+    color: #228B22;
+    font-weight: bold;
+}
+
+/* Form Reminders */
+.form-reminders {
+    background: #fff9e6;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #ff9800;
+}
+
+.form-reminders h5 {
+    color: #ff9800;
+    margin-bottom: 10px;
+}
+
+.form-reminders ul {
+    list-style: none;
+    padding: 0;
+}
+
+.form-reminders li {
+    padding: 5px 0;
+    color: #666;
+    padding-left: 20px;
+    position: relative;
+}
+
+.form-reminders li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #ff9800;
+    font-weight: bold;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .menu-categories {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .menu-item-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .menu-checkbox-item label {
+        flex-wrap: wrap;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+}
+</style>
+
+<!-- JavaScript for the ordering system -->
+<script>
+// Filter menu by category
+function filterMenu(category) {
+    const sections = document.querySelectorAll('.menu-section');
+    const buttons = document.querySelectorAll('.menu-category-btn');
+    
+    // Update active button
+    buttons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Filter menu sections
+    sections.forEach(section => {
+        if (category === 'all' || section.dataset.category === category) {
+            section.style.display = 'block';
+        } else {
+            section.style.display = 'none';
+        }
+    });
+}
+
+// Update order summary and calculate total
+function updateOrderSummary() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+    const summaryContent = document.querySelector('.summary-content');
+    let total = 0;
+    let summaryHTML = '';
+    
+    if (checkboxes.length === 0) {
+        summaryContent.innerHTML = '<p>Selected items will appear here...</p>';
+        document.getElementById('totalAmount').textContent = '₱0';
+        return;
+    }
+    
+    checkboxes.forEach(checkbox => {
+        const label = checkbox.nextElementSibling;
+        const itemName = label.querySelector('.item-name').textContent;
+        const priceText = label.querySelector('.item-price').textContent;
+        const quantity = label.querySelector('.quantity-input').value;
+        const price = parseInt(priceText.replace('₱', ''));
+        
+        const itemTotal = price * quantity;
+        total += itemTotal;
+        
+        summaryHTML += `
+            <div class="summary-item">
+                <span>${itemName} x${quantity}</span>
+                <span>₱${itemTotal}</span>
+            </div>
+        `;
+    });
+    
+    summaryContent.innerHTML = summaryHTML;
+    document.getElementById('totalAmount').textContent = `₱${total}`;
+}
+
+// Add event listeners to checkboxes and quantity inputs
+document.addEventListener('DOMContentLoaded', function() {
+    // Set minimum date to today
+    const dateInput = document.getElementById('orderDate');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+    
+    // Update summary when items are selected
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const quantityInputs = document.querySelectorAll('.quantity-input');
+    
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateOrderSummary);
+    });
+    
+    quantityInputs.forEach(input => {
+        input.addEventListener('change', updateOrderSummary);
+    });
+    
+    // Form submission
+    document.getElementById('foodOrderForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validate time (must be at least 4 hours from now)
+        const orderDate = new Date(document.getElementById('orderDate').value);
+        const orderTime = document.getElementById('orderTime').value;
+        const [hours, minutes] = orderTime.includes('pm') ? 
+            [parseInt(orderTime) + 12, 0] : orderTime.split(':').map(Number);
+        
+        orderDate.setHours(hours, minutes || 0);
+        
+        const now = new Date();
+        const timeDiff = (orderDate - now) / (1000 * 60 * 60); // hours
+        
+        if (timeDiff < 4) {
+            alert('Please order at least 4-5 hours in advance. For quick breakfast items (30-minute prep), please call us directly.');
+            return;
+        }
+        
+        // Process order
+        alert('Thank you for your order! We will contact you shortly to confirm your order details and payment method.');
+        
+        // Here you would normally send the form data to your server
+        // For now, we'll just reset the form
+        this.reset();
+        updateOrderSummary();
+    });
+});
+
+// Reset form function
+function resetForm() {
+    document.getElementById('foodOrderForm').reset();
+    updateOrderSummary();
+}
+</script>
 
 <!-- Prenup Shoot Packages Section -->
 <section id="prenup" class="prenup-packages">
