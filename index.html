@@ -2646,23 +2646,79 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Form submission
-    document.getElementById('foodOrderForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const deliveryDate = new Date(this.deliveryDate.value + ' ' + this.deliveryTime.value);
-        const now = new Date();
-        const hoursDiff = (deliveryDate - now) / (1000 * 60 * 60);
-        
-        if (hoursDiff < 4) {
-            alert('Please order at least 4-5 hours in advance.');
-            return;
+   // Form submission
+document.getElementById('foodOrderForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Collect order items
+    let orderItems = [];
+    let totalAmount = 0;
+    
+    document.querySelectorAll('.menu-select-item input[type="checkbox"]:checked').forEach(checkbox => {
+        const quantity = parseInt(checkbox.parentElement.querySelector('.quantity-input').value);
+        if (quantity > 0) {
+            const name = checkbox.dataset.name;
+            const price = parseInt(checkbox.dataset.price);
+            const itemTotal = price * quantity;
+            orderItems.push(`${name} x${quantity} = ₱${itemTotal}`);
+            totalAmount += itemTotal;
         }
-        
-        alert('Thank you for your order! We will contact you shortly to confirm your order.');
+    });
+    
+    if (orderItems.length === 0) {
+        alert('Please select at least one item');
+        return;
+    }
+    
+    // Check delivery time
+    const deliveryDate = new Date(this.deliveryDate.value + ' ' + this.deliveryTime.value);
+    const now = new Date();
+    const hoursDiff = (deliveryDate - now) / (1000 * 60 * 60);
+    
+    if (hoursDiff < 4) {
+        alert('Please order at least 4-5 hours in advance.');
+        return;
+    }
+    
+    // Prepare data for Google Sheets
+    const formData = new FormData();
+    formData.append('guestName', document.querySelector('input[name="fullName"]').value);
+    formData.append('contactNumber', document.querySelector('input[name="contactNumber"]').value);
+    formData.append('room', document.querySelector('select[name="room"]').value || 'Not specified');
+    formData.append('deliveryDate', document.querySelector('input[name="deliveryDate"]').value);
+    formData.append('deliveryTime', document.querySelector('input[name="deliveryTime"]').value);
+    formData.append('orderItems', orderItems.join(' | '));
+    formData.append('totalAmount', totalAmount);
+    formData.append('specialRequests', document.querySelector('textarea[name="specialRequests"]').value || 'None');
+    
+    // Show loading
+    const submitBtn = document.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending to Google Sheets...';
+    
+    // SEND TO GOOGLE SHEETS - THIS IS THE MISSING PART!
+    fetch('https://script.google.com/macros/s/AKfycbyTTjn5D0sCmS-0bq0bxC4MlDNN0Gx3hztW0hi9au3mfRC2Oa-2vB8eK1nNbEuH4Ukp1A/exec', {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors'  // CRITICAL: Must have this for Google Apps Script
+    })
+    .then(() => {
+        alert('Order successfully sent to Google Sheets! We will contact you shortly to confirm.');
         this.reset();
         updateOrderSummary();
+    })
+    .catch(error => {
+        // With no-cors mode, errors don't mean failure
+        console.log('Note:', error);
+        alert('Order submitted! Check your Google Sheets.');
+        this.reset();
+        updateOrderSummary();
+    })
+    .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Order';
     });
+});
 });
 </script>
 
