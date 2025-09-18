@@ -2417,424 +2417,298 @@
         }
     </style>
 </section>
-        <!-- Online Order Form -->
-        <div class="order-form-section" style="margin-top: 60px;">
-            <h3 class="section-title" style="font-size: 2em; color: #654321;">📝 Order Form</h3>
-            <p style="text-align: center; margin-bottom: 30px;">Pre-order your meals for a hassle-free experience!</p>
-            
-            <form id="foodOrderForm" class="order-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="guestName">Guest Name *</label>
-                        <input type="text" id="guestName" name="guestName" required>
+      <!-- Order Form Section -->
+<div class="order-form-container" style="max-width: 900px; margin: 60px auto 0;">
+    <div class="order-form-card" style="background: white; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); overflow: hidden;">
+        <!-- Form Header -->
+        <div class="form-header" style="background: linear-gradient(135deg, #8B4513, #654321); padding: 40px; text-align: center;">
+            <h2 style="color: white; font-size: 2.5em; margin: 0;">Pre-Order Your Meals</h2>
+            <p style="color: rgba(255,255,255,0.9); margin-top: 10px; font-size: 1.1em;">Order in advance for a hassle-free experience</p>
+        </div>
+
+        <!-- Form Body -->
+        <form id="foodOrderForm" style="padding: 40px;">
+            <!-- Guest Information -->
+            <div class="form-section">
+                <h3 style="color: #654321; margin-bottom: 25px; font-size: 1.4em; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px;">Guest Information</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-field">
+                        <label style="display: block; margin-bottom: 8px; color: #333; font-weight: 600;">Full Name *</label>
+                        <input type="text" name="fullName" required style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; transition: all 0.3s;">
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="roomNumber">Room</label>
-                        <select id="roomNumber" name="roomNumber">
+                    <div class="form-field">
+                        <label style="display: block; margin-bottom: 8px; color: #333; font-weight: 600;">Contact Number *</label>
+                        <input type="tel" name="contactNumber" required style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; transition: all 0.3s;">
+                    </div>
+                    <div class="form-field">
+                        <label style="display: block; margin-bottom: 8px; color: #333; font-weight: 600;">Email</label>
+                        <input type="email" name="email" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; transition: all 0.3s;">
+                    </div>
+                    <div class="form-field">
+                        <label style="display: block; margin-bottom: 8px; color: #333; font-weight: 600;">Room</label>
+                        <select name="room" style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; background: white; cursor: pointer;">
+                            <option value="">Select Room</option>
                             <option value="sunrise">Sunrise Room</option>
                             <option value="leaf">Leaf Room</option>
                         </select>
                     </div>
                 </div>
+            </div>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="orderDate">Delivery Date *</label>
-                        <input type="date" id="orderDate" name="orderDate" required>
+            <!-- Delivery Schedule -->
+            <div class="form-section" style="margin-top: 40px;">
+                <h3 style="color: #654321; margin-bottom: 25px; font-size: 1.4em; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px;">Delivery Schedule</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-field">
+                        <label style="display: block; margin-bottom: 8px; color: #333; font-weight: 600;">Delivery Date *</label>
+                        <input type="date" name="deliveryDate" required style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px;">
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="orderTime">Delivery Time *</label>
-                        <input type="time" id="orderTime" name="orderTime" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Select Your Items:</label>
-                    <div class="menu-selection">
-                        <!-- Breakfast Items -->
-                        <h4 style="color: #654321; margin-top: 20px;">Breakfast</h4>
-                        <div class="menu-checkbox-group">
-                            <label><input type="checkbox" name="menuItem" value="Corned Beef Silog|169"> Corned Beef Silog (₱169) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                            <label><input type="checkbox" name="menuItem" value="Ma-Ling Silog|169"> Ma-Ling Silog (₱169) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                            <label><input type="checkbox" name="menuItem" value="Hotsilog|169"> Hotsilog (₱169) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                            <label><input type="checkbox" name="menuItem" value="Tocilog|169"> Tocilog (₱169) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                            <label><input type="checkbox" name="menuItem" value="Longsilog|250"> Longsilog (₱250) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                            <label><input type="checkbox" name="menuItem" value="Tapsilog|320"> Tapsilog (₱320) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-
-                        <!-- Main Courses -->
-                        <h4 style="color: #654321; margin-top: 20px;">Main Courses</h4>
-                        <div class="menu-checkbox-group">
-                            <label><input type="checkbox" name="menuItem" value="Whole Chicken Inasal|390"> Whole Chicken Inasal (₱390) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                            <label><input type="checkbox" name="menuItem" value="MHC Pork Sangyup BBQ|59"> MHC Pork Sangyup BBQ (₱59/stick - min 3) <input type="number" name="quantity" min="3" value="3" style="width: 50px; margin-left: 10px;"></label>
-                        </div>
-
-                        <!-- Snacks -->
-                        <h4 style="color: #654321; margin-top: 20px;">Snacks & Meryenda</h4>
-                        <div class="menu-checkbox-group">
-                            <label><input type="checkbox" name="menuItem" value="Turon|100"> Turon 3pcs (₱100) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                        </div>
-
-                        <!-- Rice -->
-                        <h4 style="color: #654321; margin-top: 20px;">Rice & Sides</h4>
-                        <div class="menu-checkbox-group">
-                            <label><input type="checkbox" name="menuItem" value="Plain Rice|30"> Plain Rice (₱30) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                            <label><input type="checkbox" name="menuItem" value="MHC Fried Rice|149"> MHC Fried Rice (₱149) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                        </div>
-
-                        <!-- Beverages -->
-                        <h4 style="color: #654321; margin-top: 20px;">Beverages (if admins available)</h4>
-                        <div class="menu-checkbox-group">
-                            <label><input type="checkbox" name="menuItem" value="Water|30"> Water (₱30) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                            <label><input type="checkbox" name="menuItem" value="Softdrinks|59"> Softdrinks (₱59) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                            <label><input type="checkbox" name="menuItem" value="Fresh Milk|69"> Fresh Milk (₱69) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                            <label><input type="checkbox" name="menuItem" value="Yakult|49"> Yakult (₱49) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                            <label><input type="checkbox" name="menuItem" value="Pilsen|79"> Pilsen (₱79) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                            <label><input type="checkbox" name="menuItem" value="Heineken|120"> Heineken (₱120) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                            <label><input type="checkbox" name="menuItem" value="Soju|169"> Soju (₱169) <input type="number" name="quantity" min="1" value="1" style="width: 50px; margin-left: 10px;"></label>
-                        </div>
+                    <div class="form-field">
+                        <label style="display: block; margin-bottom: 8px; color: #333; font-weight: 600;">Delivery Time *</label>
+                        <input type="time" name="deliveryTime" required style="width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px;">
                     </div>
                 </div>
+                <p style="color: #ff6b35; font-size: 0.9em; margin-top: 10px;">⚠️ Please order 4-5 hours in advance</p>
+            </div>
 
-                <div class="form-group">
-                    <label for="specialRequests">Special Requests / Dietary Requirements</label>
-                    <textarea id="specialRequests" name="specialRequests" rows="3" placeholder="Any allergies, preferences, or special instructions..."></textarea>
+            <!-- Menu Selection -->
+            <div class="form-section" style="margin-top: 40px;">
+                <h3 style="color: #654321; margin-bottom: 25px; font-size: 1.4em; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px;">Select Your Items</h3>
+                
+                <!-- Breakfast Items -->
+                <div class="menu-section">
+                    <h4 style="color: #8B4513; margin: 20px 0 15px;">🌅 Breakfast (₱169 Value Meals)</h4>
+                    <div style="display: grid; gap: 12px;">
+                        <div class="menu-select-item" style="display: flex; align-items: center; background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                            <input type="checkbox" data-price="169" data-name="Corned Beef Silog" style="margin-right: 15px; transform: scale(1.2);">
+                            <label style="flex: 1; color: #333;">Corned Beef Silog</label>
+                            <span style="color: #8B4513; font-weight: bold; margin: 0 15px;">₱169</span>
+                            <input type="number" min="0" value="0" class="quantity-input" style="width: 60px; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; text-align: center;">
+                        </div>
+                        <div class="menu-select-item" style="display: flex; align-items: center; background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                            <input type="checkbox" data-price="169" data-name="Ma-Ling Silog" style="margin-right: 15px; transform: scale(1.2);">
+                            <label style="flex: 1; color: #333;">Ma-Ling Silog</label>
+                            <span style="color: #8B4513; font-weight: bold; margin: 0 15px;">₱169</span>
+                            <input type="number" min="0" value="0" class="quantity-input" style="width: 60px; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; text-align: center;">
+                        </div>
+                        <div class="menu-select-item" style="display: flex; align-items: center; background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                            <input type="checkbox" data-price="169" data-name="Hotsilog" style="margin-right: 15px; transform: scale(1.2);">
+                            <label style="flex: 1; color: #333;">Hotsilog</label>
+                            <span style="color: #8B4513; font-weight: bold; margin: 0 15px;">₱169</span>
+                            <input type="number" min="0" value="0" class="quantity-input" style="width: 60px; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; text-align: center;">
+                        </div>
+                        <div class="menu-select-item" style="display: flex; align-items: center; background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                            <input type="checkbox" data-price="169" data-name="Tocilog" style="margin-right: 15px; transform: scale(1.2);">
+                            <label style="flex: 1; color: #333;">Tocilog</label>
+                            <span style="color: #8B4513; font-weight: bold; margin: 0 15px;">₱169</span>
+                            <input type="number" min="0" value="0" class="quantity-input" style="width: 60px; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; text-align: center;">
+                        </div>
+                        <div class="menu-select-item" style="display: flex; align-items: center; background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                            <input type="checkbox" data-price="250" data-name="Longsilog" style="margin-right: 15px; transform: scale(1.2);">
+                            <label style="flex: 1; color: #333;">Longsilog</label>
+                            <span style="color: #8B4513; font-weight: bold; margin: 0 15px;">₱250</span>
+                            <input type="number" min="0" value="0" class="quantity-input" style="width: 60px; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; text-align: center;">
+                        </div>
+                        <div class="menu-select-item" style="display: flex; align-items: center; background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                            <input type="checkbox" data-price="320" data-name="Tapsilog" style="margin-right: 15px; transform: scale(1.2);">
+                            <label style="flex: 1; color: #333;">Tapsilog</label>
+                            <span style="color: #8B4513; font-weight: bold; margin: 0 15px;">₱320</span>
+                            <input type="number" min="0" value="0" class="quantity-input" style="width: 60px; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; text-align: center;">
+                        </div>
+                    </div>
                 </div>
 
-                <div class="order-summary" id="orderSummary" style="display: none;">
-                    <h4>Order Summary:</h4>
-                    <div id="summaryItems"></div>
-                    <div class="total-price">Total: ₱<span id="totalPrice">0</span></div>
+                <!-- Main Courses -->
+                <div class="menu-section">
+                    <h4 style="color: #8B4513; margin: 30px 0 15px;">🍖 Main Courses</h4>
+                    <div style="display: grid; gap: 12px;">
+                        <div class="menu-select-item" style="display: flex; align-items: center; background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                            <input type="checkbox" data-price="390" data-name="Whole Chicken Inasal" style="margin-right: 15px; transform: scale(1.2);">
+                            <label style="flex: 1; color: #333;">Whole Chicken Inasal</label>
+                            <span style="color: #8B4513; font-weight: bold; margin: 0 15px;">₱390</span>
+                            <input type="number" min="0" value="0" class="quantity-input" style="width: 60px; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; text-align: center;">
+                        </div>
+                        <div class="menu-select-item" style="display: flex; align-items: center; background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                            <input type="checkbox" data-price="59" data-name="MHC Pork Sangyup BBQ" style="margin-right: 15px; transform: scale(1.2);">
+                            <label style="flex: 1; color: #333;">MHC Pork Sangyup BBQ (per stick, min 3)</label>
+                            <span style="color: #8B4513; font-weight: bold; margin: 0 15px;">₱59</span>
+                            <input type="number" min="0" value="0" class="quantity-input" style="width: 60px; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; text-align: center;">
+                        </div>
+                    </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">Submit Order</button>
-            </form>
-        </div>
+                <!-- Snacks & Rice -->
+                <div class="menu-section">
+                    <h4 style="color: #8B4513; margin: 30px 0 15px;">🍿 Snacks & Rice</h4>
+                    <div style="display: grid; gap: 12px;">
+                        <div class="menu-select-item" style="display: flex; align-items: center; background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                            <input type="checkbox" data-price="100" data-name="Turon (3pcs)" style="margin-right: 15px; transform: scale(1.2);">
+                            <label style="flex: 1; color: #333;">Turon (3 pieces)</label>
+                            <span style="color: #8B4513; font-weight: bold; margin: 0 15px;">₱100</span>
+                            <input type="number" min="0" value="0" class="quantity-input" style="width: 60px; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; text-align: center;">
+                        </div>
+                        <div class="menu-select-item" style="display: flex; align-items: center; background: #f8f9fa; padding: 15px; border-radius: 10px;">
+                            <input type="checkbox" data-price="149" data-name="MHC Fried Rice" style="margin-right: 15px; transform: scale(1.2);">
+                            <label style="flex: 1; color: #333;">MHC Fried Rice (good for 2)</label>
+                            <span style="color: #8B4513; font-weight: bold; margin: 0 15px;">₱149</span>
+                            <input type="number" min="0" value="0" class="quantity-input" style="width: 60px; padding: 8px; border: 2px solid #e0e0e0; border-radius: 5px; text-align: center;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Special Requests -->
+            <div class="form-section" style="margin-top: 40px;">
+                <h3 style="color: #654321; margin-bottom: 25px; font-size: 1.4em; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px;">Special Requests</h3>
+                <textarea name="specialRequests" rows="4" placeholder="Any allergies, dietary restrictions, or special instructions..." style="width: 100%; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 16px; resize: vertical;"></textarea>
+            </div>
+
+            <!-- Order Summary -->
+            <div id="orderSummary" style="display: none; background: #f8f9fa; padding: 25px; border-radius: 15px; margin-top: 30px;">
+                <h3 style="color: #654321; margin-bottom: 20px;">Order Summary</h3>
+                <div id="summaryItems" style="margin-bottom: 20px;"></div>
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 2px solid #dee2e6; padding-top: 15px;">
+                    <span style="font-size: 1.2em; color: #333;">Total Amount:</span>
+                    <span style="font-size: 1.5em; color: #8B4513; font-weight: bold;">₱<span id="totalAmount">0</span></span>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" style="width: 100%; padding: 18px; background: linear-gradient(135deg, #8B4513, #654321); color: white; font-size: 1.2em; font-weight: bold; border: none; border-radius: 10px; cursor: pointer; margin-top: 30px; transition: all 0.3s;">
+                Submit Order
+            </button>
+        </form>
     </div>
+</div>
 
-    <style>
-        /* Food Menu Styles */
-        .food-menu-section {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #F5F5DC 0%, #F0F8E7 100%);
-        }
-
-        .menu-notice {
-            text-align: center;
-            background: #fff3cd;
-            color: #856404;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 40px;
-            font-weight: bold;
-        }
-
-        .menu-filter {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 10px 20px;
-            background: white;
-            border: 2px solid #654321;
-            border-radius: 25px;
-            color: #654321;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-        }
-
-        .filter-btn.active,
-        .filter-btn:hover {
-            background: #654321;
-            color: white;
-        }
-
-        .menu-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .menu-category {
-            margin-bottom: 60px;
-        }
-
-        .category-title {
-            font-size: 2em;
-            color: #654321;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .category-subtitle {
-            text-align: center;
-            color: #666;
-            margin-bottom: 30px;
-            font-style: italic;
-        }
-
-        .menu-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 25px;
-        }
-
-        .menu-item {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-        }
-
-        .menu-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        .menu-item.value-meal {
-            border: 3px solid #FFD700;
-            background: linear-gradient(135deg, #fffdf7, #fff9e6);
-        }
-
-        .menu-item.special-dish {
-            border: 2px solid #ff6b35;
-        }
-
-        .menu-item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .menu-item-header h4 {
-            color: #654321;
-            font-size: 1.2em;
-            margin: 0;
-        }
-
-        .menu-price {
-            font-size: 1.3em;
-            color: #8B4513;
-            font-weight: bold;
-        }
-
-        .menu-description {
-            color: #666;
-            margin-bottom: 10px;
-            line-height: 1.6;
-        }
-
-        .prep-notice {
-            display: inline-block;
-            background: #ffc107;
-            color: #333;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.85em;
-            font-weight: bold;
-        }
-
-        /* Order Form Styles */
-        .order-form {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #654321;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #654321;
-        }
-
-        .menu-checkbox-group {
-            display: grid;
-            gap: 10px;
-        }
-
-        .menu-checkbox-group label {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
-        .menu-checkbox-group label:hover {
-            background: #e9ecef;
-        }
-
-        .menu-checkbox-group input[type="checkbox"] {
-            margin-right: 10px;
-        }
-
-        .order-summary {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 30px;
-        }
-
-        .order-summary h4 {
-            color: #654321;
-            margin-bottom: 15px;
-        }
-
-        .total-price {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #8B4513;
-            text-align: right;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px solid #dee2e6;
-        }
-
-        @media (max-width: 768px) {
-            .menu-items {
-                grid-template-columns: 1fr;
+<script>
+// Order Form Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const checkboxes = document.querySelectorAll('.menu-select-item input[type="checkbox"]');
+    const orderSummary = document.getElementById('orderSummary');
+    const summaryItems = document.getElementById('summaryItems');
+    const totalAmount = document.getElementById('totalAmount');
+    
+    // Handle checkbox and quantity changes
+    checkboxes.forEach(checkbox => {
+        const quantityInput = checkbox.parentElement.querySelector('.quantity-input');
+        
+        checkbox.addEventListener('change', function() {
+            if (this.checked && quantityInput.value === '0') {
+                quantityInput.value = '1';
+            } else if (!this.checked) {
+                quantityInput.value = '0';
             }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-            
-            .menu-filter {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .filter-btn {
-                width: 200px;
-            }
-        }
-    </style>
-
-    <script>
-        // Menu filter functionality
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                // Remove active class from all buttons
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-                // Add active class to clicked button
-                this.classList.add('active');
-                
-                // Get filter value
-                const filter = this.getAttribute('data-filter');
-                
-                // Show/hide menu categories
-                document.querySelectorAll('.menu-category').forEach(category => {
-                    if (filter === 'all' || category.getAttribute('data-category') === filter) {
-                        category.style.display = 'block';
-                    } else {
-                        category.style.display = 'none';
-                    }
-                });
-            });
-        });
-
-        // Order form functionality
-        const checkboxes = document.querySelectorAll('input[name="menuItem"]');
-        const orderSummary = document.getElementById('orderSummary');
-        const summaryItems = document.getElementById('summaryItems');
-        const totalPriceElement = document.getElementById('totalPrice');
-
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', updateOrderSummary);
-            // Also update when quantity changes
-            const quantityInput = checkbox.parentElement.querySelector('input[type="number"]');
-            if (quantityInput) {
-                quantityInput.addEventListener('input', updateOrderSummary);
-            }
-        });
-
-        function updateOrderSummary() {
-            let total = 0;
-            let itemsHTML = '';
-            
-            checkboxes.forEach(checkbox => {
-                if (checkbox.checked) {
-                    const [itemName, price] = checkbox.value.split('|');
-                    const quantityInput = checkbox.parentElement.querySelector('input[type="number"]');
-                    const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
-                    const itemTotal = parseInt(price) * quantity;
-                    
-                    total += itemTotal;
-                    itemsHTML += `<div>${itemName} x${quantity} - ₱${itemTotal}</div>`;
-                }
-            });
-            
-            if (total > 0) {
-                orderSummary.style.display = 'block';
-                summaryItems.innerHTML = itemsHTML;
-                totalPriceElement.textContent = total;
-            } else {
-                orderSummary.style.display = 'none';
-            }
-        }
-
-        // Form submission with time validation
-        document.getElementById('foodOrderForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get order date and time
-            const orderDate = new Date(document.getElementById('orderDate').value + ' ' + document.getElementById('orderTime').value);
-            const now = new Date();
-            const hoursDiff = (orderDate - now) / (1000 * 60 * 60);
-            
-            // Check if order is at least 4 hours in advance
-            if (hoursDiff < 4) {
-                alert('Please order at least 4-5 hours in advance!');
-                return;
-            }
-            
-            // Process order
-            alert('Your order has been submitted! We will confirm it shortly.');
-            this.reset();
             updateOrderSummary();
         });
-    </script>
-</section>
+        
+        quantityInput.addEventListener('input', function() {
+            if (this.value > 0) {
+                checkbox.checked = true;
+            } else {
+                checkbox.checked = false;
+            }
+            updateOrderSummary();
+        });
+    });
+    
+    function updateOrderSummary() {
+        let total = 0;
+        let itemsHTML = '';
+        let hasItems = false;
+        
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                const quantity = parseInt(checkbox.parentElement.querySelector('.quantity-input').value) || 0;
+                if (quantity > 0) {
+                    hasItems = true;
+                    const price = parseInt(checkbox.dataset.price);
+                    const name = checkbox.dataset.name;
+                    const itemTotal = price * quantity;
+                    total += itemTotal;
+                    
+                    itemsHTML += `
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="color: #333;">${name} x${quantity}</span>
+                            <span style="color: #8B4513; font-weight: bold;">₱${itemTotal}</span>
+                        </div>
+                    `;
+                }
+            }
+        });
+        
+        if (hasItems) {
+            orderSummary.style.display = 'block';
+            summaryItems.innerHTML = itemsHTML;
+            totalAmount.textContent = total.toLocaleString();
+        } else {
+            orderSummary.style.display = 'none';
+        }
+    }
+    
+    // Form submission
+    document.getElementById('foodOrderForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const deliveryDate = new Date(this.deliveryDate.value + ' ' + this.deliveryTime.value);
+        const now = new Date();
+        const hoursDiff = (deliveryDate - now) / (1000 * 60 * 60);
+        
+        if (hoursDiff < 4) {
+            alert('Please order at least 4-5 hours in advance.');
+            return;
+        }
+        
+        alert('Thank you for your order! We will contact you shortly to confirm your order.');
+        this.reset();
+        updateOrderSummary();
+    });
+});
+</script>
+
+<style>
+/* Form Input Focus Styles */
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: #8B4513;
+}
+
+/* Hover Effects */
+.menu-select-item:hover {
+    background: #e9ecef !important;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(139, 69, 19, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .order-form-container {
+        margin: 30px 15px;
+    }
+    
+    form {
+        padding: 25px !important;
+    }
+    
+    .form-section > div {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .menu-select-item {
+        flex-wrap: wrap;
+    }
+    
+    .menu-select-item label {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+</style>
                
 <!-- Prenup Shoot Packages Section -->
 <section id="prenup" class="prenup-packages">
