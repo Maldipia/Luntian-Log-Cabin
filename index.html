@@ -2261,7 +2261,7 @@
                     </div>
                 </div>
            </section>
-              <!-- Food Menu Section -->
+<!-- Food Menu Section -->
 <section id="food-menu" class="food-menu-section">
     <div class="container">
         <h2 class="section-title">Food Menu</h2>
@@ -2329,61 +2329,94 @@
                 <h3 class="category-title">🍖 Main Courses</h3>
                 <div class="menu-items">
                     <div class="menu-item special-dish">
-                        <img src="MHCinasal.jpg" alt="Chicken Inasal" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
-                        <div class="menu-item-header">
-                            <h4>Whole Chicken Inasal</h4>
-                            <span class="menu-price">₱390</span>
+                        <div class="menu-image">
+                            <img src="MHCinasal.jpg" alt="Chicken Inasal">
                         </div>
-                        <p class="menu-description">Perfectly grilled whole butterflied chicken with golden crispy skin, marinated in special inasal blend</p>
-                        <span class="prep-notice">3-4 hrs advance order</span>
+                        <div class="menu-content">
+                            <div class="menu-item-header">
+                                <h4>Whole Chicken Inasal</h4>
+                                <span class="menu-price">₱390</span>
+                            </div>
+                            <p class="menu-description">Perfectly grilled whole butterflied chicken with golden crispy skin, marinated in special inasal blend</p>
+                            <span class="prep-notice">3-4 hrs advance order</span>
+                        </div>
                     </div>
                     <div class="menu-item special-dish">
-                        <img src="MHCporkbbq.jpg" alt="Pork BBQ" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;">
-                        <div class="menu-item-header">
-                            <h4>MHC Pork Sangyup BBQ</h4>
-                            <span class="menu-price">₱59/stick</span>
+                        <div class="menu-image">
+                            <img src="MHCporkbbq.jpg" alt="Pork BBQ">
                         </div>
-                        <p class="menu-description">Korean-style marinated pork BBQ on a stick. Minimum order: 3 sticks. Perfect with rice or as pulutan!</p>
-                        <span class="prep-notice">3-4 hrs advance order</span>
+                        <div class="menu-content">
+                            <div class="menu-item-header">
+                                <h4>MHC Pork Sangyup BBQ</h4>
+                                <span class="menu-price">₱59/stick</span>
+                            </div>
+                            <p class="menu-description">Korean-style marinated pork BBQ on a stick. Minimum order: 3 sticks. Perfect with rice or as pulutan!</p>
+                            <span class="prep-notice">3-4 hrs advance order</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-           <!-- Snacks -->
-<div class="menu-category" data-category="snacks">
-    <h3 class="category-title">🍿 Snacks</h3>
-    <div class="menu-items">
-        <div class="menu-item">
-            <img src="Turon.jpg" alt="Turon" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
-            <div class="menu-item-content">
-                <div class="menu-item-header">
-                    <h4>Turon</h4>
-                    <span class="menu-price">₱100</span>
+            <!-- Snacks -->
+            <div class="menu-category" data-category="snacks">
+                <h3 class="category-title">🍿 Snacks</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="menu-image">
+                            <img src="Turon.jpg" alt="Turon">
+                        </div>
+                        <div class="menu-content">
+                            <div class="menu-item-header">
+                                <h4>Turon</h4>
+                                <span class="menu-price">₱100</span>
+                            </div>
+                            <p class="menu-description">3 pieces of golden crispy banana spring rolls with caramelized sugar coating</p>
+                            <span class="prep-notice">3-4 hrs advance order (upon availability)</span>
+                        </div>
+                    </div>
                 </div>
-                <p class="menu-description">3 pieces of golden crispy banana spring rolls with caramelized sugar coating</p>
-                <span class="prep-notice">3-4 hrs advance order (upon availability)</span>
             </div>
-        </div>
-    </div>
-</div>
 
-<!-- Rice -->
-<div class="menu-category" data-category="rice">
-    <h3 class="category-title">🍚 Rice</h3>
-    <div class="menu-items">
-        <div class="menu-item">
-            <img src="MHCspecialfriedrice.jpg" alt="MHC Fried Rice" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 20px;">
-            <div class="menu-item-content">
-                <div class="menu-item-header">
-                    <h4>MHC Fried Rice</h4>
-                    <span class="menu-price">₱149</span>
+            <!-- Rice -->
+            <div class="menu-category" data-category="rice">
+                <h3 class="category-title">🍚 Rice</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="menu-image">
+                            <img src="MHCspecialfriedrice.jpg" alt="MHC Fried Rice">
+                        </div>
+                        <div class="menu-content">
+                            <div class="menu-item-header">
+                                <h4>MHC Fried Rice</h4>
+                                <span class="menu-price">₱149</span>
+                            </div>
+                            <p class="menu-description">Special fried rice good for 2 persons</p>
+                            <span class="prep-notice">3-4 hrs advance order</span>
+                        </div>
+                    </div>
                 </div>
-                <p class="menu-description">Special fried rice good for 2 persons</p>
-                <span class="prep-notice">3-4 hrs advance order</span>
             </div>
         </div>
     </div>
-</div>
+
+    <style>
+        .menu-image {
+            height: 300px;
+            overflow: hidden;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .menu-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .menu-content {
+            padding: 25px;
+        }
+    </style>
+</section>
         <!-- Online Order Form -->
         <div class="order-form-section" style="margin-top: 60px;">
             <h3 class="section-title" style="font-size: 2em; color: #654321;">📝 Order Form</h3>
