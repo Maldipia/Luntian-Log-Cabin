@@ -2697,7 +2697,7 @@ document.getElementById('foodOrderForm').addEventListener('submit', function(e) 
     submitBtn.textContent = 'Sending to Google Sheets...';
     
     // SEND TO GOOGLE SHEETS - THIS IS THE MISSING PART!
-    fetch('https://script.google.com/macros/s/AKfycbwCVXP6Q4vd_J-gPTVI3R5uppkXnalehHxOkrEFmbl2Ee74uGp24GcwMJcX7HGcURD_bA/exec', {
+   fetch('https://script.google.com/macros/s/AKfycbx1hlmOQiEDvCWMk-gyBi-S2n6AkkQ22ny5HGpKLZhdKJG07qAScAbFC7XxwGW3N_mMOw/exec', {
         method: 'POST',
         body: formData,
         mode: 'no-cors'  // CRITICAL: Must have this for Google Apps Script
