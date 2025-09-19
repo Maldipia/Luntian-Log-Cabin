@@ -2691,7 +2691,7 @@ document.getElementById('foodOrderForm').addEventListener('submit', function(e) 
     formData.append('totalAmount', totalAmount);
     formData.append('specialRequests', document.querySelector('textarea[name="specialRequests"]').value || 'None');
     
-    // Show loading
+    // Show loadingß∞
     const submitBtn = document.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending to Google Sheets...';
