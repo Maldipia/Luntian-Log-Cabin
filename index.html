@@ -2697,11 +2697,11 @@ document.getElementById('foodOrderForm').addEventListener('submit', function(e) 
     submitBtn.textContent = 'Sending to Google Sheets...';
     
     // SEND TO GOOGLE SHEETS - THIS IS THE MISSING PART!
-   fetch('https://script.google.com/macros/s/AKfycbx1hlmOQiEDvCWMk-gyBi-S2n6AkkQ22ny5HGpKLZhdKJG07qAScAbFC7XxwGW3N_mMOw/exec', {
-        method: 'POST',
-        body: formData,
-        mode: 'no-cors'  // CRITICAL: Must have this for Google Apps Script
-    })
+   fetch('https://script.google.com/macros/s/AKfycbwDlfHh1uSmsPPDOB87_-_Nnmf-54VXrXQFa3l80wOU2GqbDmKzcdgsjlT4Ynf0T--Jxw/exec', {
+    method: 'POST',
+    body: formData,
+    mode: 'no-cors'
+})
     .then(() => {
         alert('Order successfully sent to Google Sheets! We will contact you shortly to confirm.');
         this.reset();
