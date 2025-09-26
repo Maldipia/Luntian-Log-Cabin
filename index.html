@@ -1504,7 +1504,88 @@
     border-radius: 15px;
     margin: 20px 0;
 }
+/* Business Portfolio Footer */
+.business-portfolio-footer {
+    background: linear-gradient(135deg, #654321 0%, #8B4513 100%);
+    padding: 80px 0;
+    position: relative;
+}
 
+.business-portfolio-footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.portfolio-title {
+    color: #F5DEB3;
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 60px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-weight: 300;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.business-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.business-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    padding: 40px 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.business-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border-color: #F5DEB3;
+}
+
+.business-card h3 {
+    color: #F5DEB3;
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.business-card p {
+    color: #F0F8FF;
+    font-size: 1em;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.business-card.coming-soon {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.business-card.coming-soon:hover {
+    transform: none;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Green accent bar */
+.business-portfolio-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #228B22, #32CD32, #228B22);
+}
 .services-container {
     max-width: 600px;
     margin: 0 auto;
@@ -3136,7 +3217,41 @@
             </div>
         </div>
     </section>
+<!-- Business Portfolio Section -->
+    <section class="business-portfolio-footer">
+        <div class="container">
+            <h2 class="portfolio-title">OUR BUSINESS PORTFOLIO</h2>
+            <div class="business-grid">
+                <a href="https://tyg-services.com" class="business-card" target="_blank">
+                    <h3>TYG Services</h3>
+                    <p>Automation & Professional Services</p>
+                </a>
+                
+                <a href="https://luntian.net" class="business-card">
+                    <h3>Luntian</h3>
+                    <p>Tagaytay Staycations</p>
+                </a>
+                
+                <a href="https://soleblessing.com" class="business-card" target="_blank">
+                    <h3>Sole Blessing</h3>
+                    <p>Original and Lifestyle Sneakers</p>
+                </a>
+                
+                <a href="https://musthavecorner.com" class="business-card" target="_blank">
+                    <h3>Must Have Corner</h3>
+                    <p>Fresh Foods & Essentials</p>
+                </a>
+                
+                <div class="business-card coming-soon">
+                    <h3>Aster</h3>
+                    <p>Premium Apparels<br>(Coming Soon)</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Footer -->
+    <footer class="footer">
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
