@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luntian Calendar - Property Management</title>
+    <title>Luntian Calendar - Login</title>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -15,11 +15,107 @@
     <script type="text/babel">
         const { useState } = React;
 
-        function LuntianCalendar() {
+        // 🔐 SET YOUR PASSWORD HERE
+        const ADMIN_PASSWORD = "luntian2025";  // Change this to your preferred password
+
+        function App() {
+          const [isLoggedIn, setIsLoggedIn] = useState(() => {
+            // Check if already logged in (session storage)
+            return sessionStorage.getItem('luntianAuth') === 'true';
+          });
+          const [password, setPassword] = useState('');
+          const [error, setError] = useState('');
+
+          const handleLogin = (e) => {
+            e.preventDefault();
+            
+            if (password === ADMIN_PASSWORD) {
+              sessionStorage.setItem('luntianAuth', 'true');
+              setIsLoggedIn(true);
+              setError('');
+            } else {
+              setError('Incorrect password. Please try again.');
+              setPassword('');
+            }
+          };
+
+          const handleLogout = () => {
+            sessionStorage.removeItem('luntianAuth');
+            setIsLoggedIn(false);
+            setPassword('');
+          };
+
+          // Login Screen
+          if (!isLoggedIn) {
+            return (
+              <div className="min-h-screen bg-gradient-to-br from-green-400 via-emerald-500 to-teal-600 flex items-center justify-center p-4">
+                <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full">
+                  <div className="text-center mb-8">
+                    <div className="text-6xl mb-4">🏡</div>
+                    <h1 className="text-3xl font-bold text-gray-800 mb-2">Luntian Calendar</h1>
+                    <p className="text-gray-600">Property Management System</p>
+                  </div>
+
+                  <div className="mb-6">
+                    <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-4 mb-6">
+                      <div className="flex items-start gap-3">
+                        <span className="text-2xl">🔒</span>
+                        <div>
+                          <p className="font-semibold text-gray-800 mb-1">Admin Access Only</p>
+                          <p className="text-sm text-gray-600">Enter password to view booking calendar</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      onKeyPress={(e) => e.key === 'Enter' && handleLogin(e)}
+                      placeholder="Enter password"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent text-lg"
+                      autoFocus
+                    />
+
+                    {error && (
+                      <div className="mt-3 bg-red-50 border-2 border-red-200 rounded-xl p-3 flex items-center gap-2">
+                        <span className="text-xl">❌</span>
+                        <p className="text-red-700 text-sm font-medium">{error}</p>
+                      </div>
+                    )}
+                  </div>
+
+                  <button
+                    onClick={handleLogin}
+                    className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 rounded-xl font-bold text-lg hover:from-green-700 hover:to-emerald-700 transition shadow-lg"
+                  >
+                    🔓 Login
+                  </button>
+
+                  <div className="mt-6 text-center">
+                    <a 
+                      href="https://luntian.net" 
+                      className="text-green-600 hover:text-green-700 font-medium text-sm"
+                    >
+                      ← Back to Website
+                    </a>
+                  </div>
+                </div>
+              </div>
+            );
+          }
+
+          // Calendar Screen (after login)
+          return <LuntianCalendar onLogout={handleLogout} />;
+        }
+
+        function LuntianCalendar({ onLogout }) {
           const [view, setView] = useState('calendar');
-          const [currentMonth, setCurrentMonth] = useState(9); // October = 9
+          const [currentMonth, setCurrentMonth] = useState(9);
           
-          // Load bookings from localStorage or use default data
           const [bookings, setBookings] = useState(() => {
             const saved = localStorage.getItem('luntianBookings');
             return saved ? JSON.parse(saved) : [
@@ -52,7 +148,6 @@
             ];
           });
           
-          // Save to localStorage whenever bookings change
           React.useEffect(() => {
             localStorage.setItem('luntianBookings', JSON.stringify(bookings));
           }, [bookings]);
@@ -63,7 +158,7 @@
           const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
           
           const daysInMonth = 31;
-          const firstDayOfMonth = 3; // Oct 1, 2025 is Wednesday
+          const firstDayOfMonth = 3;
           
           const getBookingForDay = (day) => {
             return bookings.find(b => b.checkIn === day);
@@ -75,22 +170,28 @@
             <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 p-4">
               <div className="max-w-7xl mx-auto">
                 
-                {/* Header Card */}
                 <div className="bg-white rounded-2xl shadow-xl p-6 mb-6">
                   <div className="flex items-center justify-between mb-6">
                     <div>
                       <h1 className="text-4xl font-bold text-gray-800">🏡 Luntian Calendar</h1>
                       <p className="text-gray-600 mt-1">Tagaytay Log Cabin - Property Management</p>
                     </div>
-                    <a 
-                      href="https://luntian.net" 
-                      className="px-6 py-3 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition"
-                    >
-                      ← Back to Website
-                    </a>
+                    <div className="flex gap-3">
+                      <a 
+                        href="https://luntian.net" 
+                        className="px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition"
+                      >
+                        🏠 Website
+                      </a>
+                      <button
+                        onClick={onLogout}
+                        className="px-6 py-3 bg-red-600 text-white rounded-xl font-semibold hover:bg-red-700 transition"
+                      >
+                        🔒 Logout
+                      </button>
+                    </div>
                   </div>
                   
-                  {/* Stats Dashboard */}
                   <div className="grid grid-cols-4 gap-4">
                     <div className="bg-gradient-to-br from-blue-400 to-blue-600 text-white p-6 rounded-xl">
                       <div className="text-3xl font-bold">{bookings.length}</div>
@@ -111,7 +212,6 @@
                   </div>
                 </div>
 
-                {/* Navigation Tabs */}
                 <div className="bg-white rounded-2xl shadow-xl mb-6 overflow-hidden">
                   <div className="flex border-b">
                     <button
@@ -136,10 +236,8 @@
                     </button>
                   </div>
 
-                  {/* Calendar View */}
                   {view === 'calendar' && (
                     <div className="p-6">
-                      {/* Month Header */}
                       <div className="flex items-center justify-between mb-8">
                         <button 
                           onClick={() => setCurrentMonth(currentMonth - 1)}
@@ -158,7 +256,6 @@
                         </button>
                       </div>
 
-                      {/* Room Legend */}
                       <div className="flex gap-6 mb-6 justify-center">
                         <div className="flex items-center gap-2">
                           <div className="w-5 h-5 bg-orange-500 rounded"></div>
@@ -174,22 +271,18 @@
                         </div>
                       </div>
 
-                      {/* Calendar Grid */}
                       <div className="bg-gray-50 rounded-xl p-4">
                         <div className="grid grid-cols-7 gap-2">
-                          {/* Day Headers */}
                           {days.map(day => (
                             <div key={day} className="text-center font-bold text-gray-600 py-3">
                               {day}
                             </div>
                           ))}
                           
-                          {/* Empty cells before month starts */}
                           {[...Array(firstDayOfMonth)].map((_, i) => (
                             <div key={`empty-${i}`} className="h-28"></div>
                           ))}
                           
-                          {/* Calendar Days */}
                           {[...Array(daysInMonth)].map((_, i) => {
                             const day = i + 1;
                             const booking = getBookingForDay(day);
@@ -223,7 +316,6 @@
                     </div>
                   )}
 
-                  {/* List View */}
                   {view === 'list' && (
                     <div className="p-6 space-y-4">
                       <h2 className="text-2xl font-bold text-gray-800 mb-6">October 2025 Bookings</h2>
@@ -282,7 +374,7 @@
           );
         }
 
-        ReactDOM.render(<LuntianCalendar />, document.getElementById('root'));
+        ReactDOM.render(<App />, document.getElementById('root'));
     </script>
 </body>
 </html>
