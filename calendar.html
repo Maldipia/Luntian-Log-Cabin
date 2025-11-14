@@ -38,9 +38,9 @@
 
         // Room configuration
         const ROOMS = [
-            { id: 'sunrise', name: 'Sunrise Room', color: 'bg-orange-500', lightColor: 'bg-orange-100', emoji: '🟠', price: 3800 },
-            { id: 'leaf', name: 'Leaf Room', color: 'bg-green-500', lightColor: 'bg-green-100', emoji: '🟢', price: 3800 },
-            { id: 'yani', name: 'Yani Room', color: 'bg-blue-500', lightColor: 'bg-blue-100', emoji: '🔵', price: 2499 }
+            { id: 'sunrise', name: 'Sunrise Room', color: 'bg-orange-500', lightColor: 'bg-orange-100', emoji: '🔠', price: 1699, originalPrice: 4500, savings: 2801 },
+            { id: 'leaf', name: 'Leaf Room', color: 'bg-green-500', lightColor: 'bg-green-100', emoji: '🔢', price: 2499, originalPrice: 6500, savings: 4001 },
+            { id: 'yani', name: 'Yani Room', color: 'bg-blue-500', lightColor: 'bg-blue-100', emoji: '🔵', price: 2699, originalPrice: 7000, savings: 4301 }
         ];
 
         const PLATFORMS = ['Airbnb', 'Booking.com', 'Agoda', 'Direct', 'WhatsApp'];
@@ -310,8 +310,12 @@
                             <div class="flex items-center gap-2">
                                 <span class="text-2xl">${room.emoji}</span>
                                 <div>
-                                    <div class="text-sm">${room.name}</div>
-                                    <div class="text-xs text-gray-600">₱${room.price.toLocaleString()}/night</div>
+                                    <div class="text-sm font-bold">${room.name}</div>
+                                    <div class="text-xs">
+                                        <span class="text-green-600 font-bold">₱${room.price.toLocaleString()}</span>
+                                        <span class="text-gray-400 line-through ml-1">₱${room.originalPrice.toLocaleString()}</span>
+                                    </div>
+                                    <div class="text-xs text-red-600 font-semibold">Save ₱${room.savings.toLocaleString()}!</div>
                                 </div>
                             </div>
                         </td>
