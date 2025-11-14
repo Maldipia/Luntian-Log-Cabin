@@ -1,0 +1,205 @@
+LUNTIAN LOG CABIN - GOOGLE APPS SCRIPT
+=======================================
+Booking Form Backend Integration
+
+INSTRUCTIONS:
+1. Open your Google Sheet: https://docs.google.com/spreadsheets/d/1Lg9vMkwC28fT7-v8DZVzxJ3VLeWaZgSA55pStbsUmh4/edit
+2. Go to Extensions > Apps Script
+3. Delete any existing code
+4. Paste the code below
+5. Click "Deploy" > "New deployment"
+6. Choose type: "Web app"
+7. Execute as: "Me"
+8. Who has access: "Anyone"
+9. Click "Deploy"
+10. Copy the Web App URL
+11. Send me the URL to integrate with your website
+
+=======================================
+CODE (COPY EVERYTHING BELOW):
+=======================================
+
+// Configuration
+const SHEET_NAME = "LUNTIANinq";
+const NOTIFICATION_EMAIL = "luntianlogcabin@gmail.com";
+
+// Handle form submissions
+function doPost(e) {
+  try {
+    const data = JSON.parse(e.postData.contents);
+    
+    // Save to Google Sheet
+    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
+    
+    if (!sheet) {
+      return ContentService.createTextOutput(JSON.stringify({
+        success: false,
+        message: "Sheet not found"
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+    
+    // Prepare row data
+    const timestamp = new Date();
+    const row = [
+      timestamp,                    // Timestamp
+      data.name || "",             // Guest Name
+      data.email || "",            // Email
+      data.phone || "",            // Phone
+      data.checkIn || "",          // Check-in Date
+      data.checkOut || "",         // Check-out Date
+      data.guests || "",           // Number of Guests
+      data.notes || "",            // Special Requests
+      "Pending Review",            // Status
+      "",                          // Room Assigned (you fill this)
+      "",                          // Platform (you fill this)
+      ""                           // Notes (your internal notes)
+    ];
+    
+    // Append to sheet
+    sheet.appendRow(row);
+    
+    // Send notification email to admin
+    sendAdminNotification(data);
+    
+    // Send confirmation email to guest
+    sendGuestConfirmation(data);
+    
+    return ContentService.createTextOutput(JSON.stringify({
+      success: true,
+      message: "Booking inquiry received successfully!"
+    })).setMimeType(ContentService.MimeType.JSON);
+    
+  } catch (error) {
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      message: "Error: " + error.toString()
+    })).setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+// Send notification to admin
+function sendAdminNotification(data) {
+  const subject = "🏡 New Booking Inquiry - Luntian Log Cabin";
+  
+  const body = `
+New Booking Inquiry Received!
+
+Guest Details:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone}
+
+Booking Details:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Check-in: ${data.checkIn}
+Check-out: ${data.checkOut}
+Number of Guests: ${data.guests}
+
+Special Requests:
+${data.notes || "None"}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Next Steps:
+1. Check room availability in your Google Sheet
+2. Assign available room (Sunrise/Leaf/Yani)
+3. Send invoice and payment details to guest
+4. Update status in sheet when confirmed
+
+View all inquiries:
+https://docs.google.com/spreadsheets/d/1Lg9vMkwC28fT7-v8DZVzxJ3VLeWaZgSA55pStbsUmh4/edit#gid=1086592689
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Luntian Log Cabin - Tagaytay
+www.luntian.net
+  `;
+  
+  try {
+    MailApp.sendEmail({
+      to: NOTIFICATION_EMAIL,
+      subject: subject,
+      body: body
+    });
+  } catch (error) {
+    Logger.log("Error sending admin email: " + error);
+  }
+}
+
+// Send confirmation to guest
+function sendGuestConfirmation(data) {
+  const subject = "🌿 Booking Inquiry Received - Luntian Log Cabin";
+  
+  const body = `
+Dear ${data.name},
+
+Thank you for your interest in Luntian Log Cabin! 🏡
+
+We have received your booking inquiry for:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Check-in: ${data.checkIn}
+Check-out: ${data.checkOut}
+Guests: ${data.guests} person(s)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+What's Next?
+
+Our team will check availability and get back to you within 24 hours with:
+✓ Room availability confirmation
+✓ Pricing and invoice details
+✓ Payment instructions
+✓ Booking confirmation
+
+Our Rooms (All with PROMO Pricing!):
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🟠 Sunrise Room - ₱1,699/night (was ₱4,500)
+🟢 Leaf Room - ₱2,499/night (was ₱6,500)
+🔵 Yani Room - ₱2,699/night (was ₱7,000)
+
+Note: We may offer you a complimentary room upgrade based on availability! 🎉
+
+Contact Us:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📧 Email: luntianlogcabin@gmail.com
+📱 WhatsApp: +63 935 763 7498
+🌐 Website: www.luntian.net
+
+We look forward to hosting you at Luntian Log Cabin!
+
+Best regards,
+Luntian Team
+Your Nature Escape in Tagaytay 🌿
+  `;
+  
+  try {
+    MailApp.sendEmail({
+      to: data.email,
+      subject: subject,
+      body: body,
+      replyTo: NOTIFICATION_EMAIL
+    });
+  } catch (error) {
+    Logger.log("Error sending guest email: " + error);
+  }
+}
+
+// Handle GET requests (for testing)
+function doGet(e) {
+  return ContentService.createTextOutput("Luntian Booking System API is running!");
+}
+
+=======================================
+END OF CODE
+=======================================
+
+AFTER DEPLOYMENT:
+1. You'll get a Web App URL like: https://script.google.com/macros/s/XXXXX/exec
+2. Copy that URL
+3. Send it to me
+4. I'll integrate it with your website booking form
+
+TROUBLESHOOTING:
+- If emails don't send, check Gmail quota (100 emails/day limit)
+- Make sure "LUNTIANinq" tab exists in your sheet
+- Test by clicking "Run" > "doGet" in Apps Script editor

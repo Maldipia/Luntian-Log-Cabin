@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Stay - Luntian Log Cabin | Tagaytay Nature Staycation</title>
+    <meta name="description" content="Book your stay at Luntian Log Cabin in Tagaytay. Choose from 3 beautiful rooms with special promo pricing. Nature escape, pet-friendly, and highly rated.">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateX(-5px);
+        }
+
+        .booking-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .card h2 {
+            color: #2E7D32;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #2E7D32;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #2E7D32, #4CAF50);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(46, 125, 50, 0.3);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .rooms-info {
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .room-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .room-name {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .room-price {
+            text-align: right;
+        }
+
+        .promo-price {
+            color: #2E7D32;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        .savings {
+            color: #FF4444;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+
+        .info-box {
+            background: #FFF9C4;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #FFC107;
+            margin-bottom: 20px;
+        }
+
+        .success-message {
+            background: #C8E6C9;
+            color: #2E7D32;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .error-message {
+            background: #FFCDD2;
+            color: #C62828;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .booking-container {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .card {
+                padding: 20px;
+            }
+        }
+
+        .required {
+            color: #FF4444;
+        }
+
+        .whatsapp-btn {
+            display: inline-block;
+            background: #25D366;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Back to Website</a>
+        
+        <div class="header">
+            <h1>🏡 Book Your Stay</h1>
+            <p>Luntian Log Cabin - Your Nature Escape in Tagaytay</p>
+        </div>
+
+        <div class="booking-container">
+            <!-- Booking Form -->
+            <div class="card">
+                <h2>📅 Booking Inquiry Form</h2>
+                
+                <div class="info-box">
+                    <strong>📝 How it works:</strong><br>
+                    1. Fill out this form<br>
+                    2. We'll check availability within 24 hours<br>
+                    3. We'll send you invoice & payment details<br>
+                    4. Pay deposit to confirm booking
+                </div>
+
+                <div id="success-message" class="success-message">
+                    <h3>✅ Inquiry Sent Successfully!</h3>
+                    <p>Thank you! We'll get back to you within 24 hours.</p>
+                    <p>Check your email for confirmation.</p>
+                </div>
+
+                <div id="error-message" class="error-message">
+                    <h3>❌ Oops! Something went wrong.</h3>
+                    <p id="error-text">Please try again or contact us via WhatsApp.</p>
+                </div>
+
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label>Full Name <span class="required">*</span></label>
+                        <input type="text" id="name" name="name" required placeholder="Juan Dela Cruz">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required placeholder="juan@email.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" required placeholder="09171234567">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Check-in Date <span class="required">*</span></label>
+                        <input type="date" id="checkIn" name="checkIn" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Check-out Date <span class="required">*</span></label>
+                        <input type="date" id="checkOut" name="checkOut" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Number of Guests <span class="required">*</span></label>
+                        <select id="guests" name="guests" required>
+                            <option value="">Select number of guests</option>
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                            <option value="5">5 Guests</option>
+                            <option value="6">6+ Guests</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Special Requests (Optional)</label>
+                        <textarea id="notes" name="notes" placeholder="Early check-in, extra services, dietary restrictions, etc."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submit-btn">
+                        📨 Send Booking Inquiry
+                    </button>
+                </form>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <p>Or book directly via WhatsApp:</p>
+                    <a href="https://wa.me/639357637498?text=Hi!%20I'd%20like%20to%20book%20a%20room%20at%20Luntian%20Log%20Cabin" class="whatsapp-btn" target="_blank">
+                        💬 WhatsApp Us
+                    </a>
+                </div>
+            </div>
+
+            <!-- Room Information -->
+            <div class="card">
+                <h2>🏠 Our Rooms</h2>
+                
+                <div class="rooms-info">
+                    <h3 style="margin-bottom: 15px; color: #2E7D32;">🎉 Special Promo Pricing!</h3>
+                    
+                    <div class="room-item">
+                        <div>
+                            <div class="room-name">🟠 Sunrise Room</div>
+                            <div style="font-size: 0.9em; color: #666;">Cozy & Highly Rated</div>
+                        </div>
+                        <div class="room-price">
+                            <div class="promo-price">₱1,699</div>
+                            <div class="original-price">₱4,500</div>
+                            <div class="savings">Save ₱2,801!</div>
+                        </div>
+                    </div>
+
+                    <div class="room-item">
+                        <div>
+                            <div class="room-name">🟢 Leaf Room</div>
+                            <div style="font-size: 0.9em; color: #666;">Nature-Inspired</div>
+                        </div>
+                        <div class="room-price">
+                            <div class="promo-price">₱2,499</div>
+                            <div class="original-price">₱6,500</div>
+                            <div class="savings">Save ₱4,001!</div>
+                        </div>
+                    </div>
+
+                    <div class="room-item">
+                        <div>
+                            <div class="room-name">🔵 Yani Room</div>
+                            <div style="font-size: 0.9em; color: #666;">Premium + Balcony Garden</div>
+                        </div>
+                        <div class="room-price">
+                            <div class="promo-price">₱2,699</div>
+                            <div class="original-price">₱7,000</div>
+                            <div class="savings">Save ₱4,301!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <strong>✨ Surprise Upgrades!</strong><br>
+                    Based on availability, you may receive a complimentary room upgrade at no extra cost! 🎁
+                </div>
+
+                <h3 style="margin: 20px 0 10px; color: #2E7D32;">📋 What's Included:</h3>
+                <ul style="line-height: 1.8; color: #555;">
+                    <li>✓ Free WiFi</li>
+                    <li>✓ Air Conditioning</li>
+                    <li>✓ Hot & Cold Shower</li>
+                    <li>✓ Kitchen Access</li>
+                    <li>✓ Living Room</li>
+                    <li>✓ Garden Area</li>
+                    <li>✓ Pet-Friendly 🐾</li>
+                    <li>✓ Free Parking</li>
+                </ul>
+
+                <h3 style="margin: 20px 0 10px; color: #2E7D32;">🌟 Extra Services:</h3>
+                <ul style="line-height: 1.8; color: #555;">
+                    <li>• Extra Hours (late checkout/early check-in)</li>
+                    <li>• Food Packages</li>
+                    <li>• Set-up & Decorations</li>
+                    <li>• Pile of Wood (for bonfire)</li>
+                    <li>• Photography/Videography</li>
+                    <li>• Flowers & Arrangements</li>
+                </ul>
+
+                <div style="margin-top: 20px; padding: 15px; background: #E3F2FD; border-radius: 8px;">
+                    <strong>📞 Contact Us:</strong><br>
+                    📧 luntianlogcabin@gmail.com<br>
+                    📱 +63 935 763 7498<br>
+                    🌐 www.luntian.net
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('checkIn').setAttribute('min', today);
+        document.getElementById('checkOut').setAttribute('min', today);
+
+        // Update checkout min date when checkin changes
+        document.getElementById('checkIn').addEventListener('change', function() {
+            const checkInDate = new Date(this.value);
+            checkInDate.setDate(checkInDate.getDate() + 1);
+            const minCheckOut = checkInDate.toISOString().split('T')[0];
+            document.getElementById('checkOut').setAttribute('min', minCheckOut);
+        });
+
+        // Form submission
+        document.getElementById('booking-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submit-btn');
+            const successMsg = document.getElementById('success-message');
+            const errorMsg = document.getElementById('error-message');
+            const errorText = document.getElementById('error-text');
+
+            // Disable submit button
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ Sending...';
+
+            // Hide previous messages
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+
+            // Collect form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                checkIn: document.getElementById('checkIn').value,
+                checkOut: document.getElementById('checkOut').value,
+                guests: document.getElementById('guests').value,
+                notes: document.getElementById('notes').value
+            };
+
+            try {
+                // REPLACE THIS URL WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+                const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+                
+                if (scriptURL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+                    throw new Error('Google Apps Script URL not configured yet');
+                }
+
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                // Show success message
+                successMsg.style.display = 'block';
+                this.reset();
+                
+                // Scroll to success message
+                successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+            } catch (error) {
+                console.error('Error:', error);
+                errorText.textContent = 'Please try again or contact us via WhatsApp below.';
+                errorMsg.style.display = 'block';
+                errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } finally {
+                // Re-enable submit button
+                submitBtn.disabled = false;
+                submitBtn.textContent = '📨 Send Booking Inquiry';
+            }
+        });
+    </script>
+</body>
+</html>

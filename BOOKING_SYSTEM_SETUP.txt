@@ -1,0 +1,230 @@
+LUNTIAN LOG CABIN - BOOKING SYSTEM SETUP GUIDE
+================================================
+
+Created: November 14, 2025
+System: Public Booking Form → Google Sheets Integration
+
+WHAT WAS CREATED:
+-----------------
+
+1. booking.html - Public booking inquiry form
+2. GoogleAppsScript_BookingForm.txt - Backend script for Google Sheets
+3. Updated index.html - Added "Book Now" button to navigation
+
+SETUP INSTRUCTIONS (FOLLOW IN ORDER):
+--------------------------------------
+
+STEP 1: SET UP GOOGLE APPS SCRIPT
+==================================
+
+1. Open your Google Sheet:
+   https://docs.google.com/spreadsheets/d/1Lg9vMkwC28fT7-v8DZVzxJ3VLeWaZgSA55pStbsUmh4/edit
+
+2. Make sure you have a tab called "LUNTIANinq" (you already have this)
+
+3. Go to: Extensions > Apps Script
+
+4. Delete any existing code in the editor
+
+5. Open the file: GoogleAppsScript_BookingForm.txt
+
+6. Copy ALL the code from that file
+
+7. Paste it into the Apps Script editor
+
+8. Click the "Save" icon (💾)
+
+9. Click "Deploy" button (top right) > "New deployment"
+
+10. Click the gear icon ⚙️ next to "Select type"
+
+11. Choose "Web app"
+
+12. Fill in the deployment settings:
+    - Description: "Luntian Booking Form API"
+    - Execute as: "Me (your email)"
+    - Who has access: "Anyone"
+
+13. Click "Deploy"
+
+14. Click "Authorize access" (if prompted)
+
+15. Choose your Google account
+
+16. Click "Advanced" > "Go to Luntian Booking (unsafe)" > "Allow"
+
+17. COPY THE WEB APP URL
+    It will look like: https://script.google.com/macros/s/AKfycbxXXXXXXXXXXXXXXX/exec
+
+18. SAVE THIS URL - You'll need it for Step 2!
+
+
+STEP 2: UPDATE BOOKING.HTML WITH YOUR SCRIPT URL
+=================================================
+
+1. Open the file: booking.html
+
+2. Find line 338 (search for: YOUR_GOOGLE_APPS_SCRIPT_URL_HERE)
+
+3. Replace this line:
+   const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+   With your actual URL:
+   const scriptURL = 'https://script.google.com/macros/s/AKfycbxXXXXXXXXXXXXXXX/exec';
+
+4. Save the file
+
+
+STEP 3: PUSH TO GITHUB
+=======================
+
+The files are ready to push to your repository.
+Run these commands or I can do it for you:
+
+git add booking.html index.html GoogleAppsScript_BookingForm.txt BOOKING_SYSTEM_SETUP.txt
+git commit -m "Add public booking system with Google Sheets integration"
+git push origin main
+
+
+STEP 4: TEST THE SYSTEM
+========================
+
+1. Visit: www.luntian.net/booking.html
+
+2. Fill out the booking form
+
+3. Click "Send Booking Inquiry"
+
+4. Check your Google Sheet tab "LUNTIANinq" - new row should appear
+
+5. Check email: luntianlogcabin@gmail.com - you should receive notification
+
+6. Check the guest's email - they should receive confirmation
+
+
+HOW IT WORKS:
+-------------
+
+GUEST SIDE:
+1. Guest visits www.luntian.net
+2. Clicks "📅 Book Now" in navigation
+3. Fills out booking inquiry form
+4. Submits form
+5. Receives confirmation email
+
+YOUR SIDE:
+1. Inquiry appears in Google Sheet tab "LUNTIANinq"
+2. You receive email notification at luntianlogcabin@gmail.com
+3. You check room availability
+4. You manually assign room (Sunrise/Leaf/Yani)
+5. You send invoice & payment details via email
+6. Guest pays and sends proof
+7. You confirm booking
+
+GOOGLE SHEET COLUMNS:
+---------------------
+
+The script will create these columns in "LUNTIANinq" tab:
+
+A: Timestamp
+B: Guest Name
+C: Email
+D: Phone
+E: Check-in Date
+F: Check-out Date
+G: Number of Guests
+H: Special Requests
+I: Status (defaults to "Pending Review")
+J: Room Assigned (you fill this manually)
+K: Platform (you fill this manually)
+L: Internal Notes (your notes)
+
+TROUBLESHOOTING:
+----------------
+
+PROBLEM: Form submission shows error
+SOLUTION: 
+- Make sure you replaced YOUR_GOOGLE_APPS_SCRIPT_URL_HERE with actual URL
+- Check that Apps Script is deployed as "Anyone" can access
+- Check browser console for errors (F12)
+
+PROBLEM: No data appears in Google Sheet
+SOLUTION:
+- Make sure tab name is exactly "LUNTIANinq" (case-sensitive)
+- Check Apps Script execution log (View > Executions)
+- Make sure you authorized the script
+
+PROBLEM: No emails received
+SOLUTION:
+- Check spam/junk folder
+- Gmail has 100 emails/day limit for Apps Script
+- Check if email address is correct in script: luntianlogcabin@gmail.com
+
+PROBLEM: Guest doesn't receive confirmation email
+SOLUTION:
+- Check if they entered correct email
+- Ask them to check spam folder
+- Check Apps Script execution log for errors
+
+CUSTOMIZATION:
+--------------
+
+To change notification email:
+- Edit GoogleAppsScript_BookingForm.txt
+- Line 7: const NOTIFICATION_EMAIL = "luntianlogcabin@gmail.com";
+- Change to your preferred email
+- Re-deploy the script
+
+To change form fields:
+- Edit booking.html
+- Add/remove form fields as needed
+- Update GoogleAppsScript_BookingForm.txt to match
+
+To change email templates:
+- Edit GoogleAppsScript_BookingForm.txt
+- Find sendAdminNotification() and sendGuestConfirmation() functions
+- Modify the email body text
+
+FEATURES:
+---------
+
+✅ Beautiful booking form matching your website design
+✅ Direct integration with your Google Sheet
+✅ Automatic email notifications to you
+✅ Automatic confirmation emails to guests
+✅ Shows current promo pricing
+✅ Mobile-responsive design
+✅ WhatsApp fallback option
+✅ Form validation
+✅ Success/error messages
+✅ Prevents double-submission
+
+NEXT STEPS (OPTIONAL ENHANCEMENTS):
+------------------------------------
+
+1. Add payment gateway integration
+2. Add automatic room assignment logic
+3. Add calendar availability display
+4. Add SMS notifications
+5. Add booking confirmation page
+6. Add guest dashboard to track booking status
+7. Add admin dashboard to manage all bookings
+
+SUPPORT:
+--------
+
+If you need help:
+1. Check the troubleshooting section above
+2. Check Google Apps Script execution logs
+3. Check browser console for JavaScript errors
+4. Contact me for assistance
+
+FILES INCLUDED:
+---------------
+
+1. booking.html - Main booking page
+2. GoogleAppsScript_BookingForm.txt - Backend script
+3. BOOKING_SYSTEM_SETUP.txt - This file
+4. index.html - Updated with Book Now button
+
+ALL EXISTING WEBSITE CONTENT PRESERVED - Nothing was removed or truncated!
