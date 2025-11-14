@@ -115,8 +115,20 @@
             background: none;
             border: none;
             color: white;
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu:hover {
+            transform: scale(1.1);
+        }
+
+        .mobile-menu.active {
+            position: fixed;
+            right: 20px;
+            top: 20px;
         }
 
         /* Hero Section */
@@ -1408,10 +1420,64 @@
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: linear-gradient(135deg, rgba(101, 67, 33, 0.98), rgba(139, 69, 19, 0.98));
+                flex-direction: column;
+                padding: 80px 30px 30px;
+                gap: 0;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+                transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+                z-index: 1000;
+                overflow-y: auto;
+            }
+
+            .nav-links.active {
+                display: flex;
+                right: 0;
+            }
+
+            .nav-links li {
+                width: 100%;
+                margin: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 18px 15px;
+                font-size: 1.1em;
+                transition: all 0.3s ease;
+            }
+
+            .nav-links a:hover {
+                background: rgba(255, 255, 255, 0.1);
+                padding-left: 25px;
             }
 
             .mobile-menu {
                 display: block;
+            }
+
+            .mobile-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+
+            .mobile-overlay.active {
+                display: block;
+                opacity: 1;
             }
 
             .hero h1 {
@@ -2030,6 +2096,7 @@
             <button class="mobile-menu" onclick="toggleMobileMenu()">☰</button>
         </div>
     </nav>
+    <div class="mobile-overlay" onclick="toggleMobileMenu()"></div>
 
     <!-- Hero Section -->
     <section id="home" class="hero">
@@ -2117,12 +2184,19 @@
                             <li>Contemporary artwork</li>
                             <li>Featured on Airbnb</li>
                         </ul>
-                        <div style="margin-bottom: 15px;">
-                            <a href="https://www.airbnb.com/rooms/1454241386398482759?source_impression_id=p3_1755532332_P3Js8K83mfd1akQY" class="btn btn-primary" target="_blank" rel="noopener">🏡 Book Sunrise Room on Airbnb</a>
+                        <div style="background: linear-gradient(135deg, #fff3e0, #ffe0b2); padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: center;">
+                            <div style="font-size: 0.9em; color: #666; margin-bottom: 5px;">Starting from</div>
+                            <div style="font-size: 2em; font-weight: bold; color: #ff6b35; margin-bottom: 10px;">₱3,800<span style="font-size: 0.5em; color: #888;">/night</span></div>
+                            <div style="font-size: 0.85em; color: #888;">★ Highly Rated on Airbnb</div>
                         </div>
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <a href="#" class="platform-btn" target="_blank" rel="noopener">📘 Booking.com</a>
-                            <a href="#" class="platform-btn" target="_blank" rel="noopener">🛎️ Agoda</a>
+                        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                            <a href="https://www.airbnb.com/rooms/1454241386398482759?source_impression_id=p3_1755532332_P3Js8K83mfd1akQY" class="btn btn-primary" target="_blank" rel="noopener" style="flex: 1; text-align: center;">📍 Book Now on Airbnb</a>
+                            <a href="https://wa.me/639357637498?text=Hi!%20I'm%20interested%20in%20booking%20the%20Sunrise%20Room" class="btn btn-secondary" target="_blank" rel="noopener" style="flex: 0 0 auto; background: #25D366; color: white; border: none;">💬 WhatsApp</a>
+                        </div>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                            <a href="#contact" class="platform-btn" style="font-size: 0.9em;">📞 Direct Booking</a>
+                            <a href="#" class="platform-btn" target="_blank" rel="noopener" style="font-size: 0.9em;">📘 Booking.com</a>
+                            <a href="#" class="platform-btn" target="_blank" rel="noopener" style="font-size: 0.9em;">🛎️ Agoda</a>
                         </div>
                     </div>
                 </div>
@@ -2143,12 +2217,19 @@
                             <li>Exposed wooden beams</li>
                             <li>Featured on Airbnb</li>
                         </ul>
-                        <div style="margin-bottom: 15px;">
-                            <a href="https://www.airbnb.com/rooms/1276705378418419415?source_impression_id=p3_1755532332_P3Eiv_2zKEdsGEvN" class="btn btn-primary" target="_blank" rel="noopener">🏡 Book Leaf Room on Airbnb</a>
+                        <div style="background: linear-gradient(135deg, #e8f5e9, #c8e6c9); padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: center;">
+                            <div style="font-size: 0.9em; color: #666; margin-bottom: 5px;">Starting from</div>
+                            <div style="font-size: 2em; font-weight: bold; color: #228B22; margin-bottom: 10px;">₱3,800<span style="font-size: 0.5em; color: #888;">/night</span></div>
+                            <div style="font-size: 0.85em; color: #888;">★ Guest Favorite</div>
                         </div>
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <a href="#" class="platform-btn" target="_blank" rel="noopener">📘 Booking.com</a>
-                            <a href="#" class="platform-btn" target="_blank" rel="noopener">🛎️ Agoda</a>
+                        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                            <a href="https://www.airbnb.com/rooms/1276705378418419415?source_impression_id=p3_1755532332_P3Eiv_2zKEdsGEvN" class="btn btn-primary" target="_blank" rel="noopener" style="flex: 1; text-align: center;">📍 Book Now on Airbnb</a>
+                            <a href="https://wa.me/639357637498?text=Hi!%20I'm%20interested%20in%20booking%20the%20Leaf%20Room" class="btn btn-secondary" target="_blank" rel="noopener" style="flex: 0 0 auto; background: #25D366; color: white; border: none;">💬 WhatsApp</a>
+                        </div>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                            <a href="#contact" class="platform-btn" style="font-size: 0.9em;">📞 Direct Booking</a>
+                            <a href="#" class="platform-btn" target="_blank" rel="noopener" style="font-size: 0.9em;">📘 Booking.com</a>
+                            <a href="#" class="platform-btn" target="_blank" rel="noopener" style="font-size: 0.9em;">🛎️ Agoda</a>
                         </div>
                     </div>
                 </div>
@@ -2158,23 +2239,32 @@
                         <img src="YANI.jpg" alt="YANI Room - Cozy Filipino Design">
                     </div>
                     <div class="room-content">
-                        <h3 class="room-title">🟢 YANI Room</h3>
-                        <p class="room-description" style="font-style: italic; color: #2E8B57; margin-bottom: 15px;">"YANI — where comfort meets nature's embrace."</p>
-                        <p class="room-description">Charming and cozy retreat featuring natural wood tones, warm lighting, and thoughtful Filipino design elements. The space combines comfort with nature-inspired aesthetics, perfect for a peaceful getaway.</p>
+                        <h3 class="room-title">🔵 Yani Room</h3>
+                        <p class="room-description" style="font-style: italic; color: #4A90E2; margin-bottom: 15px;">"Yani — where blessings bloom in every moment."</p>
+                        <p class="room-description">A serene sanctuary designed for comfort and connection. Features a cozy queen bed, spacious sofa seating for 3-4 guests, and an exclusive balcony garden where you can breathe in nature's blessings. Perfect for families or small groups.</p>
                         <ul class="room-features">
-                            <li>Comfortable for 2-3 guests</li>
+                            <li>Perfect for 2-4 guests</li>
+                            <li>Queen size bed</li>
                             <li>Air conditioning & WiFi</li>
-                            <li>Natural wood elements</li>
-                            <li>Warm ambient lighting</li>
-                            <li>Cozy living space</li>
-                            <li>Featured on Airbnb</li>
+                            <li>Sofa seating for 3-4 guests</li>
+                            <li>Exclusive balcony garden 🌿</li>
+                            <li>Newly launched room!</li>
                         </ul>
-                        <div style="margin-bottom: 15px;">
-                            <a href="#" class="btn btn-primary" target="_blank" rel="noopener">🏡 Book YANI Room on Airbnb</a>
+                        <div style="background: linear-gradient(135deg, #e3f2fd, #bbdefb); padding: 20px; border-radius: 12px; margin-bottom: 20px; text-align: center; position: relative;">
+                            <div style="position: absolute; top: -10px; right: 10px; background: #FF4444; color: white; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; font-weight: bold;">🎉 LAUNCH SALE!</div>
+                            <div style="font-size: 0.9em; color: #666; margin-bottom: 5px;">Special Launch Price</div>
+                            <div style="font-size: 2em; font-weight: bold; color: #4A90E2; margin-bottom: 5px;">₱2,499<span style="font-size: 0.5em; color: #888;">/night</span></div>
+                            <div style="font-size: 0.9em; color: #888; text-decoration: line-through;">₱3,400</div>
+                            <div style="font-size: 0.85em; color: #FF4444; font-weight: bold; margin-top: 5px;">★ Save ₱901!</div>
                         </div>
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <a href="#" class="platform-btn" target="_blank" rel="noopener">📘 Booking.com</a>
-                            <a href="#" class="platform-btn" target="_blank" rel="noopener">🛎️ Agoda</a>
+                        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                            <a href="#contact" class="btn btn-primary" style="flex: 1; text-align: center; background: #4A90E2;">📍 Book Now - Launch Price!</a>
+                            <a href="https://wa.me/639357637498?text=Hi!%20I'm%20interested%20in%20booking%20the%20Yani%20Room%20at%20the%20launch%20price!" class="btn btn-secondary" target="_blank" rel="noopener" style="flex: 0 0 auto; background: #25D366; color: white; border: none;">💬 WhatsApp</a>
+                        </div>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                            <a href="#contact" class="platform-btn" style="font-size: 0.9em;">📞 Direct Booking</a>
+                            <a href="#" class="platform-btn" target="_blank" rel="noopener" style="font-size: 0.9em;">📘 Booking.com (Soon)</a>
+                            <a href="#" class="platform-btn" target="_blank" rel="noopener" style="font-size: 0.9em;">🛎️ Agoda (Soon)</a>
                         </div>
                     </div>
                 </div>
@@ -3343,8 +3433,33 @@
         // Mobile menu toggle
         function toggleMobileMenu() {
             const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const overlay = document.querySelector('.mobile-overlay');
+            
+            navLinks.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            
+            // Change icon
+            if (navLinks.classList.contains('active')) {
+                mobileMenu.innerHTML = '×';
+            } else {
+                mobileMenu.innerHTML = '☰';
+            }
+            
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
         }
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function() {
+                const navLinks = document.querySelector('.nav-links');
+                if (navLinks.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+            });
+        });
 
         // Contact form submission
         document.querySelector('.contact-form form').addEventListener('submit', function(e) {
