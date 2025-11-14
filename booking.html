@@ -309,6 +309,30 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Room Preference (Optional)</label>
+                        <select id="roomPreference" name="roomPreference">
+                            <option value="">Select preferred room</option>
+                            <option value="Sunrise Room - ₱1,699/night">🟠 Sunrise Room - ₱1,699/night</option>
+                            <option value="Leaf Room - ₱2,499/night">🟢 Leaf Room - ₱2,499/night</option>
+                            <option value="Yani Room - ₱2,699/night">🔵 Yani Room - ₱2,699/night</option>
+                            <option value="Whole Cabin - Contact for pricing">🏡 Whole Cabin - Contact us for pricing</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Number of Pets (Optional)</label>
+                        <select id="pets" name="pets">
+                            <option value="">Select number of pets</option>
+                            <option value="0">0 - No pets</option>
+                            <option value="1">1 Pet (₱300)</option>
+                            <option value="2">2 Pets (₱600)</option>
+                            <option value="3">3 Pets (₱900)</option>
+                            <option value="4">4 Pets (₱1,200)</option>
+                            <option value="5+">5+ Pets (Contact us)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label>Special Requests (Optional)</label>
                         <textarea id="notes" name="notes" placeholder="Early check-in, extra services, dietary restrictions, etc."></textarea>
                     </div>
@@ -446,6 +470,8 @@
                 checkIn: document.getElementById('checkIn').value,
                 checkOut: document.getElementById('checkOut').value,
                 guests: document.getElementById('guests').value,
+                roomPreference: document.getElementById('roomPreference').value,
+                pets: document.getElementById('pets').value,
                 notes: document.getElementById('notes').value
             };
 
