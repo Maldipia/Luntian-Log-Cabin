@@ -184,6 +184,19 @@
             margin-bottom: 20px;
         }
 
+        .holiday-notice {
+            background: #FFE0B2;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #FF6F00;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .holiday-notice.show {
+            display: block;
+        }
+
         .success-message {
             background: #C8E6C9;
             color: #2E7D32;
@@ -256,6 +269,12 @@
                     2. We'll check availability within 24 hours<br>
                     3. We'll send you invoice & payment details<br>
                     4. Pay deposit to confirm booking
+                </div>
+
+                <div id="holiday-notice" class="holiday-notice">
+                    <strong>🎄 Holiday Rates Apply (+₱500/night)</strong><br>
+                    Your selected dates include holiday periods.<br>
+                    <span id="holiday-details"></span>
                 </div>
 
                 <div id="success-message" class="success-message">
@@ -437,13 +456,91 @@
         document.getElementById('checkIn').setAttribute('min', today);
         document.getElementById('checkOut').setAttribute('min', today);
 
+        // Holiday detection function
+        function getHolyWeekDates(year) {
+            // Holy Week dates for common years (you can update these annually)
+            const holyWeekDates = {
+                2025: ['2025-04-13', '2025-04-14', '2025-04-15', '2025-04-16', '2025-04-17', '2025-04-18', '2025-04-19', '2025-04-20'],
+                2026: ['2026-03-29', '2026-03-30', '2026-03-31', '2026-04-01', '2026-04-02', '2026-04-03', '2026-04-04', '2026-04-05'],
+                2027: ['2027-03-21', '2027-03-22', '2027-03-23', '2027-03-24', '2027-03-25', '2027-03-26', '2027-03-27', '2027-03-28']
+            };
+            return holyWeekDates[year] || [];
+        }
+
+        function isHolidayDate(dateStr) {
+            const date = new Date(dateStr);
+            const year = date.getFullYear();
+            const month = date.getMonth() + 1;
+            const day = date.getDate();
+            
+            // Christmas: Dec 24-26
+            if (month === 12 && (day >= 24 && day <= 26)) {
+                return 'Christmas';
+            }
+            
+            // New Year: Dec 31 - Jan 1
+            if ((month === 12 && day === 31) || (month === 1 && day === 1)) {
+                return 'New Year';
+            }
+            
+            // Holy Week
+            const holyWeekDates = getHolyWeekDates(year);
+            if (holyWeekDates.includes(dateStr)) {
+                return 'Holy Week';
+            }
+            
+            return null;
+        }
+
+        function checkHolidayDates() {
+            const checkIn = document.getElementById('checkIn').value;
+            const checkOut = document.getElementById('checkOut').value;
+            
+            if (!checkIn || !checkOut) return;
+            
+            const startDate = new Date(checkIn);
+            const endDate = new Date(checkOut);
+            const holidayNotice = document.getElementById('holiday-notice');
+            const holidayDetails = document.getElementById('holiday-details');
+            
+            let hasHoliday = false;
+            let holidayTypes = new Set();
+            let holidayNights = 0;
+            
+            // Check each night of the stay
+            for (let d = new Date(startDate); d < endDate; d.setDate(d.getDate() + 1)) {
+                const dateStr = d.toISOString().split('T')[0];
+                const holidayType = isHolidayDate(dateStr);
+                if (holidayType) {
+                    hasHoliday = true;
+                    holidayTypes.add(holidayType);
+                    holidayNights++;
+                }
+            }
+            
+            if (hasHoliday) {
+                const holidayList = Array.from(holidayTypes).join(', ');
+                const totalNights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+                const extraCost = holidayNights * 500;
+                
+                holidayDetails.innerHTML = `<br><strong>Holiday nights:</strong> ${holidayNights} out of ${totalNights} nights (${holidayList})<br><strong>Additional cost:</strong> +₱${extraCost.toLocaleString()}`;
+                holidayNotice.classList.add('show');
+            } else {
+                holidayNotice.classList.remove('show');
+            }
+        }
+
         // Update checkout min date when checkin changes
         document.getElementById('checkIn').addEventListener('change', function() {
             const checkInDate = new Date(this.value);
             checkInDate.setDate(checkInDate.getDate() + 1);
             const minCheckOut = checkInDate.toISOString().split('T')[0];
             document.getElementById('checkOut').setAttribute('min', minCheckOut);
+            checkHolidayDates();
         });
+
+        // Check holidays when checkout date changes
+        document.getElementById('checkOut').addEventListener('change', checkHolidayDates);
 
         // Form submission
         document.getElementById('booking-form').addEventListener('submit', async function(e) {
@@ -463,16 +560,44 @@
             errorMsg.style.display = 'none';
 
             // Collect form data
+            const checkIn = document.getElementById('checkIn').value;
+            const checkOut = document.getElementById('checkOut').value;
+            
+            // Calculate holiday info
+            let holidayNights = 0;
+            let holidayTypes = new Set();
+            const startDate = new Date(checkIn);
+            const endDate = new Date(checkOut);
+            
+            for (let d = new Date(startDate); d < endDate; d.setDate(d.getDate() + 1)) {
+                const dateStr = d.toISOString().split('T')[0];
+                const holidayType = isHolidayDate(dateStr);
+                if (holidayType) {
+                    holidayNights++;
+                    holidayTypes.add(holidayType);
+                }
+            }
+            
+            const totalNights = Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24));
+            const holidayFee = holidayNights * 500;
+            const holidayInfo = holidayNights > 0 
+                ? `${holidayNights} holiday night(s) - ${Array.from(holidayTypes).join(', ')} (+₱${holidayFee.toLocaleString()})` 
+                : 'No holiday dates';
+            
             const formData = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
-                checkIn: document.getElementById('checkIn').value,
-                checkOut: document.getElementById('checkOut').value,
+                checkIn: checkIn,
+                checkOut: checkOut,
                 guests: document.getElementById('guests').value,
                 roomPreference: document.getElementById('roomPreference').value,
                 pets: document.getElementById('pets').value,
-                notes: document.getElementById('notes').value
+                notes: document.getElementById('notes').value,
+                totalNights: totalNights,
+                holidayNights: holidayNights,
+                holidayFee: holidayFee,
+                holidayInfo: holidayInfo
             };
 
             try {
