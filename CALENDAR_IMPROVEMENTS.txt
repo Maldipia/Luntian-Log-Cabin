@@ -1,0 +1,237 @@
+LUNTIAN LOG CABIN - NEW CALENDAR SYSTEM
+========================================
+
+Date: November 14, 2025
+Version: 2.0 - Complete Redesign
+
+NEW CALENDAR FEATURES:
+----------------------
+
+1. VISUAL CALENDAR GRID
+   - See all 3 rooms (Sunrise, Leaf, Yani) at once
+   - Color-coded bookings by room
+   - Full month view with all dates visible
+   - Easy-to-read layout
+
+2. ROOM CONFIGURATION
+   - Sunrise Room: Orange (🟠) - ₱3,800/night
+   - Leaf Room: Green (🟢) - ₱3,800/night
+   - Yani Room: Blue (🔵) - ₱2,499/night
+
+3. INTERACTIVE BOOKING MANAGEMENT
+   - Click on any booking to edit details
+   - Click on empty cell to quickly add booking
+   - "Add Booking" button for full form
+   - Delete bookings with confirmation
+   - All changes saved automatically to browser
+
+4. EXCEL EXPORT
+   - Export all bookings to Excel file (.xlsx)
+   - Includes: Guest name, email, phone, room, dates, nights, guests, price, platform, notes
+   - File named: Luntian_Bookings_YYYY-MM-DD.xlsx
+   - Opens in Excel, Google Sheets, etc.
+
+5. CSV/EXCEL IMPORT
+   - Import bookings from Airbnb exports
+   - Import from Booking.com exports
+   - Import from any CSV or Excel file
+   - Automatically maps columns
+   - Supports columns: Guest Name, Email, Phone, Room, Check-in, Check-out, Guests, Price, Platform, Notes
+
+6. BOOKING FORM FIELDS
+   - Guest Name (required)
+   - Email
+   - Phone
+   - Room selection (required)
+   - Check-in date (required)
+   - Check-out date (required)
+   - Number of guests (required)
+   - Price (required)
+   - Platform: Airbnb, Booking.com, Agoda, Direct, WhatsApp
+   - Notes (optional)
+
+7. DASHBOARD STATISTICS
+   - Total Bookings count
+   - Total Revenue (₱)
+   - Average Rate per booking
+
+8. CALENDAR NAVIGATION
+   - Previous/Next month buttons
+   - Current month and year display
+   - Weekend highlighting (blue background)
+
+9. SECURITY
+   - Password protection (default: "luntian2025")
+   - Session-based login
+   - Logout button
+   - Change password in code (line 26)
+
+10. DATA STORAGE
+    - All bookings saved in browser localStorage
+    - Persists between sessions
+    - Export to Excel for backup
+    - Import to restore data
+
+HOW TO USE:
+-----------
+
+LOGIN:
+1. Open calendar.html
+2. Enter password: luntian2025
+3. Click Login
+
+ADD BOOKING (Method 1 - Quick Add):
+1. Click on empty cell in calendar
+2. Form opens with room and date pre-filled
+3. Enter guest name and other details
+4. Click "Save Booking"
+
+ADD BOOKING (Method 2 - Full Form):
+1. Click "Add Booking" button
+2. Fill in all details
+3. Click "Save Booking"
+
+EDIT BOOKING:
+1. Click on any booking in calendar
+2. Modify details in form
+3. Click "Save Booking"
+
+DELETE BOOKING:
+1. Click on booking to edit
+2. Click "Delete" button
+3. Confirm deletion
+
+EXPORT TO EXCEL:
+1. Click "Export Excel" button
+2. File downloads automatically
+3. Open in Excel or Google Sheets
+
+IMPORT FROM CSV/EXCEL:
+1. Download bookings from Airbnb/Booking.com as CSV
+2. Click "Import CSV" button
+3. Select file
+4. Bookings automatically added
+
+CHANGE PASSWORD:
+1. Open calendar.html in text editor
+2. Find line 26: const ADMIN_PASSWORD = "luntian2025";
+3. Change to your new password
+4. Save file
+
+TECHNICAL DETAILS:
+------------------
+
+Technology Stack:
+- Pure HTML + JavaScript (no server needed)
+- TailwindCSS for styling
+- SheetJS (xlsx.js) for Excel export/import
+- localStorage for data persistence
+
+File Size: ~20KB
+Browser Support: All modern browsers
+Mobile Responsive: Yes
+
+Data Structure:
+{
+  id: timestamp,
+  guestName: string,
+  email: string,
+  phone: string,
+  room: 'sunrise' | 'leaf' | 'yani',
+  checkIn: 'YYYY-MM-DD',
+  checkOut: 'YYYY-MM-DD',
+  guests: number,
+  price: number,
+  platform: string,
+  notes: string
+}
+
+IMPROVEMENTS FROM OLD VERSION:
+------------------------------
+
+OLD CALENDAR:
+- Only showed 2 sample bookings
+- Hard to see availability
+- No way to add/edit bookings easily
+- No export functionality
+- Confusing layout
+- Not mobile-friendly
+
+NEW CALENDAR:
+✓ Visual grid showing all rooms and dates
+✓ Click to add/edit bookings
+✓ Export to Excel
+✓ Import from CSV/Excel
+✓ Real room names and pricing
+✓ Better statistics
+✓ Mobile responsive
+✓ Intuitive interface
+
+AIRBNB INTEGRATION:
+-------------------
+
+To sync Airbnb bookings:
+
+Method 1 - Manual Import (Recommended):
+1. Log into Airbnb host dashboard
+2. Go to Reservations
+3. Export to CSV
+4. Click "Import CSV" in calendar
+5. Upload file
+
+Method 2 - iCal Sync (Future Enhancement):
+- Get iCal link from Airbnb
+- Add auto-sync feature
+- Bookings update automatically
+
+BACKUP INSTRUCTIONS:
+--------------------
+
+1. Regular Backup:
+   - Click "Export Excel" weekly
+   - Save file to cloud storage
+
+2. Restore from Backup:
+   - Click "Import CSV"
+   - Select backup Excel file
+   - All bookings restored
+
+3. Old Calendar Backup:
+   - Saved as calendar_backup.html
+   - Contains original version
+
+PASSWORD RESET:
+---------------
+
+If you forget password:
+1. Open calendar.html in text editor
+2. Line 26 shows current password
+3. Or change to new password
+4. Save file
+
+FILES INCLUDED:
+---------------
+
+- calendar.html (new interactive calendar)
+- calendar_backup.html (original version)
+- CALENDAR_IMPROVEMENTS.txt (this file)
+
+NEXT STEPS:
+-----------
+
+Recommended enhancements:
+1. Add iCal sync with Airbnb
+2. Email notifications for new bookings
+3. WhatsApp integration
+4. Multi-user access with different passwords
+5. Cloud backup (Google Sheets integration)
+6. Booking conflicts detection
+7. Pricing rules (weekend rates, seasonal pricing)
+8. Guest database with history
+
+SUPPORT:
+--------
+
+Password: luntian2025 (change in code)
+Access: www.luntian.net/calendar.html
+Backup: calendar_backup.html

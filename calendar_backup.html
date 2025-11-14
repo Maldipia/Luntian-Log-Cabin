@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luntian Calendar - Login</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        // 🔐 SET YOUR PASSWORD HERE
+        const ADMIN_PASSWORD = "luntian2025";  // Change this to your preferred password
+
+        function App() {
+          const [isLoggedIn, setIsLoggedIn] = useState(() => {
+            // Check if already logged in (session storage)
+            return sessionStorage.getItem('luntianAuth') === 'true';
+          });
+          const [password, setPassword] = useState('');
+          const [error, setError] = useState('');
+
+          const handleLogin = (e) => {
+            e.preventDefault();
+            
+            if (password === ADMIN_PASSWORD) {
+              sessionStorage.setItem('luntianAuth', 'true');
+              setIsLoggedIn(true);
+              setError('');
+            } else {
+              setError('Incorrect password. Please try again.');
+              setPassword('');
+            }
+          };
+
+          const handleLogout = () => {
+            sessionStorage.removeItem('luntianAuth');
+            setIsLoggedIn(false);
+            setPassword('');
+          };
+
+          // Login Screen
+          if (!isLoggedIn) {
+            return (
+              <div className="min-h-screen bg-gradient-to-br from-green-400 via-emerald-500 to-teal-600 flex items-center justify-center p-4">
+                <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full">
+                  <div className="text-center mb-8">
+                    <div className="text-6xl mb-4">🏡</div>
+                    <h1 className="text-3xl font-bold text-gray-800 mb-2">Luntian Calendar</h1>
+                    <p className="text-gray-600">Property Management System</p>
+                  </div>
+
+                  <div className="mb-6">
+                    <div className="bg-yellow-50 border-2 border-yellow-200 rounded-xl p-4 mb-6">
+                      <div className="flex items-start gap-3">
+                        <span className="text-2xl">🔒</span>
+                        <div>
+                          <p className="font-semibold text-gray-800 mb-1">Admin Access Only</p>
+                          <p className="text-sm text-gray-600">Enter password to view booking calendar</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      onKeyPress={(e) => e.key === 'Enter' && handleLogin(e)}
+                      placeholder="Enter password"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent text-lg"
+                      autoFocus
+                    />
+
+                    {error && (
+                      <div className="mt-3 bg-red-50 border-2 border-red-200 rounded-xl p-3 flex items-center gap-2">
+                        <span className="text-xl">❌</span>
+                        <p className="text-red-700 text-sm font-medium">{error}</p>
+                      </div>
+                    )}
+                  </div>
+
+                  <button
+                    onClick={handleLogin}
+                    className="w-full bg-gradient-to-r from-green-600 to-emerald-600 text-white py-3 rounded-xl font-bold text-lg hover:from-green-700 hover:to-emerald-700 transition shadow-lg"
+                  >
+                    🔓 Login
+                  </button>
+
+                  <div className="mt-6 text-center">
+                    <a 
+                      href="https://luntian.net" 
+                      className="text-green-600 hover:text-green-700 font-medium text-sm"
+                    >
+                      ← Back to Website
+                    </a>
+                  </div>
+                </div>
+              </div>
+            );
+          }
+
+          // Calendar Screen (after login)
+          return <LuntianCalendar onLogout={handleLogout} />;
+        }
+
+        function LuntianCalendar({ onLogout }) {
+          const [view, setView] = useState('calendar');
+          const [currentMonth, setCurrentMonth] = useState(9);
+          
+          const [bookings, setBookings] = useState(() => {
+            const saved = localStorage.getItem('luntianBookings');
+            return saved ? JSON.parse(saved) : [
+              {
+                id: 1,
+                guest: "Maria Eliza Cleofas",
+                email: "maria@email.com",
+                room: "Leaf Room (1BR)",
+                checkIn: 3,
+                checkOut: 4,
+                nights: 1,
+                pax: 2,
+                price: 1897.87,
+                platform: "AGODA",
+                color: "green"
+              },
+              {
+                id: 2,
+                guest: "Rak Kean",
+                email: "rak@email.com",
+                room: "2 Bedroom Suite",
+                checkIn: 4,
+                checkOut: 5,
+                nights: 1,
+                pax: 2,
+                price: 2149.89,
+                platform: "AIRBNB",
+                color: "blue"
+              }
+            ];
+          });
+          
+          React.useEffect(() => {
+            localStorage.setItem('luntianBookings', JSON.stringify(bookings));
+          }, [bookings]);
+          
+          const months = ["January", "February", "March", "April", "May", "June", 
+                          "July", "August", "September", "October", "November", "December"];
+          
+          const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+          
+          const daysInMonth = 31;
+          const firstDayOfMonth = 3;
+          
+          const getBookingForDay = (day) => {
+            return bookings.find(b => b.checkIn === day);
+          };
+          
+          const totalRevenue = bookings.reduce((sum, b) => sum + b.price, 0);
+          
+          return (
+            <div className="min-h-screen bg-gradient-to-br from-green-50 to-emerald-100 p-4">
+              <div className="max-w-7xl mx-auto">
+                
+                <div className="bg-white rounded-2xl shadow-xl p-6 mb-6">
+                  <div className="flex items-center justify-between mb-6">
+                    <div>
+                      <h1 className="text-4xl font-bold text-gray-800">🏡 Luntian Calendar</h1>
+                      <p className="text-gray-600 mt-1">Tagaytay Log Cabin - Property Management</p>
+                    </div>
+                    <div className="flex gap-3">
+                      <a 
+                        href="https://luntian.net" 
+                        className="px-6 py-3 bg-gray-200 text-gray-700 rounded-xl font-semibold hover:bg-gray-300 transition"
+                      >
+                        🏠 Website
+                      </a>
+                      <button
+                        onClick={onLogout}
+                        className="px-6 py-3 bg-red-600 text-white rounded-xl font-semibold hover:bg-red-700 transition"
+                      >
+                        🔒 Logout
+                      </button>
+                    </div>
+                  </div>
+                  
+                  <div className="grid grid-cols-4 gap-4">
+                    <div className="bg-gradient-to-br from-blue-400 to-blue-600 text-white p-6 rounded-xl">
+                      <div className="text-3xl font-bold">{bookings.length}</div>
+                      <div className="text-sm opacity-90">Total Bookings</div>
+                    </div>
+                    <div className="bg-gradient-to-br from-green-400 to-green-600 text-white p-6 rounded-xl">
+                      <div className="text-3xl font-bold">₱{totalRevenue.toFixed(0)}</div>
+                      <div className="text-sm opacity-90">Total Revenue</div>
+                    </div>
+                    <div className="bg-gradient-to-br from-purple-400 to-purple-600 text-white p-6 rounded-xl">
+                      <div className="text-3xl font-bold">2.2%</div>
+                      <div className="text-sm opacity-90">Occupancy Rate</div>
+                    </div>
+                    <div className="bg-gradient-to-br from-orange-400 to-orange-600 text-white p-6 rounded-xl">
+                      <div className="text-3xl font-bold">₱{(totalRevenue / bookings.length).toFixed(0)}</div>
+                      <div className="text-sm opacity-90">Average Rate</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl shadow-xl mb-6 overflow-hidden">
+                  <div className="flex border-b">
+                    <button
+                      onClick={() => setView('calendar')}
+                      className={`flex-1 py-4 text-lg font-semibold transition ${
+                        view === 'calendar' 
+                          ? 'bg-green-600 text-white' 
+                          : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                      }`}
+                    >
+                      📅 Calendar View
+                    </button>
+                    <button
+                      onClick={() => setView('list')}
+                      className={`flex-1 py-4 text-lg font-semibold transition ${
+                        view === 'list' 
+                          ? 'bg-green-600 text-white' 
+                          : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                      }`}
+                    >
+                      📋 Booking List
+                    </button>
+                  </div>
+
+                  {view === 'calendar' && (
+                    <div className="p-6">
+                      <div className="flex items-center justify-between mb-8">
+                        <button 
+                          onClick={() => setCurrentMonth(currentMonth - 1)}
+                          className="px-6 py-3 bg-gray-200 hover:bg-gray-300 rounded-xl font-bold transition"
+                        >
+                          ← Previous
+                        </button>
+                        <h2 className="text-3xl font-bold text-gray-800">
+                          {months[currentMonth]} 2025
+                        </h2>
+                        <button 
+                          onClick={() => setCurrentMonth(currentMonth + 1)}
+                          className="px-6 py-3 bg-gray-200 hover:bg-gray-300 rounded-xl font-bold transition"
+                        >
+                          Next →
+                        </button>
+                      </div>
+
+                      <div className="flex gap-6 mb-6 justify-center">
+                        <div className="flex items-center gap-2">
+                          <div className="w-5 h-5 bg-orange-500 rounded"></div>
+                          <span className="text-sm font-medium">Sunrise Room</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-5 h-5 bg-green-500 rounded"></div>
+                          <span className="text-sm font-medium">Leaf Room ⭐</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="w-5 h-5 bg-blue-500 rounded"></div>
+                          <span className="text-sm font-medium">2BR Suite</span>
+                        </div>
+                      </div>
+
+                      <div className="bg-gray-50 rounded-xl p-4">
+                        <div className="grid grid-cols-7 gap-2">
+                          {days.map(day => (
+                            <div key={day} className="text-center font-bold text-gray-600 py-3">
+                              {day}
+                            </div>
+                          ))}
+                          
+                          {[...Array(firstDayOfMonth)].map((_, i) => (
+                            <div key={`empty-${i}`} className="h-28"></div>
+                          ))}
+                          
+                          {[...Array(daysInMonth)].map((_, i) => {
+                            const day = i + 1;
+                            const booking = getBookingForDay(day);
+                            
+                            return (
+                              <div 
+                                key={day}
+                                className={`h-28 border-2 rounded-lg p-2 transition-all cursor-pointer ${
+                                  booking 
+                                    ? booking.color === 'green'
+                                      ? 'bg-green-500 border-green-600 text-white hover:scale-105 shadow-lg'
+                                      : 'bg-blue-500 border-blue-600 text-white hover:scale-105 shadow-lg'
+                                    : 'bg-white border-gray-200 hover:bg-gray-50'
+                                }`}
+                              >
+                                <div className={`font-bold text-lg ${booking ? 'text-white' : 'text-gray-700'}`}>
+                                  {day}
+                                </div>
+                                {booking && (
+                                  <div className="mt-1 text-xs">
+                                    <div className="font-bold">{booking.guest.split(' ')[0]}</div>
+                                    <div className="opacity-90">{booking.room.split(' ')[0]}</div>
+                                    <div className="opacity-75 text-xs mt-1">{booking.platform}</div>
+                                  </div>
+                                )}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {view === 'list' && (
+                    <div className="p-6 space-y-4">
+                      <h2 className="text-2xl font-bold text-gray-800 mb-6">October 2025 Bookings</h2>
+                      
+                      {bookings.map(booking => (
+                        <div 
+                          key={booking.id}
+                          className={`p-6 rounded-xl border-2 ${
+                            booking.color === 'green'
+                              ? 'bg-green-50 border-green-200'
+                              : 'bg-blue-50 border-blue-200'
+                          }`}
+                        >
+                          <div className="flex justify-between items-start mb-4">
+                            <div>
+                              <h3 className="text-2xl font-bold text-gray-800">{booking.guest}</h3>
+                              <p className="text-gray-600">{booking.email}</p>
+                            </div>
+                            <span className={`px-4 py-2 rounded-full text-white font-bold text-sm ${
+                              booking.color === 'green' ? 'bg-green-500' : 'bg-blue-500'
+                            }`}>
+                              {booking.platform}
+                            </span>
+                          </div>
+                          
+                          <div className="grid grid-cols-5 gap-4 text-sm">
+                            <div>
+                              <div className="text-gray-600 font-medium">Room</div>
+                              <div className="font-bold text-gray-800">{booking.room}</div>
+                            </div>
+                            <div>
+                              <div className="text-gray-600 font-medium">Check-in</div>
+                              <div className="font-bold text-gray-800">Oct {booking.checkIn}</div>
+                            </div>
+                            <div>
+                              <div className="text-gray-600 font-medium">Check-out</div>
+                              <div className="font-bold text-gray-800">Oct {booking.checkOut}</div>
+                            </div>
+                            <div>
+                              <div className="text-gray-600 font-medium">Guests</div>
+                              <div className="font-bold text-gray-800">{booking.pax} pax</div>
+                            </div>
+                            <div>
+                              <div className="text-gray-600 font-medium">Revenue</div>
+                              <div className="font-bold text-green-600">₱{booking.price.toFixed(2)}</div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+              </div>
+            </div>
+          );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
