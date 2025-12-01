@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Amadeo Marketplace</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f5f5; }
+        
+        /* Login Screen */
+        .login-screen { min-height: 100vh; background: linear-gradient(135deg, #0f766e 0%, #134e4a 100%); display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .login-box { background: white; border-radius: 20px; padding: 40px; width: 100%; max-width: 400px; box-shadow: 0 25px 50px rgba(0,0,0,0.3); }
+        .login-box h1 { color: #0f766e; text-align: center; margin-bottom: 10px; }
+        .login-box p { color: #666; text-align: center; margin-bottom: 30px; }
+        .login-box .form-group { margin-bottom: 20px; }
+        .login-box label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; }
+        .login-box input { width: 100%; padding: 14px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 16px; }
+        .login-box input:focus { outline: none; border-color: #0f766e; }
+        .login-box button { width: 100%; padding: 14px; background: linear-gradient(135deg, #0f766e, #14b8a6); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; }
+        .login-box button:hover { opacity: 0.9; }
+        .login-error { background: #fee2e2; color: #dc2626; padding: 12px; border-radius: 8px; margin-bottom: 20px; text-align: center; display: none; }
+        
+        /* Dashboard */
+        .dashboard { display: none; }
+        .dashboard.active { display: flex; min-height: 100vh; }
+        
+        /* Sidebar */
+        .sidebar { width: 250px; background: linear-gradient(180deg, #0f766e 0%, #134e4a 100%); color: white; position: fixed; height: 100vh; overflow-y: auto; }
+        .sidebar-header { padding: 25px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .sidebar-header h2 { font-size: 18px; }
+        .sidebar-header p { font-size: 12px; opacity: 0.7; margin-top: 5px; }
+        .sidebar-nav { padding: 20px 0; }
+        .nav-item { display: flex; align-items: center; gap: 12px; padding: 14px 20px; color: rgba(255,255,255,0.8); cursor: pointer; transition: all 0.3s; }
+        .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.1); color: white; }
+        .nav-item.active { border-left: 3px solid #14b8a6; }
+        .nav-badge { background: #ef4444; font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-left: auto; }
+        .sidebar-footer { position: absolute; bottom: 0; left: 0; right: 0; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .logout-btn { width: 100%; padding: 12px; background: rgba(255,255,255,0.1); color: white; border: none; border-radius: 8px; cursor: pointer; }
+        .logout-btn:hover { background: rgba(255,255,255,0.2); }
+        
+        /* Main */
+        .main { flex: 1; margin-left: 250px; }
+        .main-header { background: white; padding: 20px 30px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .main-header h1 { color: #0f766e; font-size: 24px; }
+        .refresh-btn { padding: 10px 20px; background: #0f766e; color: white; border: none; border-radius: 8px; cursor: pointer; }
+        .main-body { padding: 30px; }
+        
+        /* Section */
+        .section { display: none; }
+        .section.active { display: block; }
+        
+        /* Stats */
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .stat-card .icon { font-size: 28px; margin-bottom: 10px; }
+        .stat-card .value { font-size: 28px; font-weight: 700; color: #0f766e; }
+        .stat-card .label { font-size: 14px; color: #666; margin-top: 5px; }
+        .stat-card.warning .value { color: #f59e0b; }
+        .stat-card.danger .value { color: #ef4444; }
+        .stat-card.success .value { color: #10b981; }
+        
+        /* Card */
+        .card { background: white; border-radius: 12px; padding: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .card h3 { color: #0f766e; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        
+        /* Table */
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f9f9f9; font-weight: 600; color: #333; font-size: 13px; }
+        td { font-size: 14px; }
+        tr:hover { background: #f9f9f9; }
+        
+        .order-id { font-family: monospace; font-weight: 600; color: #0f766e; background: #f0fdfa; padding: 4px 8px; border-radius: 4px; font-size: 12px; }
+        
+        /* Badges */
+        .badge { padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+        .badge-pending { background: #fef3c7; color: #92400e; }
+        .badge-active { background: #d1fae5; color: #065f46; }
+        .badge-suspended { background: #fee2e2; color: #dc2626; }
+        .badge-cod { background: #e5e7eb; color: #374151; }
+        .badge-gcash { background: #dbeafe; color: #1e40af; }
+        
+        /* Buttons */
+        .btn { padding: 8px 16px; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; }
+        .btn-sm { padding: 5px 12px; font-size: 12px; }
+        .btn-primary { background: #0f766e; color: white; }
+        .btn-success { background: #10b981; color: white; }
+        .btn-danger { background: #ef4444; color: white; }
+        .btn-outline { background: white; border: 1px solid #ddd; color: #333; }
+        
+        /* Commission Note */
+        .commission-note { background: #f0fdfa; border: 2px solid #14b8a6; border-radius: 12px; padding: 20px; margin-bottom: 25px; }
+        .commission-note h4 { color: #0f766e; margin-bottom: 10px; }
+        .commission-note p { color: #333; font-size: 14px; }
+        .commission-note strong { color: #0f766e; }
+        
+        /* Modal */
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: white; border-radius: 16px; width: 100%; max-width: 600px; max-height: 90vh; overflow-y: auto; }
+        .modal-header { padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center; }
+        .modal-header h2 { color: #0f766e; }
+        .modal-close { background: none; border: none; font-size: 28px; cursor: pointer; color: #666; }
+        .modal-body { padding: 20px; }
+        .modal-footer { padding: 20px; border-top: 1px solid #eee; display: flex; justify-content: flex-end; gap: 10px; }
+        
+        @media (max-width: 900px) {
+            .sidebar { width: 60px; }
+            .sidebar-header h2, .sidebar-header p, .nav-item span:last-child { display: none; }
+            .nav-item { justify-content: center; }
+            .main { margin-left: 60px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-box">
+            <h1>🔐 Admin Login</h1>
+            <p>Amadeo Marketplace Admin Panel</p>
+            <div class="login-error" id="loginError">Invalid credentials</div>
+            <form onsubmit="adminLogin(event)">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="adminUsername" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="adminPassword" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Dashboard -->
+    <div class="dashboard" id="dashboard">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+                <p>Amadeo Marketplace</p>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-item active" onclick="showSection('overview', this)">
+                    <span>📊</span> <span>Overview</span>
+                </div>
+                <div class="nav-item" onclick="showSection('merchants', this)">
+                    <span>🏪</span> <span>Merchants</span>
+                    <span class="nav-badge" id="pendingMerchantsBadge" style="display:none;">0</span>
+                </div>
+                <div class="nav-item" onclick="showSection('orders', this)">
+                    <span>📦</span> <span>Orders</span>
+                </div>
+                <div class="nav-item" onclick="showSection('commissions', this)">
+                    <span>💰</span> <span>Commissions</span>
+                </div>
+                <div class="nav-item" onclick="showSection('products', this)">
+                    <span>📋</span> <span>Products</span>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="adminLogout()">Logout</button>
+            </div>
+        </aside>
+        
+        <main class="main">
+            <header class="main-header">
+                <h1 id="sectionTitle">Overview</h1>
+                <button class="refresh-btn" onclick="loadAllData()">Refresh</button>
+            </header>
+            
+            <div class="main-body">
+                <!-- Overview Section -->
+                <section class="section active" id="overviewSection">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="icon">🏪</div>
+                            <div class="value" id="totalMerchants">0</div>
+                            <div class="label">Total Merchants</div>
+                        </div>
+                        <div class="stat-card warning">
+                            <div class="icon">⏳</div>
+                            <div class="value" id="pendingApproval">0</div>
+                            <div class="label">Pending Approval</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="icon">📦</div>
+                            <div class="value" id="totalOrders">0</div>
+                            <div class="label">Total Orders</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="icon">💵</div>
+                            <div class="value" id="totalRevenue">P0</div>
+                            <div class="label">Total Revenue</div>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="icon">💰</div>
+                            <div class="value" id="totalCommission">P0</div>
+                            <div class="label">Commission (GCash)</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="icon">📋</div>
+                            <div class="value" id="totalProducts">0</div>
+                            <div class="label">Products</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Pending Merchant Approvals</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Business Name</th>
+                                        <th>Owner</th>
+                                        <th>Category</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pendingMerchantsTable">
+                                    <tr><td colspan="5" style="text-align:center;padding:20px;color:#666;">Loading...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Recent Orders</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Total</th>
+                                        <th>Payment</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentOrdersTable">
+                                    <tr><td colspan="5" style="text-align:center;padding:20px;color:#666;">Loading...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Merchants Section -->
+                <section class="section" id="merchantsSection">
+                    <div class="card">
+                        <h3>
+                            All Merchants
+                            <select id="merchantFilter" onchange="filterMerchants()" style="padding:8px;border-radius:6px;border:1px solid #ddd;">
+                                <option value="all">All Status</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Active">Active</option>
+                                <option value="Rejected">Rejected</option>
+                            </select>
+                        </h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Business Name</th>
+                                        <th>Owner</th>
+                                        <th>Phone</th>
+                                        <th>Category</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="allMerchantsTable">
+                                    <tr><td colspan="7" style="text-align:center;padding:20px;color:#666;">Loading...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Orders Section -->
+                <section class="section" id="ordersSection">
+                    <div class="card">
+                        <h3>
+                            All Orders
+                            <select id="orderFilter" onchange="filterOrdersAdmin()" style="padding:8px;border-radius:6px;border:1px solid #ddd;">
+                                <option value="all">All Status</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Confirmed">Confirmed</option>
+                                <option value="Preparing">Preparing</option>
+                                <option value="Out for Delivery">Out for Delivery</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
+                        </h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Date</th>
+                                        <th>Customer</th>
+                                        <th>Total</th>
+                                        <th>Payment</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="allOrdersTable">
+                                    <tr><td colspan="7" style="text-align:center;padding:20px;color:#666;">Loading...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Commissions Section -->
+                <section class="section" id="commissionsSection">
+                    <div class="commission-note">
+                        <h4>Commission Structure</h4>
+                        <p><strong>5% commission</strong> applies ONLY to <strong>GCash (online) payments</strong>.</p>
+                        <p><strong>COD (Cash on Delivery)</strong> orders have <strong>0% commission</strong> - merchants keep 100%.</p>
+                    </div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="icon">💵</div>
+                            <div class="value" id="totalGcashSales">P0</div>
+                            <div class="label">GCash Sales</div>
+                        </div>
+                        <div class="stat-card success">
+                            <div class="icon">💰</div>
+                            <div class="value" id="collectedCommission">P0</div>
+                            <div class="label">Commission Earned (5%)</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="icon">💳</div>
+                            <div class="value" id="totalCodSales">P0</div>
+                            <div class="label">COD Sales (0% fee)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>GCash Orders (Commissionable)</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Date</th>
+                                        <th>Merchant</th>
+                                        <th>Sale Amount</th>
+                                        <th>Commission (5%)</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="commissionsTable">
+                                    <tr><td colspan="6" style="text-align:center;padding:20px;color:#666;">Loading...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Products Section -->
+                <section class="section" id="productsSection">
+                    <div class="card">
+                        <h3>All Products</h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Merchant</th>
+                                        <th>Category</th>
+                                        <th>Price</th>
+                                        <th>Stock</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="allProductsTable">
+                                    <tr><td colspan="6" style="text-align:center;padding:20px;color:#666;">Loading...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzFo0Y_OPRZ4h9pr8lqqShRgT7NCnPSVTXf96LJ_x6DjKqUKzAAzwFkbq8NjGZAJVmncw/exec';
+        
+        let allMerchants = [];
+        let allOrders = [];
+        let allProducts = [];
+        
+        // Check if already logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('admin_logged_in') === 'true') {
+                showDashboard();
+            }
+        });
+        
+        function adminLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            if (username === 'admin' && password === 'Amadeo2025!') {
+                sessionStorage.setItem('admin_logged_in', 'true');
+                showDashboard();
+            } else {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+        
+        function showDashboard() {
+            document.getElementById('loginScreen').style.display = 'none';
+            document.getElementById('dashboard').classList.add('active');
+            loadAllData();
+        }
+        
+        function adminLogout() {
+            sessionStorage.removeItem('admin_logged_in');
+            location.reload();
+        }
+        
+        async function loadAllData() {
+            await Promise.all([loadMerchants(), loadOrders(), loadProducts()]);
+            updateOverview();
+            updateCommissions();
+        }
+        
+        async function loadMerchants() {
+            try {
+                const response = await fetch(SCRIPT_URL + '?action=getMerchants');
+                const data = await response.json();
+                if (data.success) {
+                    allMerchants = data.data || [];
+                    renderMerchants();
+                }
+            } catch (error) {
+                console.error('Error loading merchants:', error);
+            }
+        }
+        
+        async function loadOrders() {
+            try {
+                const response = await fetch(SCRIPT_URL + '?action=getOrders');
+                const data = await response.json();
+                if (data.success) {
+                    allOrders = data.data || [];
+                    renderOrders();
+                }
+            } catch (error) {
+                console.error('Error loading orders:', error);
+            }
+        }
+        
+        async function loadProducts() {
+            try {
+                const response = await fetch(SCRIPT_URL + '?action=getProducts');
+                const data = await response.json();
+                if (data.success) {
+                    allProducts = data.data || [];
+                    renderProducts();
+                }
+            } catch (error) {
+                console.error('Error loading products:', error);
+            }
+        }
+        
+        function updateOverview() {
+            const pending = allMerchants.filter(m => m.Status === 'Pending');
+            const activeMerchants = allMerchants.filter(m => m.Status === 'Active');
+            const completedOrders = allOrders.filter(o => o.OrderStatus === 'Completed' || o.OrderStatus === 'Delivered');
+            const totalRevenue = completedOrders.reduce((sum, o) => sum + (o.Total || 0), 0);
+            
+            // Commission only from GCash orders!
+            const gcashOrders = completedOrders.filter(o => o.PaymentMethod === 'GCash');
+            const gcashSales = gcashOrders.reduce((sum, o) => sum + (o.Subtotal || o.Total || 0), 0);
+            const totalCommission = Math.round(gcashSales * 0.05);
+            
+            document.getElementById('totalMerchants').textContent = activeMerchants.length;
+            document.getElementById('pendingApproval').textContent = pending.length;
+            document.getElementById('totalOrders').textContent = allOrders.length;
+            document.getElementById('totalRevenue').textContent = 'P' + totalRevenue.toLocaleString();
+            document.getElementById('totalCommission').textContent = 'P' + totalCommission.toLocaleString();
+            document.getElementById('totalProducts').textContent = allProducts.length;
+            
+            // Update badge
+            const badge = document.getElementById('pendingMerchantsBadge');
+            if (pending.length > 0) {
+                badge.style.display = 'block';
+                badge.textContent = pending.length;
+            } else {
+                badge.style.display = 'none';
+            }
+            
+            // Pending merchants table
+            document.getElementById('pendingMerchantsTable').innerHTML = pending.length > 0
+                ? pending.map(m => `
+                    <tr>
+                        <td><strong>${m.BusinessName}</strong></td>
+                        <td>${m.OwnerName}</td>
+                        <td>${m.Category}</td>
+                        <td>${new Date(m.CreatedAt).toLocaleDateString()}</td>
+                        <td>
+                            <button class="btn btn-sm btn-success" onclick="approveMerchant('${m.MerchantId}')">Approve</button>
+                            <button class="btn btn-sm btn-danger" onclick="rejectMerchant('${m.MerchantId}')">Reject</button>
+                        </td>
+                    </tr>
+                `).join('')
+                : '<tr><td colspan="5" style="text-align:center;padding:20px;color:#666;">No pending approvals</td></tr>';
+            
+            // Recent orders
+            const recent = allOrders.slice(0, 5);
+            document.getElementById('recentOrdersTable').innerHTML = recent.length > 0
+                ? recent.map(o => `
+                    <tr>
+                        <td><span class="order-id">${o.OrderId}</span></td>
+                        <td>${o.CustomerName}</td>
+                        <td><strong>P${(o.Total || 0).toLocaleString()}</strong></td>
+                        <td><span class="badge badge-${o.PaymentMethod?.toLowerCase() || 'cod'}">${o.PaymentMethod || 'COD'}</span></td>
+                        <td><span class="badge badge-${o.OrderStatus === 'Active' || o.OrderStatus === 'Completed' ? 'active' : 'pending'}">${o.OrderStatus}</span></td>
+                    </tr>
+                `).join('')
+                : '<tr><td colspan="5" style="text-align:center;padding:20px;color:#666;">No orders yet</td></tr>';
+        }
+        
+        function updateCommissions() {
+            const completedOrders = allOrders.filter(o => o.OrderStatus === 'Completed' || o.OrderStatus === 'Delivered');
+            const gcashOrders = completedOrders.filter(o => o.PaymentMethod === 'GCash');
+            const codOrders = completedOrders.filter(o => o.PaymentMethod !== 'GCash');
+            
+            const gcashSales = gcashOrders.reduce((sum, o) => sum + (o.Subtotal || o.Total || 0), 0);
+            const codSales = codOrders.reduce((sum, o) => sum + (o.Total || 0), 0);
+            const commission = Math.round(gcashSales * 0.05);
+            
+            document.getElementById('totalGcashSales').textContent = 'P' + gcashSales.toLocaleString();
+            document.getElementById('collectedCommission').textContent = 'P' + commission.toLocaleString();
+            document.getElementById('totalCodSales').textContent = 'P' + codSales.toLocaleString();
+            
+            // GCash orders table
+            document.getElementById('commissionsTable').innerHTML = gcashOrders.length > 0
+                ? gcashOrders.map(o => {
+                    const amount = o.Subtotal || o.Total || 0;
+                    const comm = Math.round(amount * 0.05);
+                    const merchant = allMerchants.find(m => m.MerchantId === o.MerchantId);
+                    return `
+                        <tr>
+                            <td><span class="order-id">${o.OrderId}</span></td>
+                            <td>${new Date(o.CreatedAt).toLocaleDateString()}</td>
+                            <td>${merchant?.BusinessName || 'Unknown'}</td>
+                            <td>P${amount.toLocaleString()}</td>
+                            <td style="color:#10b981;font-weight:600;">P${comm.toLocaleString()}</td>
+                            <td><span class="badge badge-${o.OrderStatus === 'Completed' ? 'active' : 'pending'}">${o.OrderStatus}</span></td>
+                        </tr>
+                    `;
+                }).join('')
+                : '<tr><td colspan="6" style="text-align:center;padding:20px;color:#666;">No GCash orders yet</td></tr>';
+        }
+        
+        function renderMerchants() {
+            filterMerchants();
+        }
+        
+        function filterMerchants() {
+            const filter = document.getElementById('merchantFilter').value;
+            const filtered = filter === 'all' ? allMerchants : allMerchants.filter(m => m.Status === filter);
+            
+            document.getElementById('allMerchantsTable').innerHTML = filtered.length > 0
+                ? filtered.map(m => `
+                    <tr>
+                        <td><small>${m.MerchantId}</small></td>
+                        <td><strong>${m.BusinessName}</strong></td>
+                        <td>${m.OwnerName}</td>
+                        <td>${m.Phone}</td>
+                        <td>${m.Category}</td>
+                        <td><span class="badge badge-${m.Status?.toLowerCase() || 'pending'}">${m.Status || 'Pending'}</span></td>
+                        <td>
+                            ${m.Status === 'Pending' ? `
+                                <button class="btn btn-sm btn-success" onclick="approveMerchant('${m.MerchantId}')">Approve</button>
+                                <button class="btn btn-sm btn-danger" onclick="rejectMerchant('${m.MerchantId}')">Reject</button>
+                            ` : `<button class="btn btn-sm btn-outline" onclick="viewMerchant('${m.MerchantId}')">View</button>`}
+                        </td>
+                    </tr>
+                `).join('')
+                : '<tr><td colspan="7" style="text-align:center;padding:20px;color:#666;">No merchants found</td></tr>';
+        }
+        
+        function renderOrders() {
+            filterOrdersAdmin();
+        }
+        
+        function filterOrdersAdmin() {
+            const filter = document.getElementById('orderFilter').value;
+            const filtered = filter === 'all' ? allOrders : allOrders.filter(o => o.OrderStatus === filter);
+            
+            document.getElementById('allOrdersTable').innerHTML = filtered.length > 0
+                ? filtered.map(o => `
+                    <tr>
+                        <td><span class="order-id">${o.OrderId}</span></td>
+                        <td>${new Date(o.CreatedAt).toLocaleDateString()}</td>
+                        <td>${o.CustomerName}<br><small style="color:#666;">${o.CustomerPhone}</small></td>
+                        <td><strong>P${(o.Total || 0).toLocaleString()}</strong></td>
+                        <td><span class="badge badge-${o.PaymentMethod?.toLowerCase() || 'cod'}">${o.PaymentMethod || 'COD'}</span></td>
+                        <td><span class="badge badge-${o.OrderStatus === 'Completed' || o.OrderStatus === 'Delivered' ? 'active' : 'pending'}">${o.OrderStatus}</span></td>
+                        <td><button class="btn btn-sm btn-outline" onclick="viewOrderAdmin('${o.OrderId}')">View</button></td>
+                    </tr>
+                `).join('')
+                : '<tr><td colspan="7" style="text-align:center;padding:20px;color:#666;">No orders found</td></tr>';
+        }
+        
+        function renderProducts() {
+            document.getElementById('allProductsTable').innerHTML = allProducts.length > 0
+                ? allProducts.map(p => {
+                    const merchant = allMerchants.find(m => m.MerchantId === p.MerchantId);
+                    return `
+                        <tr>
+                            <td><strong>${p.Name}</strong></td>
+                            <td>${merchant?.BusinessName || 'Unknown'}</td>
+                            <td>${p.Category}</td>
+                            <td>P${(p.Price || 0).toLocaleString()}</td>
+                            <td>${p.available || p.Stock || 0}</td>
+                            <td><span class="badge badge-${p.Status === 'Active' ? 'active' : 'pending'}">${p.Status || 'Active'}</span></td>
+                        </tr>
+                    `;
+                }).join('')
+                : '<tr><td colspan="6" style="text-align:center;padding:20px;color:#666;">No products found</td></tr>';
+        }
+        
+        async function approveMerchant(merchantId) {
+            if (!confirm('Approve this merchant?')) return;
+            
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({
+                        action: 'updateMerchant',
+                        merchantId: merchantId,
+                        status: 'Active'
+                    })
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    alert('Merchant approved!');
+                    loadAllData();
+                } else {
+                    alert('Error: ' + (result.error || 'Update failed'));
+                }
+            } catch (error) {
+                alert('Network error');
+            }
+        }
+        
+        async function rejectMerchant(merchantId) {
+            if (!confirm('Reject this merchant?')) return;
+            
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({
+                        action: 'updateMerchant',
+                        merchantId: merchantId,
+                        status: 'Rejected'
+                    })
+                });
+                
+                const result = await response.json();
+                if (result.success) {
+                    alert('Merchant rejected');
+                    loadAllData();
+                } else {
+                    alert('Error: ' + (result.error || 'Update failed'));
+                }
+            } catch (error) {
+                alert('Network error');
+            }
+        }
+        
+        function viewMerchant(merchantId) {
+            const merchant = allMerchants.find(m => m.MerchantId === merchantId);
+            if (merchant) {
+                alert(`Merchant: ${merchant.BusinessName}\nOwner: ${merchant.OwnerName}\nPhone: ${merchant.Phone}\nEmail: ${merchant.Email}\nAddress: ${merchant.Address}\nStatus: ${merchant.Status}`);
+            }
+        }
+        
+        function viewOrderAdmin(orderId) {
+            const order = allOrders.find(o => o.OrderId === orderId);
+            if (order) {
+                const isGcash = order.PaymentMethod === 'GCash';
+                const commission = isGcash ? Math.round((order.Subtotal || order.Total) * 0.05) : 0;
+                alert(`Order: ${order.OrderId}\nCustomer: ${order.CustomerName}\nPhone: ${order.CustomerPhone}\nTotal: P${order.Total}\nPayment: ${order.PaymentMethod || 'COD'}\nCommission: P${commission}\nStatus: ${order.OrderStatus}`);
+            }
+        }
+        
+        function showSection(section, navItem) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(section + 'Section').classList.add('active');
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            if (navItem) navItem.classList.add('active');
+            
+            const titles = {
+                'overview': 'Overview',
+                'merchants': 'Merchants',
+                'orders': 'Orders',
+                'commissions': 'Commissions',
+                'products': 'Products'
+            };
+            document.getElementById('sectionTitle').textContent = titles[section] || 'Dashboard';
+        }
+    </script>
+</body>
+</html>
