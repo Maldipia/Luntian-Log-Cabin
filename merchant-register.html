@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become a Merchant - Amadeo Marketplace</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #f0fdfa 0%, #ccfbf1 100%); min-height: 100vh; padding: 20px; }
+        
+        .container { max-width: 700px; margin: 0 auto; }
+        
+        .header { text-align: center; margin-bottom: 30px; padding-top: 20px; }
+        .header h1 { color: #0f766e; font-size: 32px; margin-bottom: 10px; }
+        .header p { color: #666; font-size: 16px; }
+        
+        .card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 10px 40px rgba(15,118,110,0.15); margin-bottom: 20px; }
+        
+        .step-indicator { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; }
+        .step { width: 40px; height: 40px; border-radius: 50%; background: #e5e7eb; display: flex; align-items: center; justify-content: center; font-weight: 600; color: #666; transition: all 0.3s; }
+        .step.active { background: #0f766e; color: white; }
+        .step.completed { background: #10b981; color: white; }
+        .step-line { width: 60px; height: 3px; background: #e5e7eb; align-self: center; }
+        .step-line.completed { background: #10b981; }
+        
+        .form-section { display: none; }
+        .form-section.active { display: block; }
+        
+        .section-title { color: #0f766e; font-size: 20px; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #f0fdfa; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; font-size: 14px; }
+        .form-group label .required { color: #ef4444; }
+        .form-group label .optional { color: #666; font-weight: normal; font-size: 12px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 15px; transition: border-color 0.3s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #0f766e; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        
+        .file-upload { border: 2px dashed #ddd; border-radius: 12px; padding: 25px; text-align: center; cursor: pointer; transition: all 0.3s; background: #fafafa; }
+        .file-upload:hover { border-color: #0f766e; background: #f0fdfa; }
+        .file-upload.has-file { border-color: #10b981; background: #d1fae5; }
+        .file-upload .icon { font-size: 36px; margin-bottom: 10px; }
+        .file-upload p { color: #666; font-size: 14px; margin-bottom: 5px; }
+        .file-upload small { color: #999; font-size: 12px; }
+        .file-upload .file-name { color: #0f766e; font-weight: 600; margin-top: 10px; display: none; }
+        .file-upload.has-file .file-name { display: block; }
+        .file-upload input[type="file"] { display: none; }
+        
+        .doc-preview { max-width: 100px; max-height: 80px; border-radius: 8px; margin-top: 10px; display: none; }
+        .file-upload.has-file .doc-preview { display: inline-block; }
+        
+        .btn-row { display: flex; gap: 15px; margin-top: 30px; }
+        .btn { flex: 1; padding: 16px; border: none; border-radius: 10px; font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-primary { background: linear-gradient(135deg, #0f766e, #14b8a6); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(15,118,110,0.3); }
+        .btn-primary:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+        .btn-outline { background: white; border: 2px solid #ddd; color: #333; }
+        .btn-outline:hover { border-color: #0f766e; color: #0f766e; }
+        
+        .status { padding: 15px; border-radius: 10px; margin-bottom: 20px; font-size: 14px; display: none; }
+        .status.error { display: block; background: #fee2e2; color: #dc2626; border: 1px solid #fca5a5; }
+        .status.success { display: block; background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+        .status.info { display: block; background: #dbeafe; color: #1e40af; border: 1px solid #93c5fd; }
+        
+        .info-box { background: #f0fdfa; border: 1px solid #14b8a6; border-radius: 10px; padding: 15px; margin-bottom: 20px; font-size: 14px; color: #0f766e; }
+        .info-box h4 { margin-bottom: 8px; }
+        .info-box ul { margin-left: 20px; margin-top: 8px; }
+        .info-box li { margin-bottom: 5px; }
+        
+        .terms-check { display: flex; align-items: flex-start; gap: 10px; margin: 20px 0; }
+        .terms-check input { margin-top: 3px; width: 18px; height: 18px; }
+        .terms-check label { font-size: 14px; color: #666; line-height: 1.4; }
+        .terms-check a { color: #0f766e; }
+        
+        .home-link { text-align: center; margin-top: 20px; }
+        .home-link a { color: #0f766e; text-decoration: none; font-size: 14px; }
+        
+        .success-content { text-align: center; padding: 40px 20px; }
+        .success-icon { font-size: 80px; margin-bottom: 20px; }
+        .success-content h2 { color: #0f766e; margin-bottom: 15px; }
+        .success-content p { color: #666; margin-bottom: 20px; line-height: 1.6; }
+        
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+            .card { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏪 Become a Merchant</h1>
+            <p>Join Amadeo Marketplace and grow your business</p>
+        </div>
+        
+        <div class="card">
+            <div class="step-indicator">
+                <div class="step active" id="step1">1</div>
+                <div class="step-line" id="line1"></div>
+                <div class="step" id="step2">2</div>
+                <div class="step-line" id="line2"></div>
+                <div class="step" id="step3">3</div>
+            </div>
+            
+            <div class="status" id="status"></div>
+            
+            <!-- Step 1: Business Information -->
+            <div class="form-section active" id="section1">
+                <h3 class="section-title">📋 Business Information</h3>
+                
+                <div class="form-group">
+                    <label>Business Name <span class="required">*</span></label>
+                    <input type="text" id="businessName" required placeholder="e.g., Aster Rice Trading">
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Owner's Full Name <span class="required">*</span></label>
+                        <input type="text" id="ownerName" required placeholder="Juan Dela Cruz">
+                    </div>
+                    <div class="form-group">
+                        <label>Business Category <span class="required">*</span></label>
+                        <select id="category" required>
+                            <option value="">Select Category</option>
+                            <option value="Water">Water Station</option>
+                            <option value="Food">Food & Restaurant</option>
+                            <option value="Coffee">Coffee Shop</option>
+                            <option value="Bakery">Bakery</option>
+                            <option value="Rice">Rice Dealer</option>
+                            <option value="Meat">Meat Shop</option>
+                            <option value="Produce">Farm Produce</option>
+                            <option value="Grocery">Grocery & Sari-sari</option>
+                            <option value="Services">Services</option>
+                            <option value="Hardware">Hardware</option>
+                            <option value="Health">Health & Pharmacy</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" required placeholder="09XX XXX XXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address <span class="required">*</span></label>
+                        <input type="email" id="email" required placeholder="business@email.com">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Business Address <span class="required">*</span></label>
+                    <input type="text" id="address" required placeholder="Street, Purok/Sitio">
+                </div>
+                
+                <div class="form-group">
+                    <label>Barangay <span class="required">*</span></label>
+                    <select id="barangay" required>
+                        <option value="">Select Barangay</option>
+                        <option value="Poblacion">Poblacion</option>
+                        <option value="Dagatan">Dagatan</option>
+                        <option value="Buho">Buho</option>
+                        <option value="Talon">Talon</option>
+                        <option value="Pangil">Pangil</option>
+                        <option value="Halang">Halang</option>
+                        <option value="Maymangga">Maymangga</option>
+                        <option value="Banaybanay">Banaybanay</option>
+                        <option value="Salaban">Salaban</option>
+                        <option value="Iba">Iba</option>
+                        <option value="Lalaan I">Lalaan I</option>
+                        <option value="Lalaan II">Lalaan II</option>
+                        <option value="Cuyambay">Cuyambay</option>
+                        <option value="Lucsuhin">Lucsuhin</option>
+                        <option value="Maguyam">Maguyam</option>
+                        <option value="Minantok Kanluran">Minantok Kanluran</option>
+                        <option value="Minantok Silangan">Minantok Silangan</option>
+                        <option value="Banadero">Banadero</option>
+                        <option value="Luksuhin">Luksuhin</option>
+                        <option value="Bulihan">Bulihan</option>
+                        <option value="Kabakuhan">Kabakuhan</option>
+                        <option value="Paligawan">Paligawan</option>
+                        <option value="Tabang">Tabang</option>
+                        <option value="Tibig">Tibig</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Brief Business Description</label>
+                    <textarea id="description" rows="3" placeholder="Tell customers about your business..."></textarea>
+                </div>
+                
+                <div class="btn-row">
+                    <button class="btn btn-primary" onclick="nextStep(1)">Continue →</button>
+                </div>
+            </div>
+            
+            <!-- Step 2: Documents -->
+            <div class="form-section" id="section2">
+                <h3 class="section-title">📁 Required Documents</h3>
+                
+                <div class="info-box">
+                    <h4>📌 Document Requirements</h4>
+                    <ul>
+                        <li><strong>Business Permit</strong> - Mayor's permit or DTI registration (Required)</li>
+                        <li><strong>Valid ID</strong> - Any government-issued ID (Optional for now)</li>
+                    </ul>
+                    <p style="margin-top:10px;font-size:13px;">Files accepted: JPG, PNG, PDF (max 5MB each)</p>
+                </div>
+                
+                <div class="form-group">
+                    <label>Business Permit / DTI Registration <span class="required">*</span></label>
+                    <div class="file-upload" id="permitUpload" onclick="document.getElementById('permitFile').click()">
+                        <div class="icon">📄</div>
+                        <p>Click to upload or drag & drop</p>
+                        <small>Mayor's Permit, DTI, or SEC Registration</small>
+                        <img class="doc-preview" id="permitPreview" alt="">
+                        <div class="file-name" id="permitFileName"></div>
+                    </div>
+                    <input type="file" id="permitFile" accept="image/*,.pdf" onchange="handleDocUpload('permit', event)">
+                </div>
+                
+                <div class="form-group">
+                    <label>Valid ID (Owner) <span class="optional">(Optional for now - have it ready)</span></label>
+                    <div class="file-upload" id="idUpload" onclick="document.getElementById('idFile').click()">
+                        <div class="icon">🪪</div>
+                        <p>Click to upload or drag & drop</p>
+                        <small>Any government-issued ID</small>
+                        <img class="doc-preview" id="idPreview" alt="">
+                        <div class="file-name" id="idFileName"></div>
+                    </div>
+                    <input type="file" id="idFile" accept="image/*,.pdf" onchange="handleDocUpload('id', event)">
+                </div>
+                
+                <div class="form-group">
+                    <label>Other Supporting Documents <span class="optional">(Optional)</span></label>
+                    <div class="file-upload" id="otherUpload" onclick="document.getElementById('otherFile').click()">
+                        <div class="icon">📎</div>
+                        <p>Click to upload or drag & drop</p>
+                        <small>BIR, Sanitary Permit, etc.</small>
+                        <img class="doc-preview" id="otherPreview" alt="">
+                        <div class="file-name" id="otherFileName"></div>
+                    </div>
+                    <input type="file" id="otherFile" accept="image/*,.pdf" onchange="handleDocUpload('other', event)">
+                </div>
+                
+                <div class="btn-row">
+                    <button class="btn btn-outline" onclick="prevStep(2)">← Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(2)">Continue →</button>
+                </div>
+            </div>
+            
+            <!-- Step 3: Account Setup -->
+            <div class="form-section" id="section3">
+                <h3 class="section-title">🔐 Account Setup</h3>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Create Password <span class="required">*</span></label>
+                        <input type="password" id="password" required placeholder="Min. 8 characters" minlength="8">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm Password <span class="required">*</span></label>
+                        <input type="password" id="confirmPassword" required placeholder="Re-enter password">
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <h4>💰 Commission Structure</h4>
+                    <p>Amadeo Marketplace has a simple, fair pricing:</p>
+                    <ul>
+                        <li><strong>Cash on Delivery (COD):</strong> 0% - You keep 100%!</li>
+                        <li><strong>GCash Payments:</strong> 5% platform fee</li>
+                        <li><strong>Notification Service:</strong> Optional 5% (FREE for first 3 months)</li>
+                    </ul>
+                </div>
+                
+                <div class="terms-check">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the <a href="/terms" target="_blank">Terms of Service</a> and <a href="/privacy" target="_blank">Privacy Policy</a>. I understand my application will be reviewed before approval.</label>
+                </div>
+                
+                <div class="btn-row">
+                    <button class="btn btn-outline" onclick="prevStep(3)">← Back</button>
+                    <button class="btn btn-primary" id="submitBtn" onclick="submitApplication()">Submit Application</button>
+                </div>
+            </div>
+            
+            <!-- Success Section -->
+            <div class="form-section" id="successSection">
+                <div class="success-content">
+                    <div class="success-icon">🎉</div>
+                    <h2>Application Submitted!</h2>
+                    <p>Thank you for applying to become an Amadeo Marketplace merchant!</p>
+                    <p>We will review your application and documents within <strong>1-2 business days</strong>. You'll receive an email notification once approved.</p>
+                    <p style="margin-top:20px;"><strong>Application ID:</strong> <span id="applicationId" style="font-family:monospace;color:#0f766e;"></span></p>
+                    <div class="btn-row" style="justify-content:center;margin-top:30px;">
+                        <a href="/" class="btn btn-primary" style="text-decoration:none;text-align:center;">Back to Marketplace</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="home-link">
+            <a href="/">← Back to Marketplace</a> | <a href="/login">Already have an account? Login</a>
+        </div>
+    </div>
+    
+    <script>
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwgHmmK1j8a6rqx_Zfk5nPGqdUIRSo1oIUNgGoVr2-in988F3K8Kyp8PN15zHS3InIUgw/exec';
+        
+        let currentStep = 1;
+        let documents = {
+            permit: null,
+            id: null,
+            other: null
+        };
+        
+        function showStatus(msg, type) {
+            const el = document.getElementById('status');
+            el.textContent = msg;
+            el.className = 'status ' + type;
+        }
+        
+        function hideStatus() {
+            document.getElementById('status').className = 'status';
+        }
+        
+        function updateSteps() {
+            for (let i = 1; i <= 3; i++) {
+                const step = document.getElementById('step' + i);
+                const line = document.getElementById('line' + (i-1));
+                const section = document.getElementById('section' + i);
+                
+                step.classList.remove('active', 'completed');
+                if (line) line.classList.remove('completed');
+                section.classList.remove('active');
+                
+                if (i < currentStep) {
+                    step.classList.add('completed');
+                    if (line) line.classList.add('completed');
+                } else if (i === currentStep) {
+                    step.classList.add('active');
+                    section.classList.add('active');
+                }
+            }
+        }
+        
+        function validateStep(step) {
+            hideStatus();
+            
+            if (step === 1) {
+                const fields = ['businessName', 'ownerName', 'category', 'phone', 'email', 'address', 'barangay'];
+                for (const field of fields) {
+                    const el = document.getElementById(field);
+                    if (!el.value.trim()) {
+                        showStatus('Please fill in all required fields', 'error');
+                        el.focus();
+                        return false;
+                    }
+                }
+                // Validate email
+                const email = document.getElementById('email').value;
+                if (!email.includes('@') || !email.includes('.')) {
+                    showStatus('Please enter a valid email address', 'error');
+                    return false;
+                }
+                // Validate phone
+                const phone = document.getElementById('phone').value;
+                if (phone.length < 10) {
+                    showStatus('Please enter a valid phone number', 'error');
+                    return false;
+                }
+            }
+            
+            if (step === 2) {
+                if (!documents.permit) {
+                    showStatus('Business Permit is required. Please upload your permit or DTI registration.', 'error');
+                    return false;
+                }
+            }
+            
+            if (step === 3) {
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                
+                if (password.length < 8) {
+                    showStatus('Password must be at least 8 characters', 'error');
+                    return false;
+                }
+                if (password !== confirmPassword) {
+                    showStatus('Passwords do not match', 'error');
+                    return false;
+                }
+                if (!document.getElementById('terms').checked) {
+                    showStatus('Please agree to the Terms of Service', 'error');
+                    return false;
+                }
+            }
+            
+            return true;
+        }
+        
+        function nextStep(from) {
+            if (!validateStep(from)) return;
+            currentStep = from + 1;
+            updateSteps();
+            window.scrollTo(0, 0);
+        }
+        
+        function prevStep(from) {
+            currentStep = from - 1;
+            updateSteps();
+            window.scrollTo(0, 0);
+        }
+        
+        function handleDocUpload(type, event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            if (file.size > 5 * 1024 * 1024) {
+                showStatus('File too large. Maximum size is 5MB.', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                documents[type] = {
+                    name: file.name,
+                    type: file.type,
+                    data: e.target.result
+                };
+                
+                const uploadDiv = document.getElementById(type + 'Upload');
+                const preview = document.getElementById(type + 'Preview');
+                const fileName = document.getElementById(type + 'FileName');
+                
+                uploadDiv.classList.add('has-file');
+                fileName.textContent = '✓ ' + file.name;
+                
+                if (file.type.startsWith('image/')) {
+                    preview.src = e.target.result;
+                } else {
+                    preview.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" x="25" font-size="50">📄</text></svg>';
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        async function submitApplication() {
+            if (!validateStep(3)) return;
+            
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+            
+            try {
+                const applicationData = {
+                    action: 'merchantRegister',
+                    businessName: document.getElementById('businessName').value.trim(),
+                    ownerName: document.getElementById('ownerName').value.trim(),
+                    category: document.getElementById('category').value,
+                    phone: document.getElementById('phone').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    address: document.getElementById('address').value.trim(),
+                    barangay: document.getElementById('barangay').value,
+                    description: document.getElementById('description').value.trim(),
+                    password: document.getElementById('password').value,
+                    // Document URLs (in production, these would be uploaded to cloud storage)
+                    permitDoc: documents.permit ? documents.permit.name : '',
+                    idDoc: documents.id ? documents.id.name : '',
+                    otherDoc: documents.other ? documents.other.name : '',
+                    hasPermit: !!documents.permit,
+                    hasId: !!documents.id,
+                    hasOtherDocs: !!documents.other
+                };
+                
+                console.log('Submitting application:', applicationData);
+                
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify(applicationData)
+                });
+                
+                const result = await response.json();
+                console.log('Registration result:', result);
+                
+                if (result.success) {
+                    document.getElementById('applicationId').textContent = result.merchantId || 'M' + Date.now();
+                    document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+                    document.getElementById('successSection').classList.add('active');
+                    document.querySelector('.step-indicator').style.display = 'none';
+                } else {
+                    showStatus('Error: ' + (result.error || 'Registration failed. Please try again.'), 'error');
+                    btn.disabled = false;
+                    btn.textContent = 'Submit Application';
+                }
+            } catch (error) {
+                console.error('Submit error:', error);
+                showStatus('Connection error. Please try again.', 'error');
+                btn.disabled = false;
+                btn.textContent = 'Submit Application';
+            }
+        }
+        
+        // Drag and drop for file uploads
+        document.querySelectorAll('.file-upload').forEach(upload => {
+            upload.addEventListener('dragover', e => {
+                e.preventDefault();
+                upload.style.borderColor = '#0f766e';
+                upload.style.background = '#f0fdfa';
+            });
+            upload.addEventListener('dragleave', e => {
+                e.preventDefault();
+                upload.style.borderColor = '#ddd';
+                upload.style.background = '#fafafa';
+            });
+            upload.addEventListener('drop', e => {
+                e.preventDefault();
+                upload.style.borderColor = '#ddd';
+                upload.style.background = '#fafafa';
+                const input = upload.querySelector('input[type="file"]');
+                if (e.dataTransfer.files.length) {
+                    input.files = e.dataTransfer.files;
+                    input.dispatchEvent(new Event('change'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>

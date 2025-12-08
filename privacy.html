@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Amadeo Marketplace</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0d7377;
+            --primary-dark: #095c5e;
+            --accent: #e8a838;
+            --dark: #1a1a2e;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-500: #6c757d;
+            --gray-700: #495057;
+            --white: #ffffff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--gray-100);
+            color: var(--dark);
+            line-height: 1.7;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .logo-text {
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .header-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            margin-left: 1.5rem;
+        }
+
+        .header-links a:hover { color: var(--accent); }
+
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p { opacity: 0.9; }
+
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .content-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .last-updated {
+            color: var(--gray-500);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem 0;
+            font-family: 'Playfair Display', serif;
+        }
+
+        h2:first-of-type { margin-top: 0; }
+
+        h3 {
+            color: var(--dark);
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        p { margin-bottom: 1rem; color: var(--gray-700); }
+
+        ul, ol {
+            margin: 1rem 0 1rem 1.5rem;
+            color: var(--gray-700);
+        }
+
+        li { margin-bottom: 0.5rem; }
+
+        .highlight-box {
+            background: rgba(13, 115, 119, 0.08);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .highlight-box p { margin: 0; color: var(--dark); }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .data-table th, .data-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .data-table th {
+            background: var(--gray-100);
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .data-table td { color: var(--gray-700); }
+
+        .footer {
+            background: var(--dark);
+            color: rgba(255,255,255,0.7);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .footer a { color: var(--accent); text-decoration: none; }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 1.75rem; }
+            .content-card { padding: 1.5rem; }
+            h2 { font-size: 1.25rem; }
+            .data-table { font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="/" class="logo">
+                <div class="logo-icon">🛒</div>
+                <span class="logo-text">Amadeo Marketplace</span>
+            </a>
+            <nav class="header-links">
+                <a href="/">Home</a>
+                <a href="/terms">Terms</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Privacy Policy</h1>
+        <p>How we collect, use, and protect your information</p>
+    </section>
+
+    <main class="content">
+        <div class="content-card">
+            <p class="last-updated">Last Updated: December 1, 2025</p>
+
+            <h2>1. Introduction</h2>
+            <p>Amadeo Marketplace ("we," "our," or "the Platform") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our platform.</p>
+
+            <div class="highlight-box">
+                <p><strong>Quick Summary:</strong> We only collect information necessary to provide our marketplace services. We never sell your personal data to third parties.</p>
+            </div>
+
+            <h2>2. Information We Collect</h2>
+            
+            <h3>2.1 Information You Provide</h3>
+            <table class="data-table">
+                <tr>
+                    <th>Data Type</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>Account identification, order processing</td>
+                </tr>
+                <tr>
+                    <td>Email Address</td>
+                    <td>Account login, order notifications</td>
+                </tr>
+                <tr>
+                    <td>Phone Number</td>
+                    <td>Order updates, delivery coordination</td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>Delivery fulfillment</td>
+                </tr>
+                <tr>
+                    <td>GCash Number (Merchants)</td>
+                    <td>Commission settlement</td>
+                </tr>
+            </table>
+
+            <h3>2.2 Information Collected Automatically</h3>
+            <ul>
+                <li>Device information (browser type, operating system)</li>
+                <li>Usage data (pages visited, time spent)</li>
+                <li>IP address (for security purposes)</li>
+            </ul>
+
+            <h2>3. How We Use Your Information</h2>
+            <p>We use your information to:</p>
+            <ul>
+                <li>Process and fulfill orders</li>
+                <li>Send order confirmations and updates</li>
+                <li>Facilitate communication between customers and merchants</li>
+                <li>Process merchant commission settlements</li>
+                <li>Improve our platform and services</li>
+                <li>Prevent fraud and ensure security</li>
+                <li>Comply with legal obligations</li>
+            </ul>
+
+            <h2>4. Information Sharing</h2>
+            <h3>4.1 With Merchants</h3>
+            <p>When you place an order, we share your name, phone number, and delivery address with the merchant to fulfill your order.</p>
+
+            <h3>4.2 Service Providers</h3>
+            <p>We may share information with:</p>
+            <ul>
+                <li>Google (hosting and data storage via Google Sheets)</li>
+                <li>Email service providers (for notifications)</li>
+            </ul>
+
+            <h3>4.3 We Do NOT</h3>
+            <ul>
+                <li>Sell your personal information to third parties</li>
+                <li>Share your data for advertising purposes</li>
+                <li>Use your information for purposes unrelated to our marketplace services</li>
+            </ul>
+
+            <h2>5. Data Security</h2>
+            <p>We implement appropriate security measures including:</p>
+            <ul>
+                <li>Password encryption (SHA-256 hashing)</li>
+                <li>Secure HTTPS connections</li>
+                <li>Access controls to limit data access</li>
+                <li>Regular security reviews</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Note:</strong> While we strive to protect your information, no method of transmission over the internet is 100% secure.</p>
+            </div>
+
+            <h2>6. Data Retention</h2>
+            <p>We retain your information for as long as:</p>
+            <ul>
+                <li>Your account is active</li>
+                <li>Necessary to provide our services</li>
+                <li>Required by law (e.g., transaction records for tax purposes)</li>
+            </ul>
+            <p>You may request deletion of your account and associated data at any time.</p>
+
+            <h2>7. Your Rights</h2>
+            <p>You have the right to:</p>
+            <ul>
+                <li><strong>Access</strong> - Request a copy of your personal data</li>
+                <li><strong>Correction</strong> - Update or correct inaccurate information</li>
+                <li><strong>Deletion</strong> - Request deletion of your account and data</li>
+                <li><strong>Opt-out</strong> - Unsubscribe from marketing communications</li>
+            </ul>
+
+            <h2>8. Cookies</h2>
+            <p>We use minimal cookies for:</p>
+            <ul>
+                <li>Session management (keeping you logged in)</li>
+                <li>Remembering your preferences</li>
+            </ul>
+            <p>We do not use tracking cookies for advertising purposes.</p>
+
+            <h2>9. Children's Privacy</h2>
+            <p>Our platform is not intended for users under 18 years of age. We do not knowingly collect information from children.</p>
+
+            <h2>10. Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. We will notify users of significant changes via email or platform notification.</p>
+
+            <h2>11. Contact Us</h2>
+            <p>For privacy-related questions or requests:</p>
+            <ul>
+                <li>📱 Phone: 0966 960 6060</li>
+                <li>📧 Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b9cdc0dedfcadbf9ded4d8d0d597dad6d4">[email&#160;protected]</a></li>
+                <li>🌐 Website: amadeomarketplace.com</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Data Controller:</strong> TYG Services, Amadeo, Cavite, Philippines</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>© 20

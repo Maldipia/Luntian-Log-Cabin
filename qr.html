@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan to Visit - Amadeo Verified Marketplace</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1a472a 0%, #2d5a3d 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #1a472a;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .tagline {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .qr-container {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 25px;
+            border: 3px solid #e8f5e9;
+        }
+
+        .qr-container img {
+            display: block;
+        }
+
+        .scan-text {
+            background: linear-gradient(135deg, #1a472a, #2d5a3d);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        .url-display {
+            background: #f8f9fa;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 14px;
+            color: #1a472a;
+            margin-bottom: 25px;
+            word-break: break-all;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        .feature .icon {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .feature .text {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .powered-by {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .powered-by strong {
+            color: #1a472a;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .card {
+                box-shadow: none;
+                border: 2px solid #1a472a;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+
+        .print-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            color: #1a472a;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .print-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Different QR sizes */
+        .qr-options {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .qr-option {
+            padding: 8px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .qr-option.active {
+            border-color: #1a472a;
+            background: #e8f5e9;
+        }
+
+        /* Poster Mode */
+        .poster-mode .card {
+            padding: 60px;
+        }
+
+        .poster-mode h1 {
+            font-size: 42px;
+        }
+
+        .poster-mode .tagline {
+            font-size: 22px;
+        }
+
+        .poster-mode .scan-text {
+            font-size: 24px;
+            padding: 20px 40px;
+        }
+
+        .poster-mode .feature .icon {
+            font-size: 40px;
+        }
+
+        .poster-mode .feature .text {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="logo">🏠</div>
+            <h1>Amadeo Verified Marketplace</h1>
+            <p class="tagline">Ang Online Palengke ng Amadeo</p>
+
+            <div class="qr-options no-print">
+                <button class="qr-option active" onclick="setQRSize(200)">Small</button>
+                <button class="qr-option" onclick="setQRSize(300)">Medium</button>
+                <button class="qr-option" onclick="setQRSize(400)">Large</button>
+            </div>
+
+            <div class="qr-container">
+                <img id="qrCode" src="" alt="QR Code" width="200" height="200">
+            </div>
+
+            <div class="scan-text">📱 SCAN TO VISIT</div>
+
+            <div class="url-display">
+                amadeomarketplace.com
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <div class="icon">🛒</div>
+                    <div class="text">Browse<br>Products</div>
+                </div>
+                <div class="feature">
+                    <div class="icon">📍</div>
+                    <div class="text">Local<br>Merchants</div>
+                </div>
+                <div class="feature">
+                    <div class="icon">🚚</div>
+                    <div class="text">Fast<br>Delivery</div>
+                </div>
+            </div>
+
+            <div class="powered-by">
+                Powered by <strong>TYG Services</strong>
+            </div>
+        </div>
+    </div>
+
+    <button class="print-btn no-print" onclick="window.print()">
+        🖨️ Print QR Code
+    </button>
+
+    <script>
+        // Generate QR Code using Google Charts API
+        const marketplaceURL = 'https://amadeomarketplace.com';
+        
+        function setQRSize(size) {
+            const qrImg = document.getElementById('qrCode');
+            qrImg.src = `https://chart.googleapis.com/chart?cht=qr&chs=${size}x${size}&chl=${encodeURIComponent(marketplaceURL)}&choe=UTF-8`;
+            qrImg.width = size;
+            qrImg.height = size;
+
+            // Update active button
+            document.querySelectorAll('.qr-option').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Toggle poster mode for large size
+            if (size >= 400) {
+                document.body.classList.add('poster-mode');
+            } else {
+                document.body.classList.remove('poster-mode');
+            }
+        }
+
+        // Initialize with default size
+        setQRSize(200);
+
+        // Alternative QR codes for different pages
+        const qrPages = {
+            marketplace: 'https://amadeomarketplace.com',
+            register: 'https://amadeomarketplace.com/register',
+            join: 'https://amadeomarketplace.com/join'
+        };
+    </script>
+</body>
+</html>
