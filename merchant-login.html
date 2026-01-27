@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchant Login - Amadeo Marketplace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f766e 0%, #0d5f58 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 420px;
+            overflow: hidden;
+        }
+        .login-header {
+            background: linear-gradient(135deg, #0f766e, #14b8a6);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .login-header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .login-header p {
+            opacity: 0.9;
+            font-size: 14px;
+        }
+        .login-form {
+            padding: 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 15px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #0f766e;
+        }
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #0f766e, #14b8a6);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .btn-login:hover {
+            transform: translateY(-2px);
+        }
+        .btn-login:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .form-footer {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .form-footer a {
+            color: #0f766e;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        .divider {
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+        }
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e0e0e0;
+        }
+        .divider span {
+            background: white;
+            padding: 0 15px;
+            position: relative;
+            color: #999;
+            font-size: 13px;
+        }
+        .status {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            display: none;
+        }
+        .status.error {
+            display: block;
+            background: #fee2e2;
+            color: #dc2626;
+            border: 1px solid #fca5a5;
+        }
+        .status.success {
+            display: block;
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+        }
+        .home-link {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .home-link a {
+            color: #0f766e;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .home-link a i {
+            margin-right: 5px;
+        }
+        .other-logins {
+            text-align: center;
+            padding: 15px;
+            background: #f9fafb;
+            border-top: 1px solid #e0e0e0;
+        }
+        .other-logins a {
+            color: #666;
+            text-decoration: none;
+            font-size: 13px;
+            margin: 0 10px;
+        }
+        .other-logins a:hover {
+            color: #0f766e;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1><i class="fas fa-store"></i> Merchant Login</h1>
+            <p>Access your merchant dashboard</p>
+        </div>
+        
+        <form id="merchantForm" class="login-form" onsubmit="handleMerchantLogin(event)">
+            <div id="merchantStatus" class="status"></div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-envelope"></i> Email Address</label>
+                <input type="email" id="merchantEmail" required placeholder="your@email.com">
+            </div>
+            
+            <div class="form-group">
+                <label><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="merchantPassword" required placeholder="Enter password">
+            </div>
+            
+            <button type="submit" class="btn-login" id="merchantLoginBtn">
+                <i class="fas fa-sign-in-alt"></i> Login as Merchant
+            </button>
+            
+            <div class="form-footer">
+                <a href="/forgot-password">Forgot Password?</a>
+            </div>
+            
+            <div class="divider"><span>Don't have an account?</span></div>
+            
+            <div class="form-footer">
+                <a href="/merchant-register"><i class="fas fa-plus-circle"></i> Register as Merchant</a>
+            </div>
+        </form>
+        
+        <div class="other-logins">
+            <a href="/customer-login"><i class="fas fa-user"></i> Customer Login</a> | 
+            <a href="/admin-login"><i class="fas fa-shield-alt"></i> Admin Login</a>
+        </div>
+        
+        <div class="home-link">
+            <a href="/"><i class="fas fa-arrow-left"></i> Back to Marketplace</a>
+        </div>
+    </div>
+    
+    <script>
+    var API_BASE = 'https://script.google.com/macros/s/AKfycbzBw-bLMAooXcWvcCo0VHsndaC_RpaZz-xKNpGn-nljZ4H4fyKAerf7u12-SUFfOG2nAQ/exec';
+    
+    // Check if already logged in
+    document.addEventListener('DOMContentLoaded', function() {
+        var merchant = localStorage.getItem('amadeo_merchant');
+        if (merchant) {
+            window.location.href = '/dashboard';
+        }
+    });
+    
+    function handleMerchantLogin(e) {
+        e.preventDefault();
+        
+        var email = document.getElementById('merchantEmail').value;
+        var password = document.getElementById('merchantPassword').value;
+        var btn = document.getElementById('merchantLoginBtn');
+        var status = document.getElementById('merchantStatus');
+        
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+        status.className = 'status';
+        status.style.display = 'none';
+        
+        // Use POST request with session token support
+        fetch(API_BASE, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain' },
+            body: JSON.stringify({
+                action: 'merchantLogin',
+                email: email,
+                password: password
+            }),
+            redirect: 'follow'
+        })
+        .then(function(response) {
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(function(data) {
+            console.log('Login response:', data);
+            
+            if (data.success) {
+                // Validate response has required data
+                if (!data.merchant || !data.sessionToken) {
+                    throw new Error('Invalid response from server - missing merchant or token');
+                }
+                
+                status.className = 'status success';
+                status.innerHTML = '<i class="fas fa-check-circle"></i> Login successful! Redirecting...';
+                status.style.display = 'block';
+                
+                // Store merchant data and session token
+                console.log('Storing merchant:', data.merchant);
+                localStorage.setItem('amadeo_merchant', JSON.stringify(data.merchant));
+                localStorage.setItem('amadeo_session_token', data.sessionToken);
+                localStorage.setItem('amadeo_token_expires', data.expiresAt);
+                
+                setTimeout(function() {
+                    window.location.href = '/dashboard';
+                }, 1000);
+            } else {
+                throw new Error(data.error || 'Invalid credentials');
+            }
+        })
+        .catch(function(error) {
+            console.error('Login error:', error);
+            status.className = 'status error';
+            status.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + error.message;
+            status.style.display = 'block';
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login as Merchant';
+        });
+    }
+    </script>
+</body>
+</html>
