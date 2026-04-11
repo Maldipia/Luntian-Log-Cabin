@@ -34,7 +34,7 @@ export default function Footer({ cms }: { cms: Record<string,string> }) {
             <Link href="/booking" style={{ display:'block', background:'linear-gradient(135deg,#2d6a4f,#40916c)', color:'white', padding:'12px 0', borderRadius:10, textAlign:'center', fontWeight:600, textDecoration:'none', marginBottom:12 }}>
               📅 Book Now
             </Link>
-            <Link href="/admin" style={{ display:'block', color:'rgba(255,255,255,0.3)', fontSize:'0.75rem', textAlign:'center', textDecoration:'none', marginTop:8 }}>
+            <Link href="/admin/login" style={{ display:'block', color:'rgba(255,255,255,0.3)', fontSize:'0.75rem', textAlign:'center', textDecoration:'none', marginTop:8 }}>
               Admin Login
             </Link>
           </div>

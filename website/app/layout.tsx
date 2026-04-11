@@ -3,13 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: "Luntian Log Cabin — Tagaytay's Nature Retreat",
-  description: "A nature-inspired boutique retreat in Tagaytay. Sunrise Room, Leaf Room & 2BR Suite. Pet-friendly with premium packages for romance, family and wellness.",
-  keywords: "Tagaytay staycation, log cabin, Luntian, Asisan Tagaytay, nature retreat, pet-friendly",
-  openGraph: {
-    title: "Luntian Log Cabin — Tagaytay's Nature Retreat",
-    description: "Private rooms in a cozy nature cabin. Direct bookings available.",
-    images: ['/og-image.jpg'],
-  }
+  description: "A nature-inspired boutique retreat in Tagaytay. Private rooms, premium packages, pet-friendly. Direct booking available.",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
