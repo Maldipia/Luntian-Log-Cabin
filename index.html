@@ -2072,7 +2072,7 @@
 <body>
     <!-- Promo Banner -->
     <div class="promo-banner" id="promoBanner">
-        🔥 Premium Packages Now Available! Romance ₱12,000 | Family ₱8,500 | Wellness ₱15,000 - Book in Advance! 🔥
+        <span data-cms="banner_text">🔥 Premium Packages Now Available! Romance ₱12,000 | Family ₱8,500 | Wellness ₱15,000 - Book in Advance! 🔥</span>
         <button class="close-promo" onclick="closePromoBanner()">&times;</button>
     </div>
 
@@ -2802,8 +2802,8 @@
                         <h3 class="guide-title">WiFi & Check-in</h3>
                     </div>
                     <div class="guide-content">
-                        <p><strong>Network:</strong> LuntianLogCabin</p>
-                        <p><strong>Password:</strong> NatureLovesYou</p>
+                        <p><strong>Network:</strong> <span data-cms="wifi_name">LuntianLogCabin</span></p>
+                        <p><strong>Password:</strong> <span data-cms="wifi_password">NatureLovesYou</span></p>
                         <hr style="margin: 15px 0; border-color: #f0f0f0;">
                         <p><strong>Check-in:</strong> 2:00 PM</p>
                         <p><strong>Check-out:</strong> 11:00 AM</p>
@@ -2831,7 +2831,7 @@
                 <em>Address: 4W3F+C6M, Tagaytay, Cavite</em>
             </li>
             <li style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #f0f0f0;">
-                <strong>LLC Admins:</strong> 0935-763-7498 | 0961-883-8060
+                <strong>LLC Admins:</strong> <span data-cms="contact_phone1">0935-763-7498</span> | <span data-cms="contact_phone2">0961-883-8060</span>
             </li>
             <li style="margin-bottom: 10px;">
                 <strong>Fire extinguisher location:</strong> Near chimney
@@ -3464,6 +3464,10 @@
             console.log('Luntian Log Cabin website loaded successfully!');
         });
     </script>
+
+
+<!-- LUNTIAN CMS ENGINE - DO NOT REMOVE -->
+<script src="luntian-cms.js"></script>
 </body>
 
                 <div class="pricing-card fade-in">
