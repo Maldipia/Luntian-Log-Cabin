@@ -331,58 +331,59 @@ function BookingForm() {
                 </div>
               )}
 
-              {/* STEP 3 - PAYMENT & ID UPLOAD */}
+              {/* STEP 3 - PAYMENT */}
               {step===3&&(
                 <div>
                   <button onClick={()=>setStep(2)} style={{background:'none',border:'none',color:'#888',cursor:'pointer',fontSize:'0.85rem',marginBottom:20,display:'flex',alignItems:'center',gap:4}}>← Back</button>
-                  <h2 style={{fontFamily:"'Playfair Display',serif",fontSize:'1.5rem',color:'#1a1d23',marginBottom:8}}>Payment & Verification</h2>
-                  <p style={{color:'#888',fontSize:'0.88rem',marginBottom:28}}>Send your payment then upload the screenshot. Also provide a valid government ID.</p>
+                  <h2 style={{fontFamily:"'Playfair Display',serif",fontSize:'1.5rem',color:'#1a1d23',marginBottom:8}}>Send Payment</h2>
+                  <p style={{color:'#888',fontSize:'0.88rem',marginBottom:24}}>Scan the QR code below to send your payment, then upload your screenshot as proof.</p>
 
-                  {/* Payment methods */}
-                  <div style={{marginBottom:28}}>
-                    <label style={{display:'block',fontWeight:700,marginBottom:12,fontSize:'0.9rem',color:'#444'}}>1. Choose Payment Method</label>
-                    <div style={{display:'flex',flexDirection:'column',gap:10}}>
-                      {payments.map(p=>(
-                        <label key={p.id} style={{display:'flex',alignItems:'center',gap:16,padding:16,border:`2px solid ${selectedPayment===p.id?'#2d6a4f':'#f0f0f0'}`,borderRadius:14,cursor:'pointer',background:selectedPayment===p.id?'#f0faf2':'white',transition:'all 0.2s'}}>
-                          <input type="radio" name="payment" value={p.id} checked={selectedPayment===p.id} onChange={()=>setSelectedPayment(p.id)} style={{display:'none'}}/>
-                          {p.qr_image_url&&<img src={p.qr_image_url} alt={p.label} style={{width:56,height:56,objectFit:'contain',borderRadius:8,border:'1px solid #e5e7eb',flexShrink:0}}/>}
-                          <div style={{flex:1}}>
-                            <div style={{fontWeight:700,color:'#1a1d23'}}>{p.label||p.method}</div>
-                            {p.account_name&&<div style={{fontSize:'0.82rem',color:'#666'}}>{p.account_name}</div>}
-                            {p.account_number&&<div style={{fontSize:'0.9rem',fontFamily:'monospace',fontWeight:700,color:'#2d6a4f'}}>{p.account_number}</div>}
-                            {p.bank_name&&<div style={{fontSize:'0.75rem',color:'#888'}}>{p.bank_name}</div>}
-                          </div>
-                          {selectedPayment===p.id&&<div style={{width:22,height:22,background:'#2d6a4f',borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',color:'white',fontSize:'0.75rem',flexShrink:0}}>✓</div>}
-                        </label>
-                      ))}
-                    </div>
-
-                    {/* Show selected payment QR big */}
-                    {selectedPaymentMethod?.qr_image_url&&(
-                      <div style={{marginTop:16,padding:20,background:'#f9fafb',borderRadius:16,textAlign:'center',border:'1px solid #e5e7eb'}}>
-                        <div style={{fontWeight:600,color:'#444',marginBottom:12,fontSize:'0.88rem'}}>Scan QR or send to number below</div>
-                        <img src={selectedPaymentMethod.qr_image_url} alt="QR Code" style={{width:180,height:180,objectFit:'contain',borderRadius:12,border:'2px solid #e5e7eb',margin:'0 auto',display:'block'}}/>
-                        <div style={{marginTop:12,fontFamily:'monospace',fontWeight:700,fontSize:'1.1rem',color:'#2d6a4f'}}>{selectedPaymentMethod.account_number}</div>
-                        <div style={{fontSize:'0.82rem',color:'#666'}}>{selectedPaymentMethod.account_name}</div>
-                        {selectedPaymentMethod.instructions&&<div style={{fontSize:'0.78rem',color:'#888',marginTop:8,background:'#fff',padding:'8px 12px',borderRadius:8,border:'1px solid #e5e7eb'}}>{selectedPaymentMethod.instructions}</div>}
-                        <div style={{marginTop:12,background:'#fef3c7',padding:'8px 14px',borderRadius:8,fontSize:'0.8rem',color:'#92400e',fontWeight:600}}>
-                          💰 Amount to pay: ₱{total.toLocaleString()} + ₱1,000 deposit
+                  {/* Full-width QR image — fetched from payment_settings */}
+                  {payments[0]?.qr_image_url ? (
+                    <div style={{marginBottom:28,borderRadius:20,overflow:'hidden',border:'1px solid #e5e7eb',background:'#f9fafb'}}>
+                      <img
+                        src={payments[0].qr_image_url}
+                        alt="Payment QR Code"
+                        style={{width:'100%',display:'block',objectFit:'contain',maxHeight:420}}
+                      />
+                      {/* Amount box */}
+                      <div style={{padding:'20px 24px',textAlign:'center',borderTop:'1px solid #e5e7eb'}}>
+                        <div style={{fontSize:'0.82rem',color:'#888',marginBottom:4}}>Total amount to pay</div>
+                        <div style={{fontSize:'2rem',fontWeight:800,color:'#1b4332',letterSpacing:'-0.5px'}}>
+                          ₱{(total+1000).toLocaleString()}
+                        </div>
+                        <div style={{fontSize:'0.78rem',color:'#aaa',marginTop:4}}>
+                          ₱{total.toLocaleString()} booking + ₱1,000 security deposit
                         </div>
                       </div>
-                    )}
+                    </div>
+                  ) : (
+                    <div style={{marginBottom:28,padding:32,borderRadius:16,border:'1px dashed #d1d5db',textAlign:'center',color:'#aaa'}}>
+                      No payment QR uploaded yet. Please contact the property.
+                    </div>
+                  )}
+
+                  {/* Proof of payment upload */}
+                  <div style={{marginBottom:24}}>
+                    <label style={{display:'block',fontWeight:700,marginBottom:4,fontSize:'0.9rem',color:'#1a1d23'}}>
+                      Upload Payment Screenshot <span style={{color:'#ef4444'}}>*</span>
+                    </label>
+                    <p style={{fontSize:'0.8rem',color:'#888',marginBottom:12}}>After sending payment, take a screenshot and upload it here.</p>
+                    <UploadBox label="Payment Screenshot" type="payment" icon="📸" required/>
                   </div>
 
-                  {/* File uploads */}
+                  {/* ID uploads */}
                   <div style={{marginBottom:24}}>
-                    <label style={{display:'block',fontWeight:700,marginBottom:12,fontSize:'0.9rem',color:'#444'}}>2. Upload Required Documents</label>
-                    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr 1fr',gap:12}}>
-                      <UploadBox label="Payment Screenshot" type="payment" icon="💳" required/>
-                      <UploadBox label="Valid ID (Front)" type="idFront" icon="🪪" required/>
-                      <UploadBox label="Valid ID (Back)" type="idBack" icon="🪪"/>
-                    </div>
-                    <p style={{fontSize:'0.78rem',color:'#888',marginTop:10,lineHeight:1.6}}>
-                      📋 Accepted IDs: PhilHealth, SSS, UMID, Driver's License, Passport, Voter's ID, National ID
+                    <label style={{display:'block',fontWeight:700,marginBottom:4,fontSize:'0.9rem',color:'#1a1d23'}}>
+                      Valid Government ID <span style={{color:'#ef4444'}}>*</span>
+                    </label>
+                    <p style={{fontSize:'0.78rem',color:'#888',marginBottom:12}}>
+                      PhilHealth, SSS, UMID, Driver's License, Passport, Voter's ID, or National ID
                     </p>
+                    <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+                      <UploadBox label="ID Front" type="idFront" icon="🪪" required/>
+                      <UploadBox label="ID Back" type="idBack" icon="🪪"/>
+                    </div>
                   </div>
 
                   {error&&<div style={{background:'#fee2e2',color:'#991b1b',padding:'12px 16px',borderRadius:10,marginBottom:16,fontSize:'0.88rem'}}>⚠️ {error}</div>}
